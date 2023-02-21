@@ -1,15 +1,15 @@
 //
 //  Point.cpp
-//  
+//
 //
 //  Created by Yusra Suhail on 2/11/23.
 //
 
-#include "Point.hpp"
 #include <iostream>
 #include <algorithm>
 #include <memory>
 #include <set>
+#include "Point.hpp"
 
 using namespace std;
 using namespace geometry;
@@ -17,7 +17,6 @@ using namespace geometry;
 //Static variables redeclared in source code
 set<shared_ptr<Point> > Point::pointSet;
 unsigned int Point::count = 0;
-set<int> Poinnt::segList;
 unsigned int Segment::count = 0;
 
 
@@ -25,6 +24,7 @@ Point::Point(float xCoord, float yCoord)
     :
         x(xCoord),
         y(yCoord),
+        segList(),
         idx(count++)
 {}
 

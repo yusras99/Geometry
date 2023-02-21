@@ -1,14 +1,14 @@
 /*----------------------------------------------------------------------------------+
- |																					|
- |	A Simple global header to check the development platform and load the proper	|
- |	OpenGL, glu, and glut headers.													|
- |	Supports Mac OS X, Windows, Linux,												|
- |			 and Xcode, gcc, Visual Studio, MinGW									|
- |																					|
- |	Author:		Jean-Yves Hervé,	University of Rhode Island						|
- |									Dept. of Computer Science and Statistics		|
- |									3D Group for Interactive Visualization			|
- |	Fall 2011, Rev. Fall 2022														|
+ |                                                                                    |
+ |    A Simple global header to check the development platform and load the proper    |
+ |    OpenGL, glu, and glut headers.                                                    |
+ |    Supports Mac OS X, Windows, Linux,                                                |
+ |             and Xcode, gcc, Visual Studio, MinGW                                    |
+ |                                                                                    |
+ |    Author:        Jean-Yves Hervé,    University of Rhode Island                        |
+ |                                    Dept. of Computer Science and Statistics        |
+ |                                    3D Group for Interactive Visualization            |
+ |    Fall 2011, Rev. Fall 2022                                                        |
  +---------------------------------------------------------------------------------*/
 #ifndef GL_PLATFORM_H
 #define GL_PLATFORM_H
@@ -50,4 +50,4 @@
     #endif
 #endif
 
-#endif	//	GL_PLATFORM_H
+#endif    //    GL_PLATFORM_H
