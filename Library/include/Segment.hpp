@@ -11,35 +11,38 @@
 #include <utility>
 #include <memory>
 #include <set>
+#include "Point.hpp"
 
 namespace geometry {
 
-        /** Enum type only used for rendering.  I am wodering whether it should be
-         *    renamed PointRenderMode
-         */
-    enum class SegmentType
-    {
+    /** Enum type only used for rendering.
+     */
+    enum class SegmentType{
         SEGMENT,
         CREATED_SEGMENT,
         EDITED_SEGMENT
     };
-
-    class Point;
+    
+    /**    Class created for passkey purposes (so that make_shared can make calls to
+     *    a public constructor, but nobody else can.
+     */
+    class SegmentToken{
+        private:
+            SegmentToken(void) {}
+        
+        friend class Segment;
+    };
 
     class Segment{
-        private:
-            Point& p1;
-            Point& p2;
-                        
-            Segment(Point& pt1, Point& pt2);
 
-            static std::set<std::shared_ptr<Segment> > segSet;
-            static unsigned int count;
-            unsigned int idx;
-            
-            //    We need to implement the destructor because, if a segment is deleted,
-            //    then it must be removed from its endpoints' segList
-            ~Segment(void);
+        private:
+
+            Point& p1_;
+            Point& p2_;
+            unsigned int idx_;
+                        
+            static std::set<std::shared_ptr<Segment> > segSet_;
+            static unsigned int count_;
 
             //    Disabled constructors and operators
             Segment(void) = delete;
@@ -47,13 +50,38 @@ namespace geometry {
             Segment(Segment&& ) = delete;
             Segment& operator = (const Segment& ) = delete;
             Segment& operator = (Segment&& ) = delete;
+
+            static void render_(const Point& pt1, const Point& pt2, SegmentType type);
             
         public:
         
-            void render(void, ) const;
+            Segment(SegmentToken token, Point& pt1, Point& pt2);
+
+            ~Segment(void);
+
+            inline unsigned int getIndex(void) const {
+                return idx_;
+            }
+
             
-            static std::shared_ptr<Segment> makeNewSeg(Point& pt1, Point& pt2);
+            void render(SegmentType type = SegmentType::SEGMENT) const;
+
             
+            static std::shared_ptr<Segment> makeNewSegPtr(Point& pt1, Point& pt2);
+
+            static Segment& makeNewSeg(Point& pt1, Point& pt2);
+
+            static const std::set<std::shared_ptr<Segment> >& getAllSegments(void){
+                return segSet_;
+            }
+
+            static void clearAllSegments(void){
+                segSet_.clear();
+                count_ = 0;
+            }
+
+            static void renderCreated(const PointStruct& pt1, const PointStruct& pt2);
+            static void renderAllSegments(void);
     };
 }
 #endif /* Segment_hpp */
