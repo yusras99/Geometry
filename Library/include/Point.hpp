@@ -5,63 +5,138 @@
 //  Created by Yusra Suhail on 2/11/23.
 //
 
+//jyh
+//    We should make a decision early on:  .h or .hpp for header files?
+//    I don't care either way.  It's your library, so you decide.
+//    And then same thing for the header guard below:  All-caps or not?
 #ifndef Point_hpp
 #define Point_hpp
 
 #include <memory>
 #include <set>
-
-#include "Segment.hpp"
+#include "glPlatform.h"
 
 namespace geometry {
-    class Point{
 
-        /** Enum type only used for rendering.  I am wodering whether it should be
-         *    renamed PointRenderMode
-         */
-        enum class PointType
-        {
-            SINGLE_POINT,
-            ENDPOINT,
-            FIRST_ENDPOINT,
-            EDIT_POINT
-        };
+    /** Enum type only used for rendering.  I am wodering whether it should be
+     *    renamed PointRenderMode
+     */
+    enum class PointType{
+        DEDUCED_TYPE,
+        //
+        SINGLE_POINT,
+        ENDPOINT,
+        FIRST_ENDPOINT,
+        EDIT_POINT
+    };
+
+    /** Struct used to stort the coordinates of a "potential Point," by which
+     *    we mean a geometric point that hasn't been confirmed as a Point object.
+     */
+    struct PointStruct{
+        float x, y;
+    };
+
+    /**    Class created for passkey purposes (so that make_shared can make calls to
+     *    a public constructor, but nobody else can.
+     */
+    class PointToken{
+        private:
+            PointToken(void) {}
+        
+        friend class Point;
+    };
+
+
+    class Point{
 
         friend class Segment;
         
         private:
-            float x;
-            float y;
-            // Seglist of all the segments these endpoints belong to
-            std::set<unsigned int> segList;
-            unsigned int idx;
-            
-            static unsigned int count;
-            static std::set<std::shared_ptr<Point> > pointSet;
 
-            Point(float xCoord,float yCoord);
-            //    Explicitly disabling the constructors and copy/move
-            //    operators that we don't want to be called (implicitly);
+            float x_;
+            float y_;
+            // Seglist of all the segments these endpoints belong to
+            std::set<unsigned int> segList_;
+            unsigned int idx_;
+
+            static unsigned int count_;
+            static std::set<std::shared_ptr<Point> > pointSet_;
+            static float pointDiskRadius_;
+            static GLuint diskList_;
+            static GLuint circleList_;
+            static bool listsInitialized_;
+            
+            
+            static void initLists_(void);
+            
+
+        public:
+
             Point(void) = delete;
             Point(const Point& pt) = delete;
             Point(Point&& pt) = delete;
             Point& operator = (const Point& pt) = delete;
             Point& operator = (Point&& pt) = delete;
-            
-            // Since the constructor wouldn't do anything special here,
-            //    we tell the compiler to take care of it
+
+            Point(PointToken token, float xCoord, float yCoord);
+
             ~Point(void) = default;
-            
-        public:
-            //const getter functions, so they don't modifiy instance variables. This allows usage of getters in any function that takes as argument a const Point&
-            inline float getX(void) const {
-                return x;
+
+            inline float getX(void) const{
+                return x_;
             }
-            inline float getY(void) const {
-                return y;
+            inline float getY(void) const{
+                return y_;
             }
-            static Point& makeNewPt(float xCoord,float yCoord);
+     
+            inline unsigned int getIndex(void) const{
+                return idx_;
+            }
             
+            inline void setCoordinates(float x, float y){
+                x_ = x; y_ = y;
+            }
+            
+            bool isSingle(void) const{
+                return segList_.size() == 0;
+            }
+            
+            size_t getConnectivityDegree(void) const{
+                return segList_.size();
+            }
+            
+            void render(PointType type = PointType::DEDUCED_TYPE) const;
+
+            float distance(const PointStruct& pt) const;
+            float distance(const Point& pt) const;
+
+            static void render(const PointStruct& pt,
+                               PointType type = PointType::FIRST_ENDPOINT);
+
+
+            static std::shared_ptr<Point> makeNewPointPtr(float xCoord,float yCoord);
+
+            static Point& makeNewPoint(float xCoord,float yCoord);
+            
+            static const std::set<std::shared_ptr<Point> >& getAllPoints(void){
+                return pointSet_;
+            }
+
+            static void clearAllPoints(void) {
+                pointSet_.clear();
+                count_ = 0;
+            }
+
+            static void setPointDiskRadius(float radius);
+
+            static void renderAllSinglePoints(void);
+            
+            static float distance(const PointStruct& pt1, const PointStruct& pt2);
+
     };
-} //    end of namespace
+    
+    using PointPtr = std::shared_ptr<Point>;
+    
+}    //    end of namespace
 #endif /* Point_hpp */
