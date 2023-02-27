@@ -208,3 +208,48 @@ shared_ptr<Segment> Segment::makeNewSeg(Point& pt1, Point& pt2){
         return currSeg;
     }
 }
+#if 0
+//-----------------------------------------------------------------
+#pragma mark -
+#pragma mark Intersection-related functions
+//-----------------------------------------------------------------
+#endif
+
+
+bool Segment::isOnLeftSide(const Point& pt) const{
+    float det1 = (p1_.x_ * pt.y_) - (p1_.y_ * pt.x_);
+    float det2 = (p2_.x_ * pt.y_) - (p2_.y_ * pt.x_);
+    return (det1 > 0 && det2 >0);
+}
+
+bool Segment::isOnLeftSide(const PointStruct& pt) const{
+    float det1 = (p1_.x_ * pt.y) - (p1_.y_ * pt.x);
+    float det2 = (p2_.x_ * pt.y) - (p2_.y_ * pt.x);
+    return (det1 > 0 && det2 >0);
+}
+
+bool Segment::areOnOppositeSides(const Point& pt1, const Point& pt2) const{
+    bool pt1IsLeft = isOnLeftSide(pt1);
+    bool pt2IsLeft = isOnLeftSide(pt2);
+    return ((pt1IsLeft && !pt2IsLeft) || (!pt1IsLeft && pt2IsLeft));
+}
+
+bool Segment::areOnOppositeSides(const PointStruct& pt1, const PointStruct& pt2) const{
+    bool pt1IsLeft = isOnLeftSide(pt1);
+    bool pt2IsLeft = isOnLeftSide(pt2);
+    return ((pt1IsLeft && !pt2IsLeft) || (!pt1IsLeft && pt2IsLeft));
+}
+//    Intersection possible iff:
+//    Seg1.pt1 and seg1.pt2 are on different sides of Seg2
+//    Seg2.pt1 and seg2.pt2 are on different sides of Seg1
+bool Segment::intersects(const Segment& seg) const{
+    return areOnOppositeSides(seg.p1_, seg.p2_);
+}
+
+bool Segment::intersects(const Point& pt1, const Point& pt2) const{
+    return areOnOppositeSides(pt1, pt2);
+}
+
+bool Segment::intersects(const PointStruct& pt1, const PointStruct& pt2) const{
+        return areOnOppositeSides(pt1, pt2);
+}
