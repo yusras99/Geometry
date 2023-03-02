@@ -129,7 +129,7 @@ const string SNAP_MENU_STR[] = {
     "Snap to point: ",
     "Snap to segment: "
 };
-const int NUM_SNAP_MODES = (int)(sizeof(SNAP_MENU_STR)/sizeof(SNAP_MENU_STR[0]));
+//const int NUM_SNAP_MODES = (int)(sizeof(SNAP_MENU_STR)/sizeof(SNAP_MENU_STR[0]));
 
 //-----------------------------------------------------------------
 //  file-level global variables

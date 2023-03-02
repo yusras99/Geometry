@@ -208,3 +208,89 @@ shared_ptr<Segment> Segment::makeNewSeg(Point& pt1, Point& pt2){
         return currSeg;
     }
 }
+#if 0
+//-----------------------------------------------------------------
+#pragma mark -
+#pragma mark Intersection-related functions
+//-----------------------------------------------------------------
+#endif
+
+
+bool Segment::isOnLeftSide(const Point& pt) const{
+    /**The determinant of a pt to the segment is:
+     *  det( p2 - p1, pt - p1)
+     */
+    float det  = ((pt.x_ - p1_.x_) * (p2_.y_ - p1_.y_)) - ((p2_.x_ - p1_.x_) * (pt.y_ - p1_.y_ ));
+    if(det > 0){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+bool Segment::isOnLeftSide(const PointStruct& pt) const{
+    float det  = ((pt.x - p1_.x_) * (p2_.y_ - p1_.y_)) - ((p2_.x_ - p1_.x_) * (pt.y - p1_.y_ ));
+    if(det > 0){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+bool Segment::areOnOppositeSides(const Point& pt1, const Point& pt2) const{
+    bool pt1IsLeft = isOnLeftSide(pt1);
+    bool pt2IsLeft = isOnLeftSide(pt2);
+    return ((pt1IsLeft && !pt2IsLeft) || (!pt1IsLeft && pt2IsLeft));
+}
+
+bool Segment::areOnOppositeSides(const PointStruct& pt1, const PointStruct& pt2) const{
+    bool pt1IsLeft = isOnLeftSide(pt1);
+    bool pt2IsLeft = isOnLeftSide(pt2);
+    return ((pt1IsLeft && !pt2IsLeft) || (!pt1IsLeft && pt2IsLeft));
+}
+//    Intersection possible iff:
+//    Seg1.pt1 and seg1.pt2 are on different sides of Seg2
+//    Seg2.pt1 and seg2.pt2 are on different sides of Seg1
+bool Segment::intersects(const Segment& seg) const{
+    return areOnOppositeSides(seg.p1_, seg.p2_);
+}
+
+bool Segment::intersects(const Point& pt1, const Point& pt2) const{
+    return areOnOppositeSides(pt1, pt2);
+}
+
+bool Segment::intersects(const PointStruct& pt1, const PointStruct& pt2) const{
+        return areOnOppositeSides(pt1, pt2);
+}
+PointStruct* Segment::findIntersection(const Segment& interSeg){
+    float interX = 0.0;
+    float interY = 0.0;
+    PointStruct interPoint = {interX,interY};
+    PointStruct* ptr = &interPoint;
+    if(intersects(interSeg)){
+        /**variable that is essentially a divisor of the intersection point's x and y value - currSeg's x and y value**/
+        float factor = 0.0;
+        /**variables that are just difference of the x and y values for both segments **/
+        float interSegX = interSeg.p1_.x_ - interSeg.p2_.x_;
+        float currSegX = p1_.x_ - p2_.x_;
+        float interSegY = interSeg.p1_.y_ - interSeg.p2_.y_;
+        float currSegY = p1_.y_ - p2_.y_;
+        /**Intersection point M belongs to currSeg (A, B) so there exists α  s.t. M = A + α(B-A)
+         *The  interSeg(C, D) and the segment from (C, M) are colinear (determinant of the 2 vectors is 0):
+         *      det(A + α(B-A) - C, D - C) = 0
+         * Hence the equations below are solved for α using the above equation
+         */
+        float numerator = ((interSegX/interSegY)*(p1_.y_)) -        ((interSegX/interSegY)*(interSeg.p1_.x_)) - p1_.x_ + interSeg.p1_.x_;
+        float denominator = currSegX - ((interSegX/interSegY)*currSegY);
+        factor = numerator / denominator;
+        
+        interX = p1_.x_ + (factor * (p2_.x_ - p1_.x_));
+        interY = p1_.y_ + (factor * (p2_.y_ - p1_.y_));
+        
+        interPoint = {interX,interY};
+        return ptr;
+    }else{
+        /**if no intersection found return a null pointer*/
+        return NULL;
+    }
+}
