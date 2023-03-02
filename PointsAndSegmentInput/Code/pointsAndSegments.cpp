@@ -103,6 +103,8 @@ float World::WORLD_HEIGHT = World::Y_MAX - World::Y_MIN;
 const GLint    EXIT_MENU_ITEM = 0,
             CLEAR_MENU_ITEM = 1,
             CLEAR_ALL_MENU_ITEM = 2,
+            SAVE_TO_FILE = 3,
+            RESTORE_FROM_FILE = 4,
             //
             SEPARATOR = -1;
 
@@ -117,9 +119,7 @@ enum SnapToCode{
     SNAP_TO_HORIZONTAL,
     SNAP_TO_DIAGONAL,
     SNAP_TO_POINT,
-    SNAP_TO_SEGMENT,
-    //
-    NUM_SNAP_MODES
+    SNAP_TO_SEGMENT
 };
 
 const string SNAP_MENU_STR[] = {
@@ -129,7 +129,7 @@ const string SNAP_MENU_STR[] = {
     "Snap to point: ",
     "Snap to segment: "
 };
-//const int NUM_SNAP_MODES = (int)(sizeof(SNAP_MENU_STR)/sizeof(SNAP_MENU_STR[0]));
+const int NUM_SNAP_MODES = (int)(sizeof(SNAP_MENU_STR)/sizeof(SNAP_MENU_STR[0]));
 
 //-----------------------------------------------------------------
 //  file-level global variables
@@ -162,6 +162,7 @@ ApplicationMode mode = ApplicationMode::NO_MODE;
 const string rootFilePath = "../../../savedScene";
 string dataFilePath;
 
+int snapSubMenu = -1;
 bool snapToVertical = false;
 bool snapToHorizontal = false;
 bool snapToDiagonal = false;
@@ -175,18 +176,25 @@ bool snapToSegment = false;
 //-----------------------------------------------------------------
 #endif
 
-// a function to setup the window as to track the
-// mouse to draw polygon starting position at click position.
+/** Function to setup the window as to track the mouse to draw polygon starting position at click position
+ * @param ix - the x coordinate of the mouseClick position
+ * @param iy - the y coordinate of the mouseClick position
+ * @return a pointStruct that will create the point at the mouse position
+ */
 PointStruct pixelToWorld(int ix, int iy){
-    //    we need to transform the pixel coordinates into "world" coordinates
-    //    Please note that my world y direction points "up" but the pixel
-    //    direction points down
+    /**The pixel coordinates are transformed into "world" coordinates
+     * Note: The world's  y direction points "up" but the pixel direction points down
+     */
     PointStruct pt = {World::X_MIN + ix*PIXEL_TO_WORLD,
         World::Y_MIN + (PANE_HEIGHT-iy)*PIXEL_TO_WORLD};
 
     return pt;
 }
-
+/** Function to
+ * @param x - the x coordinate
+ * @param y - the y coordinate
+ * @return a pointStruct
+ */
 PointStruct worldToPixel(float x, float y){
     PointStruct pixelPt = {(x-World::X_MIN)*WORLD_TO_PIXEL,
         PANE_HEIGHT - (y-World::Y_MIN)*WORLD_TO_PIXEL};
@@ -201,7 +209,7 @@ float checkScaling(void){
     float widthRatio = World::WORLD_WIDTH / PANE_WIDTH;
     float heightRatio = World::WORLD_HEIGHT / PANE_HEIGHT;
 
-    // If the two ratios differ by more than 5%, I reject the dimensions)
+    /** If the two ratios differ by more than 5%,  then reject the dimensions*/
     if (fabsf(widthRatio-heightRatio)/max(widthRatio,heightRatio) > 0.05){
         cout << "This application will not support different H & V scalings" << endl;
         exit(1);
@@ -219,8 +227,7 @@ float checkScaling(void){
 //-----------------------------------------------------------------
 #endif
 
-//    This resize function ignores attempts by the user to resize the
-//    window and sets it back to the values st in the code.
+/**    This resize function ignores attempts by the user to resize the window and sets it back to the values st in the code*/
 void resizeFunc(int w, int h){
     if (w != WIN_WIDTH || h != WIN_HEIGHT){
         glutReshapeWindow(WIN_WIDTH, WIN_HEIGHT);
@@ -240,16 +247,13 @@ void displayFunc(void){
     Segment::renderAllSegments();
     Point::renderAllSinglePoints();
         
-    //    if we are creating a segment, then draw the putative segment, based
-    //    on current mouse pointer location
+    /**    If we are creating a segment, then draw the putative segment, based on current mouse pointer location */
     if (mode == ApplicationMode::SEGMENT_CREATION && !isFirstClick){
         PointStruct nextPt = pixelToWorld(mouseX, mouseY);
         
-        // If the shift key is down, we try to enforce closest among
-        //    vertical/horizontal/diagonal
+        /** If the shift key is down, we try to enforce closest among vertical/ horizontal/ diagonal */
         if (glutGetModifiers() & GLUT_ACTIVE_SHIFT){
-            //    compute deltaX and deltaY, and find out the closest
-            //    direction to enforce
+            /**    compute deltaX and deltaY, and find out the closest direction to enforce*/
             float dx = nextPt.x - firstEndpoint.x;
             float dy = nextPt.y - firstEndpoint.y;
             
@@ -259,7 +263,7 @@ void displayFunc(void){
             float angle = atan2f(dy, dx);
             float rad = sqrtf(dx*dx + dy*dy);
             
-            // snap to the closes multiple of π/4
+            /** snap to the closes multiple of π/4 */
             int mult = static_cast<int>(round(4.f*angle/M_PI));
             angle =  static_cast<float>(mult * M_PI / 4.0);
             nextPt.x = firstEndpoint.x + rad*cosf(angle);
@@ -276,7 +280,7 @@ void displayFunc(void){
 void myTimerFunc(int val){
     glutTimerFunc(15, myTimerFunc, val);
     
-    // redraw the scene
+    /** redraw the scene*/
     glutSetWindow(mainWindow);
     glutPostRedisplay();
 }
@@ -318,8 +322,7 @@ void mouseHandlerFunc(int button, int state, int ix ,int iy){
 }
 
 void passiveMotionHandlerFunc(int x, int y){
-    //    If we are creating a new segment and have already recorded
-    //    the first endpoint, then we need to track the mouse position.
+    /**    If we are creating a new segment and have already recorded the first endpoint, then we need to track the mouse position */
     if (mode == ApplicationMode::SEGMENT_CREATION && !isFirstClick){
         mouseX = x;
         mouseY = y;
@@ -398,18 +401,53 @@ void modeMenuHandlerFunc(int value){
 void snapMenuHandlerFunc(int value){
     switch (value){
         case SNAP_TO_VERTICAL:
+        snapToVertical = !snapToVertical;
+        {
+            string valStr = snapToVertical ? "on" : "off";
+            glutChangeToMenuEntry(snapSubMenu,
+                                  (SNAP_MENU_STR[value+SNAP_START_CODE]+valStr).c_str(),
+                                  SNAP_TO_VERTICAL);
+        }
         break;
     
         case SNAP_TO_HORIZONTAL:
+        snapToHorizontal = !snapToHorizontal;
+        {
+            string valStr = snapToHorizontal ? "on" : "off";
+            glutChangeToMenuEntry(snapSubMenu,
+                                  (SNAP_MENU_STR[value+SNAP_START_CODE]+valStr).c_str(),
+                                  SNAP_TO_HORIZONTAL);
+        }
         break;
     
         case SNAP_TO_DIAGONAL:
+        snapToDiagonal = !snapToDiagonal;
+        {
+            string valStr = snapToDiagonal ? "on" : "off";
+            glutChangeToMenuEntry(snapSubMenu,
+                                  (SNAP_MENU_STR[value+SNAP_START_CODE]+valStr).c_str(),
+                                  SNAP_TO_DIAGONAL);
+        }
         break;
     
         case SNAP_TO_POINT:
+        snapToPoint = !snapToPoint;
+        {
+            string valStr = snapToPoint ? "on" : "off";
+            glutChangeToMenuEntry(snapSubMenu,
+                                  (SNAP_MENU_STR[value+SNAP_START_CODE]+valStr).c_str(),
+                                  SNAP_TO_POINT);
+        }
         break;
     
         case SNAP_TO_SEGMENT:
+        snapToSegment = !snapToSegment;
+        {
+            string valStr = snapToSegment ? "on" : "off";
+            glutChangeToMenuEntry(snapSubMenu,
+                                  (SNAP_MENU_STR[value+SNAP_START_CODE]+valStr).c_str(),
+                                  SNAP_TO_SEGMENT);
+        }
         break;
     
         default:
@@ -423,22 +461,22 @@ void keyboardHandlerFunc(unsigned char key, int x, int y){
     (void) x;
     (void) y;
     switch (key){
-        //    Escape key
+        /**    Escape key*/
         case 27:
-            //    Alt-ESC makes us exit the application
+            /**    Alt-ESC makes us exit the application*/
             if (glutGetModifiers() & GLUT_ACTIVE_SHIFT)
                 zeEnd();
             
-            //    At this point, this is about the only effect
+            /**    At this point, this is about the only effect*/
             if (mode == ApplicationMode::SEGMENT_CREATION){
-                //    If we had already recorded a first endpoint, forget it
+                /**    If the first endpoint of the segment is already recorded then forget it*/
                 if (!isFirstClick){
                     isFirstClick = true;
                 }
             }
             break;
         
-        //    Ctrl-S saves the current scene as a data file
+        /**    Ctrl-S saves the current scene as a data file */
         case 's':
         case 'S':
             if (glutGetModifiers() & GLUT_ACTIVE_CTRL){
@@ -446,9 +484,9 @@ void keyboardHandlerFunc(unsigned char key, int x, int y){
             }
             break;
 
-        //    Ctrl-R restores the scene to the state specified by the last saved file
-        //    or the input data file if any.  Does nothing otherwise.
-        //
+        /**Ctrl-R restores the scene to the state specified by the last saved file or the input data file if any.
+         *Does nothing otherwise
+         */
         case 'r':
         case 'R':
             if (glutGetModifiers() & GLUT_ACTIVE_CTRL){
@@ -480,11 +518,11 @@ void interfaceInit(void){
     mainWindow = glutCreateWindow("Point & Segment Creation Demo");
 
     glutSetWindow(mainWindow);
-    //    at this point, all callback calls are for this window
-    // make the background BLACK
+    /**    at this point, all callback calls are for this window */
+    /** make the background BLACK */
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-    // setup callbacks
+    /** setup callbacks*/
     glutDisplayFunc(displayFunc);
     glutReshapeFunc(resizeFunc);
     glutMouseFunc(mouseHandlerFunc);
@@ -496,34 +534,40 @@ void interfaceInit(void){
     glLoadIdentity();
     gluOrtho2D(World::X_MIN, World::X_MAX, World::Y_MIN, World::Y_MAX);
     
-    // Create Menus
-    int menu, modeSubMenu, snapMenu;
+    /** Create Menus */
+    int menu, modeSubMenu;
     
-    // Submenu for mode selection choices
-    // Note how I use my arrays defined in ApplConstants.h to automatically generate my menus
+    /** Submenu for mode selection choices
+     * Note  how I use my arrays defined in ApplConstants.h to automatically generate my menus*/
     modeSubMenu = glutCreateMenu(modeMenuHandlerFunc);
     glutAddMenuEntry("Point Creation", POINT_CREATION_CODE);
     glutAddMenuEntry("Segment Creation", SEGMENT_CREATION_CODE);
 
-    // Submenu for toggling on/off "snap-to" modes
-    snapMenu = glutCreateMenu(snapMenuHandlerFunc);
-    glutAddMenuEntry("Point Creation", POINT_CREATION_CODE);
-    
-    // Main menu that the submenus are connected to
+    /** Submenu for toggling on/off "snap-to" modes*/**
+    snapSubMenu = glutCreateMenu(snapMenuHandlerFunc);
+    for (int k=0; k< NUM_SNAP_MODES; k++){
+        glutAddMenuEntry((SNAP_MENU_STR[k] + "off").c_str(), SNAP_START_CODE + k);
+    }
+
+    /** Main menu that the submenus are connected to */
     menu = glutCreateMenu(menuHandlerFunc);
     glutAddSubMenu("Mode", modeSubMenu);
+    glutAddSubMenu("Snap to", snapSubMenu);
     glutAddMenuEntry("Clear for mode", CLEAR_MENU_ITEM);
     glutAddMenuEntry("-", SEPARATOR);
     glutAddMenuEntry("Clear All", CLEAR_ALL_MENU_ITEM);
+    glutAddMenuEntry("-", SEPARATOR);
+    glutAddMenuEntry("Save to File", SAVE_TO_FILE);
+    glutAddMenuEntry("Restore from File", RESTORE_FROM_FILE);
     glutAddMenuEntry("-", SEPARATOR);
     glutAddMenuEntry("Exit", EXIT_MENU_ITEM);
     glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
 void applicationInit(int argc, char* argv[]){
-    //    If the program has one argument, it should be the path to a data file
+    /**    If the program has one argument, it should be the path to a data file */
     if (argc == 2){
-        //    save the path to be able to reload the scene
+        /**    save the path to be able to reload the scene */
         dataFilePath = argv[1];
         readDataFile(dataFilePath);
     }else if (argc > 2){
@@ -542,24 +586,20 @@ void zeEnd(void){
 }
 
 int main(int argc, char** argv){
-    // It's generally recommended to initialize glut early.
+    /** It's generally recommended to initialize glut early. */
     glutInit(&argc, argv);
 
-    //    This only checcks if by any chance we have a file path
-    //    as argument, in which case we will load lists of predefined
-    //    points and segments.
+    /**    This only checcks if by any chance we have a file path as argument, in which case we will load lists of  predefined points and segments.*/
     applicationInit(argc, argv);
     
-    //    Initialize the GUI (create window, set up menus and
-    //    callback functions
+    /**    Initialize the GUI (create window, set up menus and callback functions*/
     interfaceInit();
     
-    //    And now we are ready to relinquish control to glut
+    /**    And now we are ready to relinquish control to glut */*
     glutMainLoop();
     
     return 0;
 }
-
 
 
 
