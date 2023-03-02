@@ -33,7 +33,11 @@ const GLfloat POINT_COLOR[][4] = {
                                 {1.f, 0.f, 1.f, 1.f}    //    EDIT_POINT
 };
 
-
+/**Constructor function that can only be called using the class itself and not by user
+ * @param xCoord  the x coordinate which will be used to create a point
+ * @param yCoord  the y coordinate which will be used to create a point
+ * @param token - the object of segmentToken class (which acts like passkey attribute) so that it is not accessible by anyone else
+ */
 Point::Point(PointToken token, float xCoord, float yCoord)
     :
         x_(xCoord),
@@ -50,10 +54,15 @@ Point::Point(PointToken token, float xCoord, float yCoord)
 #pragma mark "Maker" functions
 //-----------------------------------------------------------------
 #endif
-
+/**This is a maker function that returns a shared pointer to a point that can auto destruct itself when the point is no longer needed
+ *@params xCoord - The x coordinate of the point
+ *@params yCoord - The y coordinate of the point
+ *@return a shared pointer to the point
+ */
 shared_ptr<Point> Point::makeNewPointPtr(float xCoord,float yCoord){
     bool found = false;
     shared_ptr<Point> p;
+    /** First check if the point exists or not, if it is return the pointer otherwise make the new pointer*/
     for(auto iter = pointSet_.begin(); iter!=pointSet_.end();iter++){
         if((*iter)->x_ == xCoord &&  (*iter)->y_ == yCoord){
             found = true;
@@ -69,7 +78,11 @@ shared_ptr<Point> Point::makeNewPointPtr(float xCoord,float yCoord){
         return currPt;
     }
 }
-
+/**Maker function that calls the other constructor function and gets the point on that pointer
+ * @params xCoord - The x coordinate of the point
+ * @params yCoord - The y coordinate of the point
+ * @return the reference to a point
+ */
 Point& Point::makeNewPoint(float xCoord,float yCoord){
     return *(makeNewPointPtr(xCoord, yCoord));
 }
@@ -85,7 +98,6 @@ void Point::render(PointType type) const{
     if (!Point::listsInitialized_){
         Point::initLists_();
     }
-    
     switch (type){
         using enum PointType;
         
