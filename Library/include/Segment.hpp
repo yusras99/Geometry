@@ -73,8 +73,9 @@ namespace geometry {
             bool intersects(const Segment& seg) const;
             bool intersects(const Point& pt1, const Point& pt2) const;
             bool intersects(const PointStruct& pt1, const PointStruct& pt2) const;
-                static std::shared_ptr<Segment> makeNewSegPtr(Point& pt1, Point& pt2);
-
+            PointStruct* findIntersection(const Segment& seg);
+        
+            static std::shared_ptr<Segment> makeNewSegPtr(Point& pt1, Point& pt2);
             static Segment& makeNewSeg(Point& pt1, Point& pt2);
 
             static const std::set<std::shared_ptr<Segment> >& getAllSegments(void){
