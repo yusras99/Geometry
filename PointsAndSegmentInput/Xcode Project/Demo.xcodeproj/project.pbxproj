@@ -7,14 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		16194F0A29985CAE001A252E /* Point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16194F0529985C0B001A252E /* Point.cpp */; };
-		16194F0B29985CB2001A252E /* pointsAndSegments.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16194F0929985C18001A252E /* pointsAndSegments.cpp */; };
+		160BD36429A7BBD900751877 /* dataFileIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 160BD36229A7BBD900751877 /* dataFileIO.cpp */; };
+		160BD36729A80E7800751877 /* pointsAndSegments.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16194F0929985C18001A252E /* pointsAndSegments.cpp */; };
+		160BD36829A80E7800751877 /* dataFileIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 160BD36229A7BBD900751877 /* dataFileIO.cpp */; };
+		160BD36C29A80E7800751877 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16526F17298E4C13008C34A8 /* GLUT.framework */; };
+		160BD36D29A80E7800751877 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16526F18298E4C13008C34A8 /* OpenGL.framework */; };
+		160BD37529A8200900751877 /* Segment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16D0CB12299EC2270008B4C4 /* Segment.cpp */; };
+		160BD37629A8200900751877 /* Point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16194F0529985C0B001A252E /* Point.cpp */; };
 		16526F19298E4C13008C34A8 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16526F17298E4C13008C34A8 /* GLUT.framework */; };
 		16526F1A298E4C13008C34A8 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16526F18298E4C13008C34A8 /* OpenGL.framework */; };
-		16D0CB14299EC2270008B4C4 /* Segment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16D0CB12299EC2270008B4C4 /* Segment.cpp */; };
+		168DD2ED29A5829E00A0A99C /* pointsAndSegments.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16194F0929985C18001A252E /* pointsAndSegments.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		160BD36E29A80E7800751877 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		93EB007B26F10A410020C350 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -27,18 +41,32 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		160BD36129A74A3200751877 /* Data File Format.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Data File Format.md"; sourceTree = "<group>"; };
+		160BD36229A7BBD900751877 /* dataFileIO.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = dataFileIO.cpp; sourceTree = "<group>"; };
+		160BD36329A7BBD900751877 /* dataFileIO.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = dataFileIO.hpp; sourceTree = "<group>"; };
+		160BD37229A80E7800751877 /* Point Input - library */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Point Input - library"; sourceTree = BUILT_PRODUCTS_DIR; };
 		16194F0329985C0B001A252E /* Point.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Point.hpp; sourceTree = "<group>"; };
 		16194F0529985C0B001A252E /* Point.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Point.cpp; sourceTree = "<group>"; };
+		16194F0729985C18001A252E /* World.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = World.hpp; sourceTree = "<group>"; };
 		16194F0829985C18001A252E /* glPlatform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = glPlatform.h; sourceTree = "<group>"; };
 		16194F0929985C18001A252E /* pointsAndSegments.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = pointsAndSegments.cpp; sourceTree = "<group>"; };
 		16526F17298E4C13008C34A8 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		16526F18298E4C13008C34A8 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		16D0CB0F299EC2090008B4C4 /* Segment.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Segment.hpp; sourceTree = "<group>"; };
 		16D0CB12299EC2270008B4C4 /* Segment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Segment.cpp; sourceTree = "<group>"; };
-		93EB007D26F10A410020C350 /* Point Input */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Point Input"; sourceTree = BUILT_PRODUCTS_DIR; };
+		93EB007D26F10A410020C350 /* Point Input - source */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Point Input - source"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		160BD36B29A80E7800751877 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				160BD36C29A80E7800751877 /* GLUT.framework in Frameworks */,
+				160BD36D29A80E7800751877 /* OpenGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		93EB007A26F10A410020C350 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -51,6 +79,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		160BD36029A749EC00751877 /* App Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				160BD36129A74A3200751877 /* Data File Format.md */,
+			);
+			path = "App Documentation";
+			sourceTree = "<group>";
+		};
 		16194F0129985C0B001A252E /* Library */ = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +119,9 @@
 			isa = PBXGroup;
 			children = (
 				16194F0829985C18001A252E /* glPlatform.h */,
+				16194F0729985C18001A252E /* World.hpp */,
+				160BD36329A7BBD900751877 /* dataFileIO.hpp */,
+				160BD36229A7BBD900751877 /* dataFileIO.cpp */,
 				16194F0929985C18001A252E /* pointsAndSegments.cpp */,
 			);
 			name = Code;
@@ -101,6 +140,7 @@
 		93EB007426F10A410020C350 = {
 			isa = PBXGroup;
 			children = (
+				160BD36029A749EC00751877 /* App Documentation */,
 				16194F0129985C0B001A252E /* Library */,
 				16194F0629985C18001A252E /* Code */,
 				93EB007E26F10A410020C350 /* Products */,
@@ -111,7 +151,8 @@
 		93EB007E26F10A410020C350 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				93EB007D26F10A410020C350 /* Point Input */,
+				93EB007D26F10A410020C350 /* Point Input - source */,
+				160BD37229A80E7800751877 /* Point Input - library */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -119,9 +160,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		93EB007C26F10A410020C350 /* Point Input */ = {
+		160BD36529A80E7800751877 /* Point Input - library */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 93EB008426F10A410020C350 /* Build configuration list for PBXNativeTarget "Point Input" */;
+			buildConfigurationList = 160BD36F29A80E7800751877 /* Build configuration list for PBXNativeTarget "Point Input - library" */;
+			buildPhases = (
+				160BD36629A80E7800751877 /* Sources */,
+				160BD36B29A80E7800751877 /* Frameworks */,
+				160BD36E29A80E7800751877 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Point Input - library";
+			productName = "Class Demo";
+			productReference = 160BD37229A80E7800751877 /* Point Input - library */;
+			productType = "com.apple.product-type.tool";
+		};
+		93EB007C26F10A410020C350 /* Point Input - source */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 93EB008426F10A410020C350 /* Build configuration list for PBXNativeTarget "Point Input - source" */;
 			buildPhases = (
 				93EB007926F10A410020C350 /* Sources */,
 				93EB007A26F10A410020C350 /* Frameworks */,
@@ -131,9 +189,9 @@
 			);
 			dependencies = (
 			);
-			name = "Point Input";
+			name = "Point Input - source";
 			productName = "Class Demo";
-			productReference = 93EB007D26F10A410020C350 /* Point Input */;
+			productReference = 93EB007D26F10A410020C350 /* Point Input - source */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -163,25 +221,64 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				93EB007C26F10A410020C350 /* Point Input */,
+				93EB007C26F10A410020C350 /* Point Input - source */,
+				160BD36529A80E7800751877 /* Point Input - library */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		160BD36629A80E7800751877 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				160BD36729A80E7800751877 /* pointsAndSegments.cpp in Sources */,
+				160BD36829A80E7800751877 /* dataFileIO.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		93EB007926F10A410020C350 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16194F0B29985CB2001A252E /* pointsAndSegments.cpp in Sources */,
-				16194F0A29985CAE001A252E /* Point.cpp in Sources */,
-				16D0CB14299EC2270008B4C4 /* Segment.cpp in Sources */,
+				160BD37629A8200900751877 /* Point.cpp in Sources */,
+				168DD2ED29A5829E00A0A99C /* pointsAndSegments.cpp in Sources */,
+				160BD36429A7BBD900751877 /* dataFileIO.cpp in Sources */,
+				160BD37529A8200900751877 /* Segment.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		160BD37029A80E7800751877 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 38H6W4VN4A;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		160BD37129A80E7800751877 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 38H6W4VN4A;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		93EB008226F10A410020C350 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -352,6 +449,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		160BD36F29A80E7800751877 /* Build configuration list for PBXNativeTarget "Point Input - library" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				160BD37029A80E7800751877 /* Debug */,
+				160BD37129A80E7800751877 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		93EB007826F10A410020C350 /* Build configuration list for PBXProject "Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -361,7 +467,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		93EB008426F10A410020C350 /* Build configuration list for PBXNativeTarget "Point Input" */ = {
+		93EB008426F10A410020C350 /* Build configuration list for PBXNativeTarget "Point Input - source" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				93EB008526F10A410020C350 /* Debug */,

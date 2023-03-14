@@ -11,8 +11,7 @@
 
 #include <string>
 
-void readDataFile(const std::string& filePath);
-void writeDataFile(const std::string& fileRootPath);
+void readDataFile(const std::string& filePath, int& paneWidth, int& paneHeight);
+std::string writeDataFile(const std::string& fileRootPath);
 
 #endif /* dataFileIO_hpp */
-
