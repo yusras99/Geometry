@@ -1,2 +1,0 @@
-Target dependency graph (1 target)
-Point Input - library in Demo, no dependencies

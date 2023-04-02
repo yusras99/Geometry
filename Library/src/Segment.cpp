@@ -8,6 +8,7 @@
 #include <iostream>
 #include <algorithm>
 #include <set>
+#include <map>
 #include <memory>
 #include <utility>
 
@@ -22,7 +23,7 @@ using namespace geometry;
  *Static variables redeclared in source code
  */
 set<shared_ptr<Segment> > Segment::segSet_;
-vector<shared_ptr<Segment> > Segment::segList_;
+vector<shared_ptr<Segment> > Segment::segVect_;
 unsigned int Segment::count_ = 0;
 
 
@@ -70,11 +71,6 @@ Segment::~Segment(void){
 //-----------------------------------------------------------------
 #endif
 
-/**Maker function for the segment that will create a shared pointer to the segment so it can be stored in the set
- * @param pt1 a reference to a point 1 which will be used to create a segment
- * @param pt2 a reference to a point 2 which will be used to create a segment
- * @return a shared pointer to the segment
- */
 shared_ptr<Segment> Segment::makeNewSegPtr(Point& pt1, Point& pt2){
     bool found = false;
     shared_ptr<Segment> p;
@@ -95,17 +91,13 @@ shared_ptr<Segment> Segment::makeNewSegPtr(Point& pt1, Point& pt2){
     }else{
         shared_ptr<Segment> currSeg = make_shared<Segment>(SegmentToken{}, pt1, pt2);
         segSet_.insert(currSeg);
-        segList_.push_back(currSeg);
+        segVect_.push_back(currSeg);
 		pt1.segList_.insert(currSeg->idx_);
 		pt2.segList_.insert(currSeg->idx_);
         return currSeg;
     }
 }
-/**Maker function that calls the other constructor function and gets the segment on that pointer
- * @param pt1 a reference to a point 1 which will be used to create a segment
- * @param pt2 a reference to a point 2 which will be used to create a segment
- * @return the reference to a segment
- */
+
 Segment& Segment::makeNewSeg(Point& pt1, Point& pt2){
    return *(makeNewSegPtr(pt1, pt2));
 }
@@ -194,10 +186,7 @@ bool Segment::isOnLeftSide(const Point& pt) const{
 //    PointStruct pts = {pt.getX(), pt.getY()};
 //    return isOnLeftSide(pts);
 }
-/**Function that checks if the point is on left of the segments or not
- *@param pt - a reference to a constant point struct which has to be checked on its direction to the segment
- *@return boolean that tells if the point is on left or not
- */
+
 bool Segment::isOnLeftSide(const PointStruct& pt) const{
     float det  = ((pt.x - p1_.x_) * (p2_.y_ - p1_.y_)) - ((p2_.x_ - p1_.x_) * (pt.y - p1_.y_ ));
     if(det > 0){
@@ -206,81 +195,31 @@ bool Segment::isOnLeftSide(const PointStruct& pt) const{
         return false;
     }
 }
-/**Function that checks the points of the intersecting segment if they are on opposite sides which will set the basis of intersection
- *@param pt1 - a reference to a constant point 1 which has to be checked on its direction to the segment
- *@param pt2 - a reference to a constant point 2 which has to be checked on its direction to the segment
- *@return boolean that tells if the 2 points are on the opposite sides of the currSeg
- */
 bool Segment::areOnOppositeSides(const Point& pt1, const Point& pt2) const{
 	bool pt1IsLeft = isOnLeftSide(pt1);
 	bool pt2IsLeft = isOnLeftSide(pt2);
 	return ((pt1IsLeft && !pt2IsLeft) || (!pt1IsLeft && pt2IsLeft));
 }
-/**Function that checks the points of the intersecting segment if they are on opposite sides which will set the basis of intersection
- *@param pt1 - a reference to a constant point 1 struct which has to be checked on its direction to the segment
- *@param pt2 - a reference to a constant point 2 struct which has to be checked on its direction to the segment
- *@return boolean that tells if the 2 points are on the opposite sides of the currSeg
- */
 bool Segment::areOnOppositeSides(const PointStruct& pt1, const PointStruct& pt2) const{
     bool pt1IsLeft = isOnLeftSide(pt1);
 	bool pt2IsLeft = isOnLeftSide(pt2);
 	return ((pt1IsLeft && !pt2IsLeft) || (!pt1IsLeft && pt2IsLeft));
 }
-/**Intersection possible iff:
- *  Seg1.pt1 and seg1.pt2 are on different sides of Seg2
- *  Seg2.pt1 and seg2.pt2 are on different sides of Seg1
- *@param seg - the segment which is possible of intersection
- *@return boolean that tells if the intersection exists between two segments
- */
 bool Segment::intersects(const Segment& seg) const{
     return areOnOppositeSides(seg.p1_, seg.p2_) && seg.areOnOppositeSides(p1_, p2_);;
 }
-/**
- *@param pt1 - a const reference to point  - part of a possibly intersecting segment
- *@param pt2 - a const reference to another point - part of a possibly intersecting segment
- *@return boolean that tells if the intersection exists between two segments
- */
 bool Segment::intersects(const Point& pt1, const Point& pt2) const{
 		Segment seg(const_cast<Point&>(pt1), const_cast<Point&>(pt2));
         return areOnOppositeSides(pt1, pt2) && seg.areOnOppositeSides(p1_, p2_);
 }
-/**
- *@param pt1 - a const reference to pointStruct  - part of a possibly intersecting segment
- *@param pt2 - a const reference to another pointStruct - part of a possibly intersecting segment
- *@return boolean that tells if the intersection exists between two segments
- */
 bool Segment::intersects(const PointStruct& pt1, const PointStruct& pt2) const{
 		SegmentStruct segStruct(pt1, pt2);
 		PointStruct ps1{p1_.x_, p1_.y_};
 		PointStruct ps2{p2_.x_, p2_.y_};
         return areOnOppositeSides(pt1, pt2) && segStruct.areOnOppositeSides(ps1, ps2);
 }
-/**Function that checks interSeg with the currSeg to see if there is an intersection, if there is pointer to the intersection pt is returned otherwise a null pointer is returned
- *@param interSeg A const reference to a segment which is possible candidate of an intersection
- *@return A pointer to Point struct variable which is the intersection point of both segments
- */
 unique_ptr<PointStruct> Segment::findIntersection(const Segment& interSeg){
     if(intersects(interSeg)){
-        /**variable that is essentially a divisor of the intersection point's x and y value - currSeg's x and y value**/
-        float factor = 0.0;
-        /**variables that are just difference of the x and y values for both segments **/
-        const float interSegX = interSeg.p1_.x_ - interSeg.p2_.x_;
-        const float currSegX = p1_.x_ - p2_.x_;
-        const float interSegY = interSeg.p1_.y_ - interSeg.p2_.y_;
-        const float currSegY = p1_.y_ - p2_.y_;
-        /**Intersection point M belongs to currSeg (A, B) so there exists α  s.t. M = A + α(B-A)
-         *The  interSeg(C, D) and the segment from (C, M) are colinear (determinant of the 2 vectors is 0):
-         *      det(A + α(B-A) - C, D - C) = 0
-         * Hence the equations below are solved for α using the above equation
-         */
-        float numerator = ((interSegX/interSegY)*(p1_.y_)) -        ((interSegX/interSegY)*(interSeg.p1_.x_)) - p1_.x_ + interSeg.p1_.x_;
-        float denominator = currSegX - ((interSegX/interSegY)*currSegY);
-        factor = numerator / denominator;
-        
-        float interX = p1_.x_ + (factor * (p2_.x_ - p1_.x_));
-        float interY = p1_.y_ + (factor * (p2_.y_ - p1_.y_));
-
- {
 		const float interSegDX = interSeg.p2_.x_ - interSeg.p1_.x_;
 		const float currSegDX = p2_.x_ - p1_.x_;
 		const float interSegDY = interSeg.p2_.y_ - interSeg.p1_.y_;
@@ -290,18 +229,19 @@ unique_ptr<PointStruct> Segment::findIntersection(const Segment& interSeg){
 		float num = interSegDY*(p1_.x_ - interSeg.p1_.x_) -
 					interSegDX*(p1_.y_ - interSeg.p1_.y_);
 		float alpha = num/denom;
-		interX = p1_.x_ + alpha*currSegDX;
-		interY = p1_.y_ + alpha*currSegDY;
- }
- 
- 
-		return make_unique<PointStruct>(interX,interY);
+		float interX = p1_.x_ + alpha*currSegDX;
+		float interY = p1_.y_ + alpha*currSegDY;
+        
+        geometry::segPointSet_.insert(make_shared<Point>(interX, interY));
+        //Professor, I am not sure about this. Over here I am just pushing the intersection point in the set.
+        //However, I forgot that why are we returning the pointstruct and not a point?
+        return make_unique<PointStruct>(interX, interY);
+
     }else{
-        /**if no intersection found return a null pointer*/
+        //	if no intersection found return a null pointer
         return nullptr;
     }
 }
-
 vector<unique_ptr<PointStruct> > geometry::findAllIntersectionsBruteForce(const vector<shared_ptr<Segment> >& vect){
 	
 	vector<unique_ptr<PointStruct> > intersectVect;
@@ -314,4 +254,55 @@ vector<unique_ptr<PointStruct> > geometry::findAllIntersectionsBruteForce(const 
 		}
 	}
 	return intersectVect;
+}
+//Do we need this function to maintain the order of the map, or will it be done by the map itself?
+void geometry::orderMap(std::map<int,unsigned int> &prioritySegMap,const vector<shared_ptr<Segment> >& segVect){
+    /**
+            go through all the segments and see which if they are on the left or right of the segment that they are supposed to check
+     */
+    for(auto itr = prioritySegMap.begin(); itr != prioritySegMap.end(); itr++){
+        unsigned int currSeg = (itr)->second;
+//        WE NEED A FUNCTION TO CHECK IF SEGMENT IS ON LEFT SIDE OR RIGHT SIDE
+/*        if(segVect[currSeg].isOnLeftSide(itr.next)){
+                swap priorities
+                itr++
+            }else{
+                    
+            }
+ */
+    }
+}
+
+vector<unique_ptr<PointStruct> > geometry::findAllIntersectionsSmart(const vector<shared_ptr<Segment> >& segVect){
+  
+    vector<unique_ptr<PointStruct> > intersectVect;
+//    Call this function to populate the segmentPoints
+    geometry::getAllSegPoints();
+//   The T data structure is an ordered map with key being segment priority number, and value is the segment number
+    std::map<int,unsigned int> prioritySegMap;
+    int segPriority = 0;
+    for(auto itr = geometry::segPointSet_.begin(); itr != geometry::segPointSet_.end(); itr++){
+        std::shared_ptr<Point> currPoint = *itr;
+//      Get the segmentlist of each point and push it in the priority seg map according to the order
+        std::set<unsigned int> currSegSet = currPoint->getSegList();
+        
+        //populate segMap
+        if(currSegSet.size()>1){
+            for(auto segItr = currSegSet.begin(); segItr != currSegSet.end(); segItr++){
+                prioritySegMap[segPriority] = *(segItr);
+                segPriority++;
+            }
+        }else{
+            prioritySegMap[segPriority] = *(currSegSet.begin());
+        }
+        
+        //ordering segMap
+        if(prioritySegMap.size() == 1){
+            continue;
+        }else{
+            // if there are more than one segments in the map then sort them
+            orderMap(prioritySegMap,segVect);
+        }
+    }
+    return intersectVect;
 }

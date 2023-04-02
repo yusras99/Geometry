@@ -49,7 +49,7 @@
 #include <cstdlib>
 #include <cmath>
 //
-#include "glPlatform.h"
+#include "glPlatform.hpp"
 #include "World.hpp"
 #include "Point.hpp"
 #include "Segment.hpp"
@@ -115,7 +115,7 @@ float World::WORLD_TO_PIXEL;
 float World::SNAP_TO_ANGLE_TOL;
 float World::SNAP_TO_POINT_TOL;
 float World::SNAP_TO_SEGMENT_TOL;
-const float World::POINT_PIXEL_RAD = 5.f;
+const float World::POINT_PIXEL_RADIUS = 5.f;
 const float World::DISTANCE_TOL = (float) 1E-5;
 const float World::DISTANCE_SQ_TOL = World::DISTANCE_TOL*World::DISTANCE_TOL;
 

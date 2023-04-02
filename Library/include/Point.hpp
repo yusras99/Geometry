@@ -10,7 +10,7 @@
 
 #include <memory>
 #include <set>
-#include "glPlatform.h"
+#include "glPlatform.hpp"
 
 namespace geometry {
 
@@ -26,15 +26,28 @@ namespace geometry {
 		EDIT_POINT,
 		INTERSECTION_POINT
 	};
-
 	/** Struct used to stort the coordinates of a "potential Point," by which
 	 *	we mean a geometric point that hasn't been confirmed as a Point object.
 	 */
 	struct PointStruct{
-		float x, y;
 		
+		/** The point's horizontal coordinate.
+		 */
+		float x;
+
+		/** The point's vertical coordinate.
+		 */
+		float y;
+
+		/** Empty constructor */
 		PointStruct() {};
 		
+		/** Intializes a PointStruct object.  This constructor (and therefore the
+		 *	previous one, seem to be needed because make_unique doesn't play nice
+		 *	with brace initialization [???]
+		 *	@param theX	 our point's x coordinate
+		 *	@param theY	 our point's y coordinate
+		 */
 		PointStruct(float theX, float theY)
 			: x(theX), y(theY) {};
 	};
@@ -63,8 +76,10 @@ namespace geometry {
 			unsigned int idx_;
 
 			static unsigned int count_;
+            //The set of all points which are unique and can autosort itself
 			static std::set<std::shared_ptr<Point> > pointSet_;
-			static std::vector<std::shared_ptr<Point> > pointList_;
+        
+			static std::vector<std::shared_ptr<Point> > pointVect_;
 			static float pointDiskRadius_;
 			static GLuint diskList_;
 			static GLuint circleList_;
@@ -108,7 +123,9 @@ namespace geometry {
 			size_t getConnectivityDegree(void) const{
 				return segList_.size();
 			}
-			
+            std::set<unsigned int> getSegList(void) const{
+                return segList_;
+            }
 			void render(PointType type = PointType::DEDUCED_TYPE) const;
 
 			float distance(const PointStruct& pt) const;
@@ -127,8 +144,7 @@ namespace geometry {
 			static const std::set<std::shared_ptr<Point> >& getAllPoints(void){
 				return pointSet_;
 			}
-			
-			static shared_ptr<Point> getPointAtIndex(size_t index);
+			static std::shared_ptr<Point> getPointAtIndex(size_t index);
 
 			static void clearAllPoints(void) {
 				pointSet_.clear();
@@ -141,10 +157,31 @@ namespace geometry {
 			
 			static float distance(const PointStruct& pt1, const PointStruct& pt2);
 			static float distanceSq(const PointStruct& pt1, const PointStruct& pt2);
-
 	};
-	
+    // Compare struct that helps to compare between points, to decide their position in the queue
+    struct compare{
+      bool operator()(const Point p1, const Point p2){
+          float x1 = p1.getX();
+          float y1 = p1.getY();
+          float x2 = p2.getX();
+          float y2 = p2.getY();
+          
+          if(y1 == y2){
+              return x1 < x2;
+          }
+          else{
+             return y1 > y2;
+          }
+      }
+    };
 	using PointPtr = std::shared_ptr<Point>;
+    //The set of all points which are on a segment including endpoints and intersectionpt
+    static std::set<std::shared_ptr<Point> ,compare> segPointSet_;
+    /**
+     *This function populates the segPointSet.
+     *It takes the points which lies on the segment and put them in the segPointSet.
+     */
+//     static void buildAllEndPointSet(void);
 	
 }	//	end of namespace
 #endif /* Point_hpp */

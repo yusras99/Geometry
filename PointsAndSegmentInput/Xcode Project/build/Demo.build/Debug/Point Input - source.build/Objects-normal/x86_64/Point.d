@@ -1,5 +1,5 @@
 dependencies: \
-  /Users/jyh/Library/CloudStorage/Dropbox/Developer/csc491\ -\ Yusra\ Suhail/Geometry/Library/src/Point.cpp \
-  /Users/jyh/Library/CloudStorage/Dropbox/Developer/csc491\ -\ Yusra\ Suhail/Geometry/Library/include/Point.hpp \
-  /Users/jyh/Library/CloudStorage/Dropbox/Developer/csc491\ -\ Yusra\ Suhail/Geometry/PointsAndSegmentInput/Code/glPlatform.h \
-  /Users/jyh/Library/CloudStorage/Dropbox/Developer/csc491\ -\ Yusra\ Suhail/Geometry/Library/include/Segment.hpp
+  /Users/yusrasuhail/Dropbox/csc491\ -\ Yusra\ Suhail/Geometry/Library/src/Point.cpp \
+  /Users/yusrasuhail/Dropbox/csc491\ -\ Yusra\ Suhail/Geometry/Library/include/Point.hpp \
+  /Users/yusrasuhail/Dropbox/csc491\ -\ Yusra\ Suhail/Geometry/PointsAndSegmentInput/Code/glPlatform.hpp \
+  /Users/yusrasuhail/Dropbox/csc491\ -\ Yusra\ Suhail/Geometry/Library/include/Segment.hpp

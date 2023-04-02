@@ -18,7 +18,7 @@ using namespace geometry;
 
 //Static variables redeclared in source code
 set<shared_ptr<Point> > Point::pointSet_;
-vector<shared_ptr<Point> > Point::pointList_;
+vector<shared_ptr<Point> > Point::pointVect_;
 unsigned int Point::count_ = 0;
 float Point::pointDiskRadius_;
 GLuint Point::diskList_ = 0;
@@ -88,7 +88,7 @@ shared_ptr<Point> Point::makeNewPointPtr(float xCoord,float yCoord){
 Point& Point::makeNewPoint(float xCoord,float yCoord){
     return *(makeNewPointPtr(xCoord, yCoord));
 }
-
+//Yusra: what is this function doing?
 shared_ptr<Point> Point::getPointAtIndex(size_t index){
 	shared_ptr<Point> ptr = nullptr;
 	if (index < pointSet_.size()){
@@ -251,3 +251,14 @@ float Point::distanceSq(const Point& pt) const{
 	return (dx*dx + dy*dy);
 }
 
+//NEED TO DISCUSS WITH PROFESSOR ON HOW TO CHANGE TO POINTSTRUCT
+//void geometry::buildAllEndPointSet(void){
+////   Get all points and see if they have a segList, if they do put them in a segPointSet.
+//    static const std::set<std::shared_ptr<Point> > allPointSet = Point::getAllPoints();
+//    for (auto itr = allPointSet.begin(); itr != allPointSet.end(); itr++){
+//        std::shared_ptr<Point> currPoint = *itr;
+//        if(currPoint->getConnectivityDegree() != 0){
+//            segPointSet_.insert(currPoint);
+//        }
+//    }
+//}

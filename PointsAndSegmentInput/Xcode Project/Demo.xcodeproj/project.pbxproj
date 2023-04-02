@@ -17,6 +17,7 @@
 		16526F19298E4C13008C34A8 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16526F17298E4C13008C34A8 /* GLUT.framework */; };
 		16526F1A298E4C13008C34A8 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16526F18298E4C13008C34A8 /* OpenGL.framework */; };
 		168DD2ED29A5829E00A0A99C /* pointsAndSegments.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16194F0929985C18001A252E /* pointsAndSegments.cpp */; };
+		6E1BEBE329D59499000AA358 /* PointStruct.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E1BEBE129D59499000AA358 /* PointStruct.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,12 +49,14 @@
 		16194F0329985C0B001A252E /* Point.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Point.hpp; sourceTree = "<group>"; };
 		16194F0529985C0B001A252E /* Point.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Point.cpp; sourceTree = "<group>"; };
 		16194F0729985C18001A252E /* World.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = World.hpp; sourceTree = "<group>"; };
-		16194F0829985C18001A252E /* glPlatform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = glPlatform.h; sourceTree = "<group>"; };
+		16194F0829985C18001A252E /* glPlatform.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = glPlatform.hpp; sourceTree = "<group>"; };
 		16194F0929985C18001A252E /* pointsAndSegments.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = pointsAndSegments.cpp; sourceTree = "<group>"; };
 		16526F17298E4C13008C34A8 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		16526F18298E4C13008C34A8 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		16D0CB0F299EC2090008B4C4 /* Segment.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Segment.hpp; sourceTree = "<group>"; };
 		16D0CB12299EC2270008B4C4 /* Segment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Segment.cpp; sourceTree = "<group>"; };
+		6E1BEBE129D59499000AA358 /* PointStruct.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PointStruct.cpp; sourceTree = "<group>"; };
+		6E1BEBE229D59499000AA358 /* PointStruct.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PointStruct.hpp; sourceTree = "<group>"; };
 		93EB007D26F10A410020C350 /* Point Input - source */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Point Input - source"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -100,6 +103,7 @@
 		16194F0229985C0B001A252E /* include */ = {
 			isa = PBXGroup;
 			children = (
+				6E1BEBE229D59499000AA358 /* PointStruct.hpp */,
 				16194F0329985C0B001A252E /* Point.hpp */,
 				16D0CB0F299EC2090008B4C4 /* Segment.hpp */,
 			);
@@ -111,6 +115,7 @@
 			children = (
 				16194F0529985C0B001A252E /* Point.cpp */,
 				16D0CB12299EC2270008B4C4 /* Segment.cpp */,
+				6E1BEBE129D59499000AA358 /* PointStruct.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -118,7 +123,7 @@
 		16194F0629985C18001A252E /* Code */ = {
 			isa = PBXGroup;
 			children = (
-				16194F0829985C18001A252E /* glPlatform.h */,
+				16194F0829985C18001A252E /* glPlatform.hpp */,
 				16194F0729985C18001A252E /* World.hpp */,
 				160BD36329A7BBD900751877 /* dataFileIO.hpp */,
 				160BD36229A7BBD900751877 /* dataFileIO.cpp */,
@@ -243,6 +248,7 @@
 			files = (
 				160BD37629A8200900751877 /* Point.cpp in Sources */,
 				168DD2ED29A5829E00A0A99C /* pointsAndSegments.cpp in Sources */,
+				6E1BEBE329D59499000AA358 /* PointStruct.cpp in Sources */,
 				160BD36429A7BBD900751877 /* dataFileIO.cpp in Sources */,
 				160BD37529A8200900751877 /* Segment.cpp in Sources */,
 			);
@@ -260,6 +266,7 @@
 				DEVELOPMENT_TEAM = 38H6W4VN4A;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -274,6 +281,7 @@
 				DEVELOPMENT_TEAM = 38H6W4VN4A;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -336,6 +344,7 @@
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				GCC_WARN_PEDANTIC = YES;
@@ -403,6 +412,7 @@
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				GCC_WARN_PEDANTIC = YES;
@@ -427,6 +437,7 @@
 				DEVELOPMENT_TEAM = 38H6W4VN4A;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -441,6 +452,7 @@
 				DEVELOPMENT_TEAM = 38H6W4VN4A;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
