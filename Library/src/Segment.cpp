@@ -39,8 +39,8 @@ const GLfloat SEGMENT_COLOR[][4] = {
  */
 Segment::Segment(SegmentToken token, Point& pt1, Point& pt2)
     :
-		p1_(pt1),
-		p2_(pt2),
+		p1_((pt1.y_ < pt2.y_) || ((pt1.y_ < pt2.y_) && (pt1.x_ < pt2.x_)) ? pt1 :  pt2),
+		p2_((pt1.y_ < pt2.y_) || ((pt1.y_ < pt2.y_) && (pt1.x_ < pt2.x_)) ? pt2 :  pt1),
         idx_(count_++)
 {
 	(void) token;
@@ -51,8 +51,8 @@ Segment::Segment(SegmentToken token, Point& pt1, Point& pt2)
 }
 Segment::Segment(Point& pt1, Point& pt2)
     :
-		p1_(pt1),
-		p2_(pt2),
+		p1_((pt1.y_ < pt2.y_) || ((pt1.y_ < pt2.y_) && (pt1.x_ < pt2.x_)) ? pt1 :  pt2),
+		p2_((pt1.y_ < pt2.y_) || ((pt1.y_ < pt2.y_) && (pt1.x_ < pt2.x_)) ? pt2 :  pt1),
         idx_(UINT_MAX)
 {
 }
@@ -232,7 +232,7 @@ unique_ptr<PointStruct> Segment::findIntersection(const Segment& interSeg){
 		float interX = p1_.x_ + alpha*currSegDX;
 		float interY = p1_.y_ + alpha*currSegDY;
         
-        geometry::segPointSet_.insert(make_shared<Point>(interX, interY));
+//        geometry::segPointSet_.insert(make_shared<Point>(interX, interY));
         //Professor, I am not sure about this. Over here I am just pushing the intersection point in the set.
         //However, I forgot that why are we returning the pointstruct and not a point?
         return make_unique<PointStruct>(interX, interY);
@@ -255,7 +255,44 @@ vector<unique_ptr<PointStruct> > geometry::findAllIntersectionsBruteForce(const 
 	}
 	return intersectVect;
 }
-//Do we need this function to maintain the order of the map, or will it be done by the map itself?
+#if 0
+//-----------------------------------------------------------------
+#pragma mark -
+#pragma mark Smart Intersection-related functions
+//-----------------------------------------------------------------
+#endif
+vector<shared_ptr<Point> > geometry::getAllEndPoints(const vector<shared_ptr<Segment> >& vect){
+    vector<shared_ptr<Point> > endpointVect;
+    //   Get all points and see if they have a segList, if they do put them in the vector.
+    static const std::set<std::shared_ptr<Point> > allPointSet = Point::getAllPoints();
+    for (auto itr = allPointSet.begin(); itr != allPointSet.end(); itr++){
+        std::shared_ptr<Point> currPoint = *itr;
+        if(currPoint->getConnectivityDegree() != 0){
+            endpointVect.push_back(currPoint);
+        }
+    }
+    return endpointVect;
+}
+
+std::set<std::shared_ptr<interQueueEvent> , compare> geometry::buildEventSet(const std::vector<std::shared_ptr<Segment> >& vect){
+    vector<shared_ptr<Point> > endpointVect = getAllEndPoints(vect);
+    std::set<std::shared_ptr<interQueueEvent> , compare> eventQueue;
+    
+    for (auto itr = endpointVect.begin(); itr != endpointVect.end(); itr++){
+        const std::shared_ptr<interQueueEvent> currPoint = make_shared<interQueueEvent>();
+        currPoint->endpt = *itr;
+        currPoint->isIntersection = false;
+        eventQueue.insert(currPoint);
+    }
+    return eventQueue;
+}
+
+void geometry::addEvent(set<shared_ptr<interQueueEvent> , compare>& eventQueue,shared_ptr<PointStruct> currInterPt){
+    const std::shared_ptr<interQueueEvent> currPoint;
+    currPoint->interPt = currInterPt;
+    currPoint->isIntersection = true;
+    eventQueue.insert(currPoint);
+}
 void geometry::orderMap(std::map<int,unsigned int> &prioritySegMap,const vector<shared_ptr<Segment> >& segVect){
     /**
             go through all the segments and see which if they are on the left or right of the segment that they are supposed to check
@@ -274,35 +311,43 @@ void geometry::orderMap(std::map<int,unsigned int> &prioritySegMap,const vector<
 }
 
 vector<unique_ptr<PointStruct> > geometry::findAllIntersectionsSmart(const vector<shared_ptr<Segment> >& segVect){
-  
+    
     vector<unique_ptr<PointStruct> > intersectVect;
-//    Call this function to populate the segmentPoints
-    geometry::getAllSegPoints();
-//   The T data structure is an ordered map with key being segment priority number, and value is the segment number
-    std::map<int,unsigned int> prioritySegMap;
-    int segPriority = 0;
-    for(auto itr = geometry::segPointSet_.begin(); itr != geometry::segPointSet_.end(); itr++){
-        std::shared_ptr<Point> currPoint = *itr;
-//      Get the segmentlist of each point and push it in the priority seg map according to the order
-        std::set<unsigned int> currSegSet = currPoint->getSegList();
-        
-        //populate segMap
-        if(currSegSet.size()>1){
-            for(auto segItr = currSegSet.begin(); segItr != currSegSet.end(); segItr++){
-                prioritySegMap[segPriority] = *(segItr);
-                segPriority++;
-            }
-        }else{
-            prioritySegMap[segPriority] = *(currSegSet.begin());
-        }
-        
-        //ordering segMap
-        if(prioritySegMap.size() == 1){
-            continue;
-        }else{
-            // if there are more than one segments in the map then sort them
-            orderMap(prioritySegMap,segVect);
-        }
-    }
+    //    Call this function to populate the segmentPoints
+    std::set<std::shared_ptr<interQueueEvent> , compare> eventQueue = buildEventSet(segVect);
+//    for(auto itr = eventQueue.begin(); itr != eventQueue.end(); itr++){
+//        if(!(*itr)->isIntersection){
+//            std::cout<<(*itr)->endpt->getX()<<", "<<(*itr)->endpt->getY()<<std::endl;
+//        }
+	//   The T data structure is an ordered map with key being segment priority number, and value is the segment number
+	std::map<int,unsigned int> prioritySegMap;
+	int segPriority = 0;
+	for(auto itr = eventQueue.begin(); itr != eventQueue.end(); itr++){
+		std::shared_ptr<interQueueEvent> currPoint = *itr;
+		std::set<unsigned int> currSegSet;
+		//      Get the segmentlist of each point and push it in the priority seg map according to the order
+		if(!(*currPoint).isIntersection){
+			currSegSet = (currPoint->endpt)->getSegList();
+		}
+		
+		//populate segMap
+		if(currSegSet.size()>1){
+			for(auto segItr = currSegSet.begin(); segItr != currSegSet.end(); segItr++){
+				prioritySegMap[segPriority] = *(segItr);
+				segPriority++;
+			}
+		}else{
+			prioritySegMap[segPriority] = *(currSegSet.begin());
+		}
+		
+		//ordering segMap
+		if(prioritySegMap.size() == 1){
+			continue;
+		}else{
+			// if there are more than one segments in the map then sort them
+			orderMap(prioritySegMap,segVect);
+		}
+	}
+//    }
     return intersectVect;
 }

@@ -10,6 +10,7 @@
 
 #include <memory>
 #include <set>
+#include <cmath>
 #include "glPlatform.hpp"
 
 namespace geometry {
@@ -128,10 +129,6 @@ namespace geometry {
             }
 			void render(PointType type = PointType::DEDUCED_TYPE) const;
 
-			float distance(const PointStruct& pt) const;
-			float distance(const Point& pt) const;
-			float distanceSq(const PointStruct& pt) const;
-			float distanceSq(const Point& pt) const;
 
 			static void render(const PointStruct& pt,
 							   PointType type = PointType::FIRST_ENDPOINT);
@@ -146,6 +143,54 @@ namespace geometry {
 			}
 			static std::shared_ptr<Point> getPointAtIndex(size_t index);
 
+			static float distanceSq(float x1, float y1, float x2, float y2);
+
+			inline float distance(const PointStruct& pt) const{
+				return sqrtf(distanceSq(x_, y_, pt.x, pt.y));
+			}
+			inline float distance(const Point& pt) const{
+				return sqrtf(distanceSq(x_, y_, pt.x_, pt.y_));
+			}
+			inline float distance(float x, float y) const{
+				return sqrtf(distanceSq(x_, y_, x, y));
+			}
+			inline float distanceSq(const PointStruct& pt) const{
+				return distanceSq(x_, y_, pt.x, pt.y);
+			}
+			inline float distanceSq(const Point& pt) const{
+				return distanceSq(x_, y_, pt.x_, pt.y_);
+			}
+			inline float distanceSq(float x, float y) const{
+				return distanceSq(x_, y_, x, y);
+			}
+			inline bool isSame(const PointStruct& pt) const{
+				return (distanceSq(x_, y_, pt.x, pt.y) == 0);
+			}
+			inline bool isSame(const Point& pt) const{
+				return (distanceSq(x_, y_, pt.x_, pt.y_) == 0.f);
+			}
+			inline bool isSame(float x, float y) const{
+				return (distanceSq(x_, y_, x, y) == 0);
+			}
+			inline static float distance(float x1, float y1, float x2, float y2){
+				return sqrtf(distanceSq(x1, y1, x2, y2));
+			}
+			
+			inline static float distanceSq(const PointStruct& pt1, const PointStruct& pt2){
+				return distanceSq(pt1.x, pt1.y, pt2.x, pt2.y);
+			}
+			inline static float distance(const PointStruct& pt1, const PointStruct& pt2){
+				return sqrtf(distanceSq(pt1.x, pt1.y, pt2.x, pt2.y));
+			}
+
+			inline static bool isSame(float x1, float y1, float x2, float y2){
+				return (distanceSq(x1, y1, x2, y2) == 0.f);
+			}
+			
+			inline static bool isSame(const PointStruct& pt1, const PointStruct& pt2){
+				return (distanceSq(pt1.x, pt1.y, pt2.x, pt2.y) == 0.f);
+			}
+
 			static void clearAllPoints(void) {
 				pointSet_.clear();
 				count_ = 0;
@@ -155,33 +200,26 @@ namespace geometry {
 
 			static void renderAllSinglePoints(void);
 			
-			static float distance(const PointStruct& pt1, const PointStruct& pt2);
-			static float distanceSq(const PointStruct& pt1, const PointStruct& pt2);
 	};
-    // Compare struct that helps to compare between points, to decide their position in the queue
-    struct compare{
-      bool operator()(const Point p1, const Point p2){
-          float x1 = p1.getX();
-          float y1 = p1.getY();
-          float x2 = p2.getX();
-          float y2 = p2.getY();
-          
-          if(y1 == y2){
-              return x1 < x2;
-          }
-          else{
-             return y1 > y2;
-          }
-      }
-    };
+//    // Compare struct that helps to compare between points, to decide their position in the queue
+//    struct compare{
+//      bool operator()(const Point p1, const Point p2){
+//          float x1 = p1.getX();
+//          float y1 = p1.getY();
+//          float x2 = p2.getX();
+//          float y2 = p2.getY();
+//
+//          if(y1 == y2){
+//              return x1 < x2;
+//          }
+//          else{
+//             return y1 > y2;
+//          }
+//      }
+//    };
 	using PointPtr = std::shared_ptr<Point>;
     //The set of all points which are on a segment including endpoints and intersectionpt
-    static std::set<std::shared_ptr<Point> ,compare> segPointSet_;
-    /**
-     *This function populates the segPointSet.
-     *It takes the points which lies on the segment and put them in the segPointSet.
-     */
-//     static void buildAllEndPointSet(void);
+//    static std::set<std::shared_ptr<Point> ,compare> segPointSet_;
 	
 }	//	end of namespace
 #endif /* Point_hpp */

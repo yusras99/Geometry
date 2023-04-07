@@ -1,19 +1,15 @@
 {
-  "_buildCommand2" : {
+  "buildCommand" : {
     "command" : "prepareForIndexing",
     "enableIndexBuildArena" : false,
     "targets" : null
   },
-  "buildCommand" : "build",
   "configuredTargets" : [
-    {
-      "guid" : "eaee17aee96df92022dd96a9efbd9d1c257e66ef74b72d525668fa904a2c6cae"
-    },
     {
       "guid" : "eaee17aee96df92022dd96a9efbd9d1c15aca1f807c5d1a40de2a12e675b2aad"
     }
   ],
-  "containerPath" : "/Users/jyh/Library/CloudStorage/Dropbox/Developer/csc491 - Yusra Suhail/Geometry/PointsAndSegmentInput/Xcode Project/Demo.xcodeproj",
+  "containerPath" : "/Users/yusrasuhail/Dropbox/csc491 - Yusra Suhail/Geometry/PointsAndSegmentInput/Xcode Project/Demo.xcodeproj",
   "continueBuildingAfterErrors" : true,
   "enableIndexBuildArena" : false,
   "hideShellScriptEnvironment" : false,
@@ -23,7 +19,7 @@
     "activeRunDestination" : {
       "disableOnlyActiveArch" : false,
       "platform" : "macosx",
-      "sdk" : "macosx13.1",
+      "sdk" : "macosx13.3",
       "sdkVariant" : "macos",
       "supportedArchitectures" : [
         "x86_64h",
@@ -34,10 +30,10 @@
     "arenaInfo" : {
       "buildIntermediatesPath" : "",
       "buildProductsPath" : "",
-      "derivedDataPath" : "/Users/jyh/Library/Developer/Xcode/DerivedData",
-      "indexDataStoreFolderPath" : "/Users/jyh/Library/Developer/Xcode/DerivedData/Demo-gtdoxembmihjihbahgmjxnxnpkns/Index.noindex/DataStore",
+      "derivedDataPath" : "/Users/yusrasuhail/Library/Developer/Xcode/DerivedData",
+      "indexDataStoreFolderPath" : "/Users/yusrasuhail/Library/Developer/Xcode/DerivedData/Demo-gmgpbrkmzvwfrbbxncwxzlljrouy/Index.noindex/DataStore",
       "indexEnableDataStore" : true,
-      "indexPCHPath" : "/Users/jyh/Library/Developer/Xcode/DerivedData/Demo-gtdoxembmihjihbahgmjxnxnpkns/Index.noindex/PrecompiledHeaders",
+      "indexPCHPath" : "/Users/yusrasuhail/Library/Developer/Xcode/DerivedData/Demo-gmgpbrkmzvwfrbbxncwxzlljrouy/Index.noindex/PrecompiledHeaders",
       "pchPath" : ""
     },
     "configurationName" : "Debug",
@@ -49,11 +45,9 @@
       }
     }
   },
-  "qos" : "default",
   "schemeCommand" : "launch",
-  "schemeCommand2" : "launch",
   "showNonLoggedProgress" : true,
-  "useDryRun" : true,
+  "useDryRun" : false,
   "useImplicitDependencies" : true,
   "useLegacyBuildLocations" : false,
   "useParallelTargets" : true

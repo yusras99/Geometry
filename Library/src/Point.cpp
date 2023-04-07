@@ -10,6 +10,7 @@
 #include <memory>
 #include <set>
 #include <cmath>
+#include "Geometry.hpp"
 #include "Point.hpp"
 #include "Segment.hpp"
 
@@ -215,50 +216,23 @@ void Point::initDisplayLists_(void){
 	Point::displayListsInitialized_ = true;
 }
 
-float Point::distance(const PointStruct& pt1, const PointStruct& pt2){
-	float dx = pt2.x - pt1.x;
-	float dy = pt2.y - pt1.y;
-	return sqrtf(dx*dx + dy*dy);
+#if 0
+//-----------------------------------------------------------------
+#pragma mark -
+#pragma mark Distance functions
+//-----------------------------------------------------------------
+#endif
+
+float Point::distanceSq(float x1, float y1, float x2, float y2){
+	float dx = x2 - x1;
+	float dy = y2 - y1;
+	float d2 = dx*dx + dy*dy;
+	float r2 = x1*x1 + y1*y1;
+	if ((r2 > Geometry::DISTANCE_ABS_SQ_TOL && d2/r2 < Geometry::DISTANCE_REL_SQ_TOL) ||
+		(d2 < Geometry::DISTANCE_ABS_SQ_TOL)){
+		d2 = 0.f;
+	}
+	return d2;
+
 }
 
-float Point::distance(const PointStruct& pt) const{
-	float dx = pt.x - x_;
-	float dy = pt.y - y_;
-	return sqrtf(dx*dx + dy*dy);
-}
-
-float Point::distance(const Point& pt) const{
-	float dx = pt.x_ - x_;
-	float dy = pt.y_ - y_;
-	return sqrtf(dx*dx + dy*dy);
-}
-
-float Point::distanceSq(const PointStruct& pt1, const PointStruct& pt2){
-	float dx = pt2.x - pt1.x;
-	float dy = pt2.y - pt1.y;
-	return (dx*dx + dy*dy);
-}
-
-float Point::distanceSq(const PointStruct& pt) const{
-	float dx = pt.x - x_;
-	float dy = pt.y - y_;
-	return (dx*dx + dy*dy);
-}
-
-float Point::distanceSq(const Point& pt) const{
-	float dx = pt.x_ - x_;
-	float dy = pt.y_ - y_;
-	return (dx*dx + dy*dy);
-}
-
-//NEED TO DISCUSS WITH PROFESSOR ON HOW TO CHANGE TO POINTSTRUCT
-//void geometry::buildAllEndPointSet(void){
-////   Get all points and see if they have a segList, if they do put them in a segPointSet.
-//    static const std::set<std::shared_ptr<Point> > allPointSet = Point::getAllPoints();
-//    for (auto itr = allPointSet.begin(); itr != allPointSet.end(); itr++){
-//        std::shared_ptr<Point> currPoint = *itr;
-//        if(currPoint->getConnectivityDegree() != 0){
-//            segPointSet_.insert(currPoint);
-//        }
-//    }
-//}
