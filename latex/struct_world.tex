@@ -1,0 +1,203 @@
+\hypertarget{struct_world}{}\doxysection{World Struct Reference}
+\label{struct_world}\index{World@{World}}
+
+
+{\ttfamily \#include $<$World.\+hpp$>$}
+
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{struct_world_ac12a53b98b83210648d509874e4db7d5}{set\+World\+Bounds}} (float xmin, float xmax, float ymin, float ymax, int \&pane\+Width, int \&pane\+Height)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static float \mbox{\hyperlink{struct_world_a18aded95aeb8ee054e25c02139310ba8}{X\+\_\+\+MIN}} = -\/100
+\item 
+static float \mbox{\hyperlink{struct_world_a78cdf3fe34a3302edd722f8161cbf4f1}{X\+\_\+\+MAX}} = +100
+\item 
+static float \mbox{\hyperlink{struct_world_a4eb671799d5b4d65714d718e577ed886}{Y\+\_\+\+MIN}} = -\/100
+\item 
+static float \mbox{\hyperlink{struct_world_a8c989606d13be76d377d415f62473668}{Y\+\_\+\+MAX}} = +100
+\item 
+static float \mbox{\hyperlink{struct_world_a24bc56e58a0d8a85a61788a7b69bc022}{WORLD\+\_\+\+WIDTH}} = \mbox{\hyperlink{struct_world_a78cdf3fe34a3302edd722f8161cbf4f1}{World\+::\+X\+\_\+\+MAX}} -\/ \mbox{\hyperlink{struct_world_a18aded95aeb8ee054e25c02139310ba8}{World\+::\+X\+\_\+\+MIN}}
+\item 
+static float \mbox{\hyperlink{struct_world_a4caee66302ee54cc58ff3c2a17075bca}{WORLD\+\_\+\+HEIGHT}} = \mbox{\hyperlink{struct_world_a8c989606d13be76d377d415f62473668}{World\+::\+Y\+\_\+\+MAX}} -\/ \mbox{\hyperlink{struct_world_a4eb671799d5b4d65714d718e577ed886}{World\+::\+Y\+\_\+\+MIN}}
+\item 
+static float \mbox{\hyperlink{struct_world_ab2fd9e08935ac6c6842dec0b7c047943}{PIXEL\+\_\+\+TO\+\_\+\+WORLD}}
+\item 
+static float \mbox{\hyperlink{struct_world_ad68790ab83b708ced7362c7f38c12acd}{WORLD\+\_\+\+TO\+\_\+\+PIXEL}}
+\item 
+static const float \mbox{\hyperlink{struct_world_a825336f28350e40afe1d306518742188}{POINT\+\_\+\+PIXEL\+\_\+\+RADIUS}} = 5.f
+\item 
+static float \mbox{\hyperlink{struct_world_a29a26b0b17d30c1a8b35be07ae9ae024}{POINT\+\_\+\+DISK\+\_\+\+RADIUS}}
+\item 
+static float \mbox{\hyperlink{struct_world_af37d41975ce13f7071089ccc1932f3e2}{SNAP\+\_\+\+TO\+\_\+\+ANGLE\+\_\+\+TOL}}
+\item 
+static float \mbox{\hyperlink{struct_world_a10c710f927d3e2c0603ae6962247b87a}{SNAP\+\_\+\+TO\+\_\+\+POINT\+\_\+\+TOL}}
+\item 
+static float \mbox{\hyperlink{struct_world_af285d82d76daa9b54ddc5f077e63a1e1}{SNAP\+\_\+\+TO\+\_\+\+SEGMENT\+\_\+\+TOL}}
+\item 
+static const float \mbox{\hyperlink{struct_world_a5c6c401f536017831f9a268aac7ac8a3}{DISTANCE\+\_\+\+TOL}} = (float) 1E-\/5
+\item 
+static const float \mbox{\hyperlink{struct_world_aecbdb6dfb829e9ea9ad8574dfee33bb3}{DISTANCE\+\_\+\+SQ\+\_\+\+TOL}} = \mbox{\hyperlink{struct_world_a5c6c401f536017831f9a268aac7ac8a3}{World\+::\+DISTANCE\+\_\+\+TOL}}$\ast$\mbox{\hyperlink{struct_world_a5c6c401f536017831f9a268aac7ac8a3}{World\+::\+DISTANCE\+\_\+\+TOL}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Essentially a set of application-\/wide global variables defining the dimensions of the \char`\"{}world\char`\"{} and the conversion factors from pixel to world units and back, as well as a few rendering constants. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{struct_world_ac12a53b98b83210648d509874e4db7d5}\label{struct_world_ac12a53b98b83210648d509874e4db7d5}} 
+\index{World@{World}!setWorldBounds@{setWorldBounds}}
+\index{setWorldBounds@{setWorldBounds}!World@{World}}
+\doxysubsubsection{\texorpdfstring{setWorldBounds()}{setWorldBounds()}}
+{\footnotesize\ttfamily static void World\+::set\+World\+Bounds (\begin{DoxyParamCaption}\item[{float}]{xmin,  }\item[{float}]{xmax,  }\item[{float}]{ymin,  }\item[{float}]{ymax,  }\item[{int \&}]{pane\+Width,  }\item[{int \&}]{pane\+Height }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Function called through the initialization of a global variable in the main program. Although the user specifies dimensions for the rendering pane, the function may set different values that agree better with the world aspect ratio. 
+\begin{DoxyParams}{Parameters}
+{\em xmin} & Minimum x value to get mapped to the display area. \\
+\hline
+{\em xmax} & Maximum x value to get mapped to the display area. \\
+\hline
+{\em ymin} & Minimum y value to get mapped to the display area. \\
+\hline
+{\em ymax} & Maximum y value to get mapped to the display area. \\
+\hline
+{\em pane\+Width} & user-\/set width of the redering pane \\
+\hline
+{\em pane\+Height} & user-\/set height of the redering pane \\
+\hline
+\end{DoxyParams}
+If the two ratios differ by more than 5\%, then reject the dimensions
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{struct_world_aecbdb6dfb829e9ea9ad8574dfee33bb3}\label{struct_world_aecbdb6dfb829e9ea9ad8574dfee33bb3}} 
+\index{World@{World}!DISTANCE\_SQ\_TOL@{DISTANCE\_SQ\_TOL}}
+\index{DISTANCE\_SQ\_TOL@{DISTANCE\_SQ\_TOL}!World@{World}}
+\doxysubsubsection{\texorpdfstring{DISTANCE\_SQ\_TOL}{DISTANCE\_SQ\_TOL}}
+{\footnotesize\ttfamily const float World\+::\+DISTANCE\+\_\+\+SQ\+\_\+\+TOL = \mbox{\hyperlink{struct_world_a5c6c401f536017831f9a268aac7ac8a3}{World\+::\+DISTANCE\+\_\+\+TOL}}$\ast$\mbox{\hyperlink{struct_world_a5c6c401f536017831f9a268aac7ac8a3}{World\+::\+DISTANCE\+\_\+\+TOL}}\hspace{0.3cm}{\ttfamily [static]}}
+
+Tolerance for squared distance computations. For any computed squared distance less than the tolerance, we consider that points coincide, a point lies on a segment, etc. Set in the main program. \mbox{\Hypertarget{struct_world_a5c6c401f536017831f9a268aac7ac8a3}\label{struct_world_a5c6c401f536017831f9a268aac7ac8a3}} 
+\index{World@{World}!DISTANCE\_TOL@{DISTANCE\_TOL}}
+\index{DISTANCE\_TOL@{DISTANCE\_TOL}!World@{World}}
+\doxysubsubsection{\texorpdfstring{DISTANCE\_TOL}{DISTANCE\_TOL}}
+{\footnotesize\ttfamily const float World\+::\+DISTANCE\+\_\+\+TOL = (float) 1E-\/5\hspace{0.3cm}{\ttfamily [static]}}
+
+Tolerance for distance computations. For any computed distance less than the tolerance, we consider that points coincide, a point lies on a segment, etc. Set in the main program. \mbox{\Hypertarget{struct_world_ab2fd9e08935ac6c6842dec0b7c047943}\label{struct_world_ab2fd9e08935ac6c6842dec0b7c047943}} 
+\index{World@{World}!PIXEL\_TO\_WORLD@{PIXEL\_TO\_WORLD}}
+\index{PIXEL\_TO\_WORLD@{PIXEL\_TO\_WORLD}!World@{World}}
+\doxysubsubsection{\texorpdfstring{PIXEL\_TO\_WORLD}{PIXEL\_TO\_WORLD}}
+{\footnotesize\ttfamily float World\+::\+PIXEL\+\_\+\+TO\+\_\+\+WORLD\hspace{0.3cm}{\ttfamily [static]}}
+
+Scaling factor converting pixel units to world units. Calculated in the main program by a call to set\+World\+Bounds. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{struct_world_ac12a53b98b83210648d509874e4db7d5}{set\+World\+Bounds}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{struct_world_a29a26b0b17d30c1a8b35be07ae9ae024}\label{struct_world_a29a26b0b17d30c1a8b35be07ae9ae024}} 
+\index{World@{World}!POINT\_DISK\_RADIUS@{POINT\_DISK\_RADIUS}}
+\index{POINT\_DISK\_RADIUS@{POINT\_DISK\_RADIUS}!World@{World}}
+\doxysubsubsection{\texorpdfstring{POINT\_DISK\_RADIUS}{POINT\_DISK\_RADIUS}}
+{\footnotesize\ttfamily float World\+::\+POINT\+\_\+\+DISK\+\_\+\+RADIUS\hspace{0.3cm}{\ttfamily [static]}}
+
+Radius (in world units) of the disk used to represent a point. Calculated in the main program by a call to set\+World\+Bounds. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{struct_world_ac12a53b98b83210648d509874e4db7d5}{set\+World\+Bounds}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{struct_world_a825336f28350e40afe1d306518742188}\label{struct_world_a825336f28350e40afe1d306518742188}} 
+\index{World@{World}!POINT\_PIXEL\_RADIUS@{POINT\_PIXEL\_RADIUS}}
+\index{POINT\_PIXEL\_RADIUS@{POINT\_PIXEL\_RADIUS}!World@{World}}
+\doxysubsubsection{\texorpdfstring{POINT\_PIXEL\_RADIUS}{POINT\_PIXEL\_RADIUS}}
+{\footnotesize\ttfamily const float World\+::\+POINT\+\_\+\+PIXEL\+\_\+\+RADIUS = 5.f\hspace{0.3cm}{\ttfamily [static]}}
+
+Radius (in pixel units) of the disk used to represent a point. Set in the main program. \mbox{\Hypertarget{struct_world_af37d41975ce13f7071089ccc1932f3e2}\label{struct_world_af37d41975ce13f7071089ccc1932f3e2}} 
+\index{World@{World}!SNAP\_TO\_ANGLE\_TOL@{SNAP\_TO\_ANGLE\_TOL}}
+\index{SNAP\_TO\_ANGLE\_TOL@{SNAP\_TO\_ANGLE\_TOL}!World@{World}}
+\doxysubsubsection{\texorpdfstring{SNAP\_TO\_ANGLE\_TOL}{SNAP\_TO\_ANGLE\_TOL}}
+{\footnotesize\ttfamily float World\+::\+SNAP\+\_\+\+TO\+\_\+\+ANGLE\+\_\+\+TOL\hspace{0.3cm}{\ttfamily [static]}}
+
+When in snap-\/to-\/direction mode, degree range within which snap is enforced. Set in the main program. \mbox{\Hypertarget{struct_world_a10c710f927d3e2c0603ae6962247b87a}\label{struct_world_a10c710f927d3e2c0603ae6962247b87a}} 
+\index{World@{World}!SNAP\_TO\_POINT\_TOL@{SNAP\_TO\_POINT\_TOL}}
+\index{SNAP\_TO\_POINT\_TOL@{SNAP\_TO\_POINT\_TOL}!World@{World}}
+\doxysubsubsection{\texorpdfstring{SNAP\_TO\_POINT\_TOL}{SNAP\_TO\_POINT\_TOL}}
+{\footnotesize\ttfamily float World\+::\+SNAP\+\_\+\+TO\+\_\+\+POINT\+\_\+\+TOL\hspace{0.3cm}{\ttfamily [static]}}
+
+When in snap-\/to-\/point mode, distance (in world units) within which snap is enforced. Calculated in the main program by a call to set\+World\+Bounds. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{struct_world_ac12a53b98b83210648d509874e4db7d5}{set\+World\+Bounds}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{struct_world_af285d82d76daa9b54ddc5f077e63a1e1}\label{struct_world_af285d82d76daa9b54ddc5f077e63a1e1}} 
+\index{World@{World}!SNAP\_TO\_SEGMENT\_TOL@{SNAP\_TO\_SEGMENT\_TOL}}
+\index{SNAP\_TO\_SEGMENT\_TOL@{SNAP\_TO\_SEGMENT\_TOL}!World@{World}}
+\doxysubsubsection{\texorpdfstring{SNAP\_TO\_SEGMENT\_TOL}{SNAP\_TO\_SEGMENT\_TOL}}
+{\footnotesize\ttfamily float World\+::\+SNAP\+\_\+\+TO\+\_\+\+SEGMENT\+\_\+\+TOL\hspace{0.3cm}{\ttfamily [static]}}
+
+When in snap-\/to-\/segment mode, distance (in world units) within which snap is enforced. Calculated in the main program by a call to set\+World\+Bounds. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{struct_world_ac12a53b98b83210648d509874e4db7d5}{set\+World\+Bounds}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{struct_world_a4caee66302ee54cc58ff3c2a17075bca}\label{struct_world_a4caee66302ee54cc58ff3c2a17075bca}} 
+\index{World@{World}!WORLD\_HEIGHT@{WORLD\_HEIGHT}}
+\index{WORLD\_HEIGHT@{WORLD\_HEIGHT}!World@{World}}
+\doxysubsubsection{\texorpdfstring{WORLD\_HEIGHT}{WORLD\_HEIGHT}}
+{\footnotesize\ttfamily float World\+::\+WORLD\+\_\+\+HEIGHT = \mbox{\hyperlink{struct_world_a8c989606d13be76d377d415f62473668}{World\+::\+Y\+\_\+\+MAX}} -\/ \mbox{\hyperlink{struct_world_a4eb671799d5b4d65714d718e577ed886}{World\+::\+Y\+\_\+\+MIN}}\hspace{0.3cm}{\ttfamily [static]}}
+
+Calculated as Y\+\_\+\+MAX-\/\+Y\+\_\+\+MIN in the main program by a call to set\+World\+Bounds. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{struct_world_ac12a53b98b83210648d509874e4db7d5}{set\+World\+Bounds}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{struct_world_ad68790ab83b708ced7362c7f38c12acd}\label{struct_world_ad68790ab83b708ced7362c7f38c12acd}} 
+\index{World@{World}!WORLD\_TO\_PIXEL@{WORLD\_TO\_PIXEL}}
+\index{WORLD\_TO\_PIXEL@{WORLD\_TO\_PIXEL}!World@{World}}
+\doxysubsubsection{\texorpdfstring{WORLD\_TO\_PIXEL}{WORLD\_TO\_PIXEL}}
+{\footnotesize\ttfamily float World\+::\+WORLD\+\_\+\+TO\+\_\+\+PIXEL\hspace{0.3cm}{\ttfamily [static]}}
+
+Scaling factor converting world units to pixel units. Calculated in the main program by a call to set\+World\+Bounds. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{struct_world_ac12a53b98b83210648d509874e4db7d5}{set\+World\+Bounds}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{struct_world_a24bc56e58a0d8a85a61788a7b69bc022}\label{struct_world_a24bc56e58a0d8a85a61788a7b69bc022}} 
+\index{World@{World}!WORLD\_WIDTH@{WORLD\_WIDTH}}
+\index{WORLD\_WIDTH@{WORLD\_WIDTH}!World@{World}}
+\doxysubsubsection{\texorpdfstring{WORLD\_WIDTH}{WORLD\_WIDTH}}
+{\footnotesize\ttfamily float World\+::\+WORLD\+\_\+\+WIDTH = \mbox{\hyperlink{struct_world_a78cdf3fe34a3302edd722f8161cbf4f1}{World\+::\+X\+\_\+\+MAX}} -\/ \mbox{\hyperlink{struct_world_a18aded95aeb8ee054e25c02139310ba8}{World\+::\+X\+\_\+\+MIN}}\hspace{0.3cm}{\ttfamily [static]}}
+
+Calculated as X\+\_\+\+MAX-\/\+X\+\_\+\+MIN in the main program by a call to set\+World\+Bounds. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{struct_world_ac12a53b98b83210648d509874e4db7d5}{set\+World\+Bounds}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{struct_world_a78cdf3fe34a3302edd722f8161cbf4f1}\label{struct_world_a78cdf3fe34a3302edd722f8161cbf4f1}} 
+\index{World@{World}!X\_MAX@{X\_MAX}}
+\index{X\_MAX@{X\_MAX}!World@{World}}
+\doxysubsubsection{\texorpdfstring{X\_MAX}{X\_MAX}}
+{\footnotesize\ttfamily float World\+::\+X\+\_\+\+MAX = +100\hspace{0.3cm}{\ttfamily [static]}}
+
+Maximum x value to get mapped to the display area. Set in the main program by a call to set\+World\+Bounds. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{struct_world_ac12a53b98b83210648d509874e4db7d5}{set\+World\+Bounds}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{struct_world_a18aded95aeb8ee054e25c02139310ba8}\label{struct_world_a18aded95aeb8ee054e25c02139310ba8}} 
+\index{World@{World}!X\_MIN@{X\_MIN}}
+\index{X\_MIN@{X\_MIN}!World@{World}}
+\doxysubsubsection{\texorpdfstring{X\_MIN}{X\_MIN}}
+{\footnotesize\ttfamily float World\+::\+X\+\_\+\+MIN = -\/100\hspace{0.3cm}{\ttfamily [static]}}
+
+Minimum x value to get mapped to the display area. Set in the main program by a call to set\+World\+Bounds. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{struct_world_ac12a53b98b83210648d509874e4db7d5}{set\+World\+Bounds}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{struct_world_a8c989606d13be76d377d415f62473668}\label{struct_world_a8c989606d13be76d377d415f62473668}} 
+\index{World@{World}!Y\_MAX@{Y\_MAX}}
+\index{Y\_MAX@{Y\_MAX}!World@{World}}
+\doxysubsubsection{\texorpdfstring{Y\_MAX}{Y\_MAX}}
+{\footnotesize\ttfamily float World\+::\+Y\+\_\+\+MAX = +100\hspace{0.3cm}{\ttfamily [static]}}
+
+Maximum x value to get mapped to the display area. Set in the main program by a call to set\+World\+Bounds. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{struct_world_ac12a53b98b83210648d509874e4db7d5}{set\+World\+Bounds}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{struct_world_a4eb671799d5b4d65714d718e577ed886}\label{struct_world_a4eb671799d5b4d65714d718e577ed886}} 
+\index{World@{World}!Y\_MIN@{Y\_MIN}}
+\index{Y\_MIN@{Y\_MIN}!World@{World}}
+\doxysubsubsection{\texorpdfstring{Y\_MIN}{Y\_MIN}}
+{\footnotesize\ttfamily float World\+::\+Y\+\_\+\+MIN = -\/100\hspace{0.3cm}{\ttfamily [static]}}
+
+Minimum y value to get mapped to the display area. Set in the main program by a call to set\+World\+Bounds. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{struct_world_ac12a53b98b83210648d509874e4db7d5}{set\+World\+Bounds}} 
+\end{DoxySeeAlso}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Points\+And\+Segment\+Input/\+Code/World.\+hpp\item 
+Points\+And\+Segment\+Input/\+Code/points\+And\+Segments.\+cpp\end{DoxyCompactItemize}

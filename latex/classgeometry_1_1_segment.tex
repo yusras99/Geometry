@@ -1,0 +1,254 @@
+\hypertarget{classgeometry_1_1_segment}{}\doxysection{geometry\+::Segment Class Reference}
+\label{classgeometry_1_1_segment}\index{geometry::Segment@{geometry::Segment}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgeometry_1_1_segment_abcc7a80e016b259c661a577e04eaff92}{Segment}} (\mbox{\hyperlink{classgeometry_1_1_segment_token}{Segment\+Token}} token, \mbox{\hyperlink{classgeometry_1_1_point}{Point}} \&pt1, \mbox{\hyperlink{classgeometry_1_1_point}{Point}} \&pt2)
+\item 
+\mbox{\hyperlink{classgeometry_1_1_segment_a3ae964744cd92c63862e92217ac778c7}{$\sim$\+Segment}} (void)
+\item 
+\mbox{\Hypertarget{classgeometry_1_1_segment_a2176b1bb974989e8f44d087758085550}\label{classgeometry_1_1_segment_a2176b1bb974989e8f44d087758085550}} 
+unsigned int {\bfseries get\+Index} (void) const
+\item 
+void \mbox{\hyperlink{classgeometry_1_1_segment_a7d167363b039213679e6cfbeaa397923}{render}} (Segment\+Type type=Segment\+Type\+::\+SEGMENT) const
+\item 
+bool \mbox{\hyperlink{classgeometry_1_1_segment_a5dabe7f0e1019fcc2d66c8abccc9b714}{is\+On\+Left\+Side}} (const \mbox{\hyperlink{classgeometry_1_1_point}{Point}} \&pt) const
+\item 
+bool \mbox{\hyperlink{classgeometry_1_1_segment_a0ca10e923899ea5ebf4261897300572b}{is\+On\+Left\+Side}} (const \mbox{\hyperlink{structgeometry_1_1_point_struct}{Point\+Struct}} \&pt) const
+\item 
+bool \mbox{\hyperlink{classgeometry_1_1_segment_afd314986a717e3203349527dcdab4a07}{are\+On\+Opposite\+Sides}} (const \mbox{\hyperlink{classgeometry_1_1_point}{Point}} \&pt1, const \mbox{\hyperlink{classgeometry_1_1_point}{Point}} \&pt2) const
+\item 
+bool \mbox{\hyperlink{classgeometry_1_1_segment_a9125cd0c6c8afbe6e908c4c0fec26ba0}{are\+On\+Opposite\+Sides}} (const \mbox{\hyperlink{structgeometry_1_1_point_struct}{Point\+Struct}} \&pt1, const \mbox{\hyperlink{structgeometry_1_1_point_struct}{Point\+Struct}} \&pt2) const
+\item 
+bool \mbox{\hyperlink{classgeometry_1_1_segment_a3c2fb82cada7f76887ee684d7caca188}{intersects}} (const \mbox{\hyperlink{classgeometry_1_1_segment}{Segment}} \&seg) const
+\item 
+bool \mbox{\hyperlink{classgeometry_1_1_segment_a8d8136c6f6eff07e1709887c68289717}{intersects}} (const \mbox{\hyperlink{classgeometry_1_1_point}{Point}} \&pt1, const \mbox{\hyperlink{classgeometry_1_1_point}{Point}} \&pt2) const
+\item 
+bool \mbox{\hyperlink{classgeometry_1_1_segment_a53f975c47c1cfd6cc19fc3bd51a05ab1}{intersects}} (const \mbox{\hyperlink{structgeometry_1_1_point_struct}{Point\+Struct}} \&pt1, const \mbox{\hyperlink{structgeometry_1_1_point_struct}{Point\+Struct}} \&pt2) const
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{structgeometry_1_1_point_struct}{Point\+Struct}} $>$ \mbox{\hyperlink{classgeometry_1_1_segment_a2802a5df54c0dcc48315a3f0d1e04cf1}{find\+Intersection}} (const \mbox{\hyperlink{classgeometry_1_1_segment}{Segment}} \&seg)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgeometry_1_1_segment}{Segment}} $>$ \mbox{\hyperlink{classgeometry_1_1_segment_aa4a29e6da5109bd712d6cb6801f7ce83}{make\+New\+Seg\+Ptr}} (\mbox{\hyperlink{classgeometry_1_1_point}{Point}} \&pt1, \mbox{\hyperlink{classgeometry_1_1_point}{Point}} \&pt2)
+\item 
+static \mbox{\hyperlink{classgeometry_1_1_segment}{Segment}} \& \mbox{\hyperlink{classgeometry_1_1_segment_ac6c31c561122faefed5ac89246b084a4}{make\+New\+Seg}} (\mbox{\hyperlink{classgeometry_1_1_point}{Point}} \&pt1, \mbox{\hyperlink{classgeometry_1_1_point}{Point}} \&pt2)
+\item 
+\mbox{\Hypertarget{classgeometry_1_1_segment_ab9a514107200ecb9ebd030a59306b5ba}\label{classgeometry_1_1_segment_ab9a514107200ecb9ebd030a59306b5ba}} 
+static \mbox{\hyperlink{classgeometry_1_1_segment}{Segment}} {\bfseries make\+New\+Temp\+Seg} (\mbox{\hyperlink{classgeometry_1_1_point}{Point}} \&pt1, \mbox{\hyperlink{classgeometry_1_1_point}{Point}} \&pt2)
+\item 
+\mbox{\Hypertarget{classgeometry_1_1_segment_a52c8aad7a678e40c59aeda3097555e96}\label{classgeometry_1_1_segment_a52c8aad7a678e40c59aeda3097555e96}} 
+static const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgeometry_1_1_segment}{Segment}} $>$ $>$ \& {\bfseries get\+All\+Segments} (void)
+\item 
+\mbox{\Hypertarget{classgeometry_1_1_segment_ab560c4ba5a4603b77e6d54b220ca0533}\label{classgeometry_1_1_segment_ab560c4ba5a4603b77e6d54b220ca0533}} 
+static void {\bfseries clear\+All\+Segments} (void)
+\item 
+\mbox{\Hypertarget{classgeometry_1_1_segment_aa584dc2c3bbf8e494db0f8c6ec74d6c4}\label{classgeometry_1_1_segment_aa584dc2c3bbf8e494db0f8c6ec74d6c4}} 
+static void {\bfseries render\+Created} (const \mbox{\hyperlink{structgeometry_1_1_point_struct}{Point\+Struct}} \&pt1, const \mbox{\hyperlink{structgeometry_1_1_point_struct}{Point\+Struct}} \&pt2)
+\item 
+\mbox{\Hypertarget{classgeometry_1_1_segment_aa08a15659280e7ddd48841509e329052}\label{classgeometry_1_1_segment_aa08a15659280e7ddd48841509e329052}} 
+static void {\bfseries render\+All\+Segments} (void)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgeometry_1_1_segment_aa92d7ce41e5fef28da1629d40074bbeb}\label{classgeometry_1_1_segment_aa92d7ce41e5fef28da1629d40074bbeb}} 
+std\+::vector$<$ int $>$ {\bfseries swapped\+Segs}
+\item 
+\mbox{\Hypertarget{classgeometry_1_1_segment_a83ed004761eaef0204af245f74942606}\label{classgeometry_1_1_segment_a83ed004761eaef0204af245f74942606}} 
+std\+::vector$<$ int $>$ {\bfseries compared\+Segs}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgeometry_1_1_segment_abcc7a80e016b259c661a577e04eaff92}\label{classgeometry_1_1_segment_abcc7a80e016b259c661a577e04eaff92}} 
+\index{geometry::Segment@{geometry::Segment}!Segment@{Segment}}
+\index{Segment@{Segment}!geometry::Segment@{geometry::Segment}}
+\doxysubsubsection{\texorpdfstring{Segment()}{Segment()}}
+{\footnotesize\ttfamily Segment\+::\+Segment (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgeometry_1_1_segment_token}{Segment\+Token}}}]{token,  }\item[{\mbox{\hyperlink{classgeometry_1_1_point}{Point}} \&}]{pt1,  }\item[{\mbox{\hyperlink{classgeometry_1_1_point}{Point}} \&}]{pt2 }\end{DoxyParamCaption})}
+
+Constructor function that can only be called using the class itself and not by user 
+\begin{DoxyParams}{Parameters}
+{\em pt1} & a reference to a point 1 which will be used to create a segment \\
+\hline
+{\em pt2} & a reference to a point 2 which will be used to create a segment \\
+\hline
+{\em token} & -\/ the object of segment\+Token class (which acts like passkey attribute) so that it is not accessible by anyone else \\
+\hline
+\end{DoxyParams}
+add myself to seg\+List of p1 and p2\mbox{\Hypertarget{classgeometry_1_1_segment_a3ae964744cd92c63862e92217ac778c7}\label{classgeometry_1_1_segment_a3ae964744cd92c63862e92217ac778c7}} 
+\index{geometry::Segment@{geometry::Segment}!````~Segment@{$\sim$Segment}}
+\index{````~Segment@{$\sim$Segment}!geometry::Segment@{geometry::Segment}}
+\doxysubsubsection{\texorpdfstring{$\sim$Segment()}{~Segment()}}
+{\footnotesize\ttfamily Segment\+::$\sim$\+Segment (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Destructor function that clears the segment remove myself from seg\+List of p1 and p2
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgeometry_1_1_segment_afd314986a717e3203349527dcdab4a07}\label{classgeometry_1_1_segment_afd314986a717e3203349527dcdab4a07}} 
+\index{geometry::Segment@{geometry::Segment}!areOnOppositeSides@{areOnOppositeSides}}
+\index{areOnOppositeSides@{areOnOppositeSides}!geometry::Segment@{geometry::Segment}}
+\doxysubsubsection{\texorpdfstring{areOnOppositeSides()}{areOnOppositeSides()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool Segment\+::are\+On\+Opposite\+Sides (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgeometry_1_1_point}{Point}} \&}]{pt1,  }\item[{const \mbox{\hyperlink{classgeometry_1_1_point}{Point}} \&}]{pt2 }\end{DoxyParamCaption}) const}
+
+Function that checks the points of the intersecting segment if they are on opposite sides which will set the basis of intersection 
+\begin{DoxyParams}{Parameters}
+{\em pt1} & -\/ a reference to a constant point 1 which has to be checked on its direction to the segment \\
+\hline
+{\em pt2} & -\/ a reference to a constant point 2 which has to be checked on its direction to the segment \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean that tells if the 2 points are on the opposite sides of the curr\+Seg 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgeometry_1_1_segment_a9125cd0c6c8afbe6e908c4c0fec26ba0}\label{classgeometry_1_1_segment_a9125cd0c6c8afbe6e908c4c0fec26ba0}} 
+\index{geometry::Segment@{geometry::Segment}!areOnOppositeSides@{areOnOppositeSides}}
+\index{areOnOppositeSides@{areOnOppositeSides}!geometry::Segment@{geometry::Segment}}
+\doxysubsubsection{\texorpdfstring{areOnOppositeSides()}{areOnOppositeSides()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool Segment\+::are\+On\+Opposite\+Sides (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structgeometry_1_1_point_struct}{Point\+Struct}} \&}]{pt1,  }\item[{const \mbox{\hyperlink{structgeometry_1_1_point_struct}{Point\+Struct}} \&}]{pt2 }\end{DoxyParamCaption}) const}
+
+Function that checks the points of the intersecting segment if they are on opposite sides which will set the basis of intersection 
+\begin{DoxyParams}{Parameters}
+{\em pt1} & -\/ a reference to a constant point 1 struct which has to be checked on its direction to the segment \\
+\hline
+{\em pt2} & -\/ a reference to a constant point 2 struct which has to be checked on its direction to the segment \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean that tells if the 2 points are on the opposite sides of the curr\+Seg 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgeometry_1_1_segment_a2802a5df54c0dcc48315a3f0d1e04cf1}\label{classgeometry_1_1_segment_a2802a5df54c0dcc48315a3f0d1e04cf1}} 
+\index{geometry::Segment@{geometry::Segment}!findIntersection@{findIntersection}}
+\index{findIntersection@{findIntersection}!geometry::Segment@{geometry::Segment}}
+\doxysubsubsection{\texorpdfstring{findIntersection()}{findIntersection()}}
+{\footnotesize\ttfamily unique\+\_\+ptr$<$ \mbox{\hyperlink{structgeometry_1_1_point_struct}{Point\+Struct}} $>$ Segment\+::find\+Intersection (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgeometry_1_1_segment}{Segment}} \&}]{seg }\end{DoxyParamCaption})}
+
+Function that checks inter\+Seg with the curr\+Seg to see if there is an intersection, if there is pointer to the intersection pt is returned otherwise a null pointer is returned 
+\begin{DoxyParams}{Parameters}
+{\em inter\+Seg} & A const reference to a segment which is possible candidate of an intersection \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to \mbox{\hyperlink{classgeometry_1_1_point}{Point}} struct variable which is the intersection point of both segments 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgeometry_1_1_segment_a8d8136c6f6eff07e1709887c68289717}\label{classgeometry_1_1_segment_a8d8136c6f6eff07e1709887c68289717}} 
+\index{geometry::Segment@{geometry::Segment}!intersects@{intersects}}
+\index{intersects@{intersects}!geometry::Segment@{geometry::Segment}}
+\doxysubsubsection{\texorpdfstring{intersects()}{intersects()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily bool Segment\+::intersects (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgeometry_1_1_point}{Point}} \&}]{pt1,  }\item[{const \mbox{\hyperlink{classgeometry_1_1_point}{Point}} \&}]{pt2 }\end{DoxyParamCaption}) const}
+
+
+\begin{DoxyParams}{Parameters}
+{\em pt1} & -\/ a const reference to point -\/ part of a possibly intersecting segment \\
+\hline
+{\em pt2} & -\/ a const reference to another point -\/ part of a possibly intersecting segment \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean that tells if the intersection exists between two segments 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgeometry_1_1_segment_a53f975c47c1cfd6cc19fc3bd51a05ab1}\label{classgeometry_1_1_segment_a53f975c47c1cfd6cc19fc3bd51a05ab1}} 
+\index{geometry::Segment@{geometry::Segment}!intersects@{intersects}}
+\index{intersects@{intersects}!geometry::Segment@{geometry::Segment}}
+\doxysubsubsection{\texorpdfstring{intersects()}{intersects()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily bool Segment\+::intersects (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structgeometry_1_1_point_struct}{Point\+Struct}} \&}]{pt1,  }\item[{const \mbox{\hyperlink{structgeometry_1_1_point_struct}{Point\+Struct}} \&}]{pt2 }\end{DoxyParamCaption}) const}
+
+
+\begin{DoxyParams}{Parameters}
+{\em pt1} & -\/ a const reference to point\+Struct -\/ part of a possibly intersecting segment \\
+\hline
+{\em pt2} & -\/ a const reference to another point\+Struct -\/ part of a possibly intersecting segment \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean that tells if the intersection exists between two segments 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgeometry_1_1_segment_a3c2fb82cada7f76887ee684d7caca188}\label{classgeometry_1_1_segment_a3c2fb82cada7f76887ee684d7caca188}} 
+\index{geometry::Segment@{geometry::Segment}!intersects@{intersects}}
+\index{intersects@{intersects}!geometry::Segment@{geometry::Segment}}
+\doxysubsubsection{\texorpdfstring{intersects()}{intersects()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily bool Segment\+::intersects (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgeometry_1_1_segment}{Segment}} \&}]{seg }\end{DoxyParamCaption}) const}
+
+Intersection possible iff\+: Seg1.\+pt1 and seg1.\+pt2 are on different sides of Seg2 Seg2.\+pt1 and seg2.\+pt2 are on different sides of Seg1 
+\begin{DoxyParams}{Parameters}
+{\em seg} & -\/ the segment which is possible of intersection \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean that tells if the intersection exists between two segments 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgeometry_1_1_segment_a5dabe7f0e1019fcc2d66c8abccc9b714}\label{classgeometry_1_1_segment_a5dabe7f0e1019fcc2d66c8abccc9b714}} 
+\index{geometry::Segment@{geometry::Segment}!isOnLeftSide@{isOnLeftSide}}
+\index{isOnLeftSide@{isOnLeftSide}!geometry::Segment@{geometry::Segment}}
+\doxysubsubsection{\texorpdfstring{isOnLeftSide()}{isOnLeftSide()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool Segment\+::is\+On\+Left\+Side (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgeometry_1_1_point}{Point}} \&}]{pt }\end{DoxyParamCaption}) const}
+
+Function that checks if the point is on left of the segments or not 
+\begin{DoxyParams}{Parameters}
+{\em pt} & -\/ a reference to a constant point which has to be checked on its direction to the segment \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean that tells if the point is on left or not 
+\end{DoxyReturn}
+The determinant of a pt to the segment is\+: det( p2 -\/ p1, pt -\/ p1)\mbox{\Hypertarget{classgeometry_1_1_segment_a0ca10e923899ea5ebf4261897300572b}\label{classgeometry_1_1_segment_a0ca10e923899ea5ebf4261897300572b}} 
+\index{geometry::Segment@{geometry::Segment}!isOnLeftSide@{isOnLeftSide}}
+\index{isOnLeftSide@{isOnLeftSide}!geometry::Segment@{geometry::Segment}}
+\doxysubsubsection{\texorpdfstring{isOnLeftSide()}{isOnLeftSide()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool Segment\+::is\+On\+Left\+Side (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structgeometry_1_1_point_struct}{Point\+Struct}} \&}]{pt }\end{DoxyParamCaption}) const}
+
+Function that checks if the point is on left of the segments or not 
+\begin{DoxyParams}{Parameters}
+{\em pt} & -\/ a reference to a constant point struct which has to be checked on its direction to the segment \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean that tells if the point is on left or not 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgeometry_1_1_segment_ac6c31c561122faefed5ac89246b084a4}\label{classgeometry_1_1_segment_ac6c31c561122faefed5ac89246b084a4}} 
+\index{geometry::Segment@{geometry::Segment}!makeNewSeg@{makeNewSeg}}
+\index{makeNewSeg@{makeNewSeg}!geometry::Segment@{geometry::Segment}}
+\doxysubsubsection{\texorpdfstring{makeNewSeg()}{makeNewSeg()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classgeometry_1_1_segment}{Segment}} \& Segment\+::make\+New\+Seg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgeometry_1_1_point}{Point}} \&}]{pt1,  }\item[{\mbox{\hyperlink{classgeometry_1_1_point}{Point}} \&}]{pt2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Maker function that calls the other constructor function and gets the segment on that pointer 
+\begin{DoxyParams}{Parameters}
+{\em pt1} & a reference to a point 1 which will be used to create a segment \\
+\hline
+{\em pt2} & a reference to a point 2 which will be used to create a segment \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the reference to a segment 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgeometry_1_1_segment_aa4a29e6da5109bd712d6cb6801f7ce83}\label{classgeometry_1_1_segment_aa4a29e6da5109bd712d6cb6801f7ce83}} 
+\index{geometry::Segment@{geometry::Segment}!makeNewSegPtr@{makeNewSegPtr}}
+\index{makeNewSegPtr@{makeNewSegPtr}!geometry::Segment@{geometry::Segment}}
+\doxysubsubsection{\texorpdfstring{makeNewSegPtr()}{makeNewSegPtr()}}
+{\footnotesize\ttfamily shared\+\_\+ptr$<$ \mbox{\hyperlink{classgeometry_1_1_segment}{Segment}} $>$ Segment\+::make\+New\+Seg\+Ptr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgeometry_1_1_point}{Point}} \&}]{pt1,  }\item[{\mbox{\hyperlink{classgeometry_1_1_point}{Point}} \&}]{pt2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Maker function for the segment that will create a shared pointer to the segment so it can be stored in the set 
+\begin{DoxyParams}{Parameters}
+{\em pt1} & a reference to a point 1 which will be used to create a segment \\
+\hline
+{\em pt2} & a reference to a point 2 which will be used to create a segment \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a shared pointer to the segment 
+\end{DoxyReturn}
+seg\+Set is a set of pointers to segments so we need to dereference the segment pointer to check the point pairs
+
+return pointer to the segment\mbox{\Hypertarget{classgeometry_1_1_segment_a7d167363b039213679e6cfbeaa397923}\label{classgeometry_1_1_segment_a7d167363b039213679e6cfbeaa397923}} 
+\index{geometry::Segment@{geometry::Segment}!render@{render}}
+\index{render@{render}!geometry::Segment@{geometry::Segment}}
+\doxysubsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void Segment\+::render (\begin{DoxyParamCaption}\item[{Segment\+Type}]{type = {\ttfamily SegmentType\+:\+:SEGMENT} }\end{DoxyParamCaption}) const}
+
+first draw the segment, then draw its endpoints
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Library/include/Segment.\+hpp\item 
+Library/src/Segment.\+cpp\end{DoxyCompactItemize}
