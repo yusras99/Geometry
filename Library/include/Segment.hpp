@@ -87,6 +87,12 @@ namespace geometry {
 			inline unsigned int getIndex(void) const {
 				return idx_;
 			}
+            inline const Point& getP1(void) const {
+                return p1_;
+            }
+            inline const Point& getP2(void) const {
+                return p2_;
+            }
             //The vector of segments with which this segment has swapped
             std::vector<int> swappedSegs;
             //The vector of segments with which this segment has done a comparison
@@ -114,7 +120,7 @@ namespace geometry {
 			 *@return boolean that tells if the 2 points are on the opposite sides of the currSeg
 			 */
 			bool areOnOppositeSides(const PointStruct& pt1, const PointStruct& pt2) const;
-
+        
 			/**Intersection possible iff:
 			 *  Seg1.pt1 and seg1.pt2 are on different sides of Seg2
 			 *  Seg2.pt1 and seg2.pt2 are on different sides of Seg1
@@ -175,12 +181,22 @@ namespace geometry {
      */
     std::vector<std::unique_ptr<PointStruct> > findAllIntersectionsBruteForce(const std::vector<std::shared_ptr<Segment> >& vect);
     
-    // Struct used to store all types of points in the queue
-    struct interQueueEvent{
+    // Enum used to store all types of points in the queue
+    struct InterQueueEvent{
         bool isIntersection;
         std::shared_ptr<Point> endpt;
+        bool isFirst;
+        unsigned int segIdx;
         std::shared_ptr<PointStruct> interPt;
     };
+    //enum class InterQueueEvent{
+    //    bool isIntersection,
+    //    Point& endpt,
+    //    bool isFirst,
+    //    unsigned int segIdx,
+    //    PointStruct& interPt,
+    ////        InterQueueEvent(bool isIntersection, Point& endpt, bool isFirst, unsigned int segIdx,PointStruct& interPt)
+    //};
     /**
      *This function takes the points which lies on the segment and put them in the a vector
      *@param vect  reference to a vector of shared pointers to the segments whose endpoints need to be found
@@ -188,9 +204,9 @@ namespace geometry {
      */
     std::vector<std::shared_ptr<Point> > getAllEndPoints(const std::vector<std::shared_ptr<Segment> >& vect);
     
-    // Compare struct that helps to compare between interQueueEvent points, to decide their position in the queue
+    // Compare struct that helps to compare between InterQueueEvent points, to decide their position in the queue
     struct compare{
-      bool operator()(const std::shared_ptr<geometry::interQueueEvent>  p1, const std::shared_ptr<geometry::interQueueEvent> p2){
+      bool operator()(const std::shared_ptr<geometry::InterQueueEvent>  p1, const std::shared_ptr<geometry::InterQueueEvent> p2){
           float x1;
           float y1;
           float x2;
@@ -215,23 +231,23 @@ namespace geometry {
       }
     };
     /**
-     *This function creates a set of type interQueueEvent, which is the event Queue
+     *This function creates a set of type InterQueueEvent, which is the event Queue
      *@param vect  reference to a vector of shared pointers to the segments whose endpoints & intersection points need to be added in the queue
-     *@return a vector of shared pointers to the the points of queue of type interQueueEvent
+     *@return a vector of shared pointers to the the points of queue of type InterQueueEvent
      */
-     std::set<std::shared_ptr<interQueueEvent> , compare> buildEventSet(const std::vector<std::shared_ptr<Segment> >& vect);
+     std::set<std::shared_ptr<InterQueueEvent> , compare> buildEventSet(const std::vector<std::shared_ptr<Segment> >& vect);
     /**
      *This function adds the intersection points in the eventQueue
      *@param eventQueue - a reference to the eventQueue set in which we will add the intersection point
      *@param currInterPt - the intersection point which has to be added in the eventQueue
      */
-     void addEvent(std::set<std::shared_ptr<interQueueEvent> , compare>& eventQueue,std::shared_ptr<PointStruct> currInterPt);
+     void addEvent(std::set<std::shared_ptr<InterQueueEvent> , compare>& eventQueue,std::shared_ptr<PointStruct> currInterPt);
     /**Intersection function that finds all intersections between the segments using smart way of computational geometry
      * @param vect  reference to a vector of shared pointers to the segments whose intersections need to be found
      * @return a vector of unique pointers to type PointStruct that are intersection points
      */
     std::vector<std::unique_ptr<PointStruct> > findAllIntersectionsSmart(const std::vector<std::shared_ptr<Segment> >& vect);
-    void orderMap(std::map<int,unsigned int> &prioritySegMap,const std::vector<std::shared_ptr<Segment> >& segVect);
+    void orderMap(std::map<int,unsigned int> &prioritySegMap,const std::vector<std::shared_ptr<Segment> >& segVect, std::shared_ptr<InterQueueEvent> currPoint);
 
 }
 #endif /* Segment_hpp */

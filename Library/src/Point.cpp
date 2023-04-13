@@ -90,13 +90,14 @@ Point& Point::makeNewPoint(float xCoord,float yCoord){
     return *(makeNewPointPtr(xCoord, yCoord));
 }
 //Yusra: what is this function doing?
-shared_ptr<Point> Point::getPointAtIndex(size_t index){
-	shared_ptr<Point> ptr = nullptr;
-	if (index < pointSet_.size()){
-		
-	}
-	return ptr;
-}
+//I don't remember why I have this. Its definetly wrong
+//shared_ptr<Point> Point::getPointAtIndex(size_t index){
+//	shared_ptr<Point> ptr = nullptr;
+//	if (index < pointSet_.size()){
+//
+//	}
+//	return ptr;
+//}
 
 #if 0
 //-----------------------------------------------------------------

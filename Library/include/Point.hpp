@@ -141,7 +141,7 @@ namespace geometry {
 			static const std::set<std::shared_ptr<Point> >& getAllPoints(void){
 				return pointSet_;
 			}
-			static std::shared_ptr<Point> getPointAtIndex(size_t index);
+//			static std::shared_ptr<Point> getPointAtIndex(size_t index);
 
 			static float distanceSq(float x1, float y1, float x2, float y2);
 
