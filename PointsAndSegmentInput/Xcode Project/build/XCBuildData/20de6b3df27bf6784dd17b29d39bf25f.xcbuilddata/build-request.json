@@ -1,14 +1,10 @@
 {
-  "_buildCommand2" : {
+  "buildCommand" : {
     "command" : "prepareForIndexing",
     "enableIndexBuildArena" : false,
     "targets" : null
   },
-  "buildCommand" : "build",
   "configuredTargets" : [
-    {
-      "guid" : "eaee17aee96df92022dd96a9efbd9d1c257e66ef74b72d525668fa904a2c6cae"
-    },
     {
       "guid" : "eaee17aee96df92022dd96a9efbd9d1c15aca1f807c5d1a40de2a12e675b2aad"
     }
@@ -23,7 +19,7 @@
     "activeRunDestination" : {
       "disableOnlyActiveArch" : false,
       "platform" : "macosx",
-      "sdk" : "macosx13.1",
+      "sdk" : "macosx13.3",
       "sdkVariant" : "macos",
       "supportedArchitectures" : [
         "x86_64h",
@@ -51,7 +47,6 @@
   },
   "qos" : "default",
   "schemeCommand" : "launch",
-  "schemeCommand2" : "launch",
   "showNonLoggedProgress" : true,
   "useDryRun" : true,
   "useImplicitDependencies" : true,
