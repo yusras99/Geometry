@@ -1,14 +1,8 @@
 {
   "buildCommand" : {
-<<<<<<<< HEAD:PointsAndSegmentInput/Xcode Project/build/XCBuildData/d99a137c5507f442426aa2dac6043230.xcbuilddata/build-request.json
     "command" : "prepareForIndexing",
     "enableIndexBuildArena" : false,
     "targets" : null
-========
-    "command" : "build",
-    "skipDependencies" : false,
-    "style" : "buildAndRun"
->>>>>>>> intersection-yusra:PointsAndSegmentInput/Xcode Project/build/XCBuildData/14525172f1797c06a73dd98dd2842f24.xcbuilddata/build-request.json
   },
   "configuredTargets" : [
     {
@@ -16,7 +10,7 @@
     }
   ],
   "containerPath" : "/Users/yusrasuhail/Dropbox/csc491 - Yusra Suhail/Geometry/PointsAndSegmentInput/Xcode Project/Demo.xcodeproj",
-  "continueBuildingAfterErrors" : false,
+  "continueBuildingAfterErrors" : true,
   "enableIndexBuildArena" : false,
   "hideShellScriptEnvironment" : false,
   "parameters" : {
@@ -51,9 +45,10 @@
       }
     }
   },
+  "qos" : "default",
   "schemeCommand" : "launch",
   "showNonLoggedProgress" : true,
-  "useDryRun" : false,
+  "useDryRun" : true,
   "useImplicitDependencies" : true,
   "useLegacyBuildLocations" : false,
   "useParallelTargets" : true

@@ -1,0 +1,169 @@
+\hypertarget{_point_8hpp_source}{}\doxysection{Point.\+hpp}
+\label{_point_8hpp_source}\index{Library/include/Point.hpp@{Library/include/Point.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{//  Point.hpp}}
+\DoxyCodeLine{3 \textcolor{comment}{//  }}
+\DoxyCodeLine{4 \textcolor{comment}{//}}
+\DoxyCodeLine{5 \textcolor{comment}{//  Created by Yusra Suhail on 2/11/23.}}
+\DoxyCodeLine{6 \textcolor{comment}{//}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#ifndef Point\_hpp}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#define Point\_hpp}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <set>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}glPlatform.hpp"{}}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{keyword}{namespace }geometry \{}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{20     \textcolor{keyword}{enum class} PointType\{}
+\DoxyCodeLine{21         DEDUCED\_TYPE,}
+\DoxyCodeLine{22         \textcolor{comment}{//}}
+\DoxyCodeLine{23         SINGLE\_POINT,}
+\DoxyCodeLine{24         ENDPOINT,}
+\DoxyCodeLine{25         FIRST\_ENDPOINT,}
+\DoxyCodeLine{26         EDIT\_POINT,}
+\DoxyCodeLine{27         INTERSECTION\_POINT}
+\DoxyCodeLine{28     \};}
+\DoxyCodeLine{32     \textcolor{keyword}{struct }\mbox{\hyperlink{structgeometry_1_1_point_struct}{PointStruct}}\{}
+\DoxyCodeLine{33         }
+\DoxyCodeLine{36         \textcolor{keywordtype}{float} \mbox{\hyperlink{structgeometry_1_1_point_struct_a4a8d2a702b64eaa4d8ad538fa286c0f9}{x}};}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{40         \textcolor{keywordtype}{float} \mbox{\hyperlink{structgeometry_1_1_point_struct_a4bb0f95369a793d833d774b5bc0833be}{y}};}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{43         \mbox{\hyperlink{structgeometry_1_1_point_struct_ab0a4e3a3b5492369cd398cc12ccae9f2}{PointStruct}}() \{\};}
+\DoxyCodeLine{44         }
+\DoxyCodeLine{51         \mbox{\hyperlink{structgeometry_1_1_point_struct_a859b5dbbcd0cb59f4179c20aa2a2bf9e}{PointStruct}}(\textcolor{keywordtype}{float} theX, \textcolor{keywordtype}{float} theY)}
+\DoxyCodeLine{52             : \mbox{\hyperlink{structgeometry_1_1_point_struct_a4a8d2a702b64eaa4d8ad538fa286c0f9}{x}}(theX), \mbox{\hyperlink{structgeometry_1_1_point_struct_a4bb0f95369a793d833d774b5bc0833be}{y}}(theY) \{\};}
+\DoxyCodeLine{53     \};}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{58     \textcolor{keyword}{class }\mbox{\hyperlink{classgeometry_1_1_point_token}{PointToken}}\{}
+\DoxyCodeLine{59         \textcolor{keyword}{private}:}
+\DoxyCodeLine{60             \mbox{\hyperlink{classgeometry_1_1_point_token}{PointToken}}(\textcolor{keywordtype}{void}) \{\}}
+\DoxyCodeLine{61         }
+\DoxyCodeLine{62         \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classgeometry_1_1_point}{Point}};}
+\DoxyCodeLine{63     \};}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66     \textcolor{keyword}{class }\mbox{\hyperlink{classgeometry_1_1_point}{Point}}\{}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68         \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classgeometry_1_1_segment}{Segment}};}
+\DoxyCodeLine{69         }
+\DoxyCodeLine{70         \textcolor{keyword}{private}:}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72             \textcolor{keywordtype}{float} x\_;}
+\DoxyCodeLine{73             \textcolor{keywordtype}{float} y\_;}
+\DoxyCodeLine{74             \textcolor{comment}{// Seglist of all the segments these endpoints belong to}}
+\DoxyCodeLine{75             std::set<unsigned int> segList\_;}
+\DoxyCodeLine{76             \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} idx\_;}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78             \textcolor{keyword}{static} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} count\_;}
+\DoxyCodeLine{79             \textcolor{comment}{//The set of all points which are unique and can autosort itself}}
+\DoxyCodeLine{80             \textcolor{keyword}{static} std::set<std::shared\_ptr<Point> > pointSet\_;}
+\DoxyCodeLine{81         }
+\DoxyCodeLine{82             \textcolor{keyword}{static} std::vector<std::shared\_ptr<Point> > pointVect\_;}
+\DoxyCodeLine{83             \textcolor{keyword}{static} \textcolor{keywordtype}{float} pointDiskRadius\_;}
+\DoxyCodeLine{84             \textcolor{keyword}{static} GLuint diskList\_;}
+\DoxyCodeLine{85             \textcolor{keyword}{static} GLuint circleList\_;}
+\DoxyCodeLine{86             \textcolor{keyword}{static} \textcolor{keywordtype}{bool} displayListsInitialized\_;}
+\DoxyCodeLine{87             }
+\DoxyCodeLine{88             }
+\DoxyCodeLine{89             \textcolor{keyword}{static} \textcolor{keywordtype}{void} initDisplayLists\_(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{90             }
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92         \textcolor{keyword}{public}:}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94             \mbox{\hyperlink{classgeometry_1_1_point}{Point}}(\textcolor{keywordtype}{void}) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{95             \mbox{\hyperlink{classgeometry_1_1_point}{Point}}(\textcolor{keyword}{const} \mbox{\hyperlink{classgeometry_1_1_point}{Point}}\& pt) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{96             \mbox{\hyperlink{classgeometry_1_1_point}{Point}}(\mbox{\hyperlink{classgeometry_1_1_point}{Point}}\&\& pt) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{97             \mbox{\hyperlink{classgeometry_1_1_point}{Point}}\& operator = (\textcolor{keyword}{const} \mbox{\hyperlink{classgeometry_1_1_point}{Point}}\& pt) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{98             \mbox{\hyperlink{classgeometry_1_1_point}{Point}}\& operator = (\mbox{\hyperlink{classgeometry_1_1_point}{Point}}\&\& pt) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100             \mbox{\hyperlink{classgeometry_1_1_point}{Point}}(\mbox{\hyperlink{classgeometry_1_1_point_token}{PointToken}} token, \textcolor{keywordtype}{float} xCoord, \textcolor{keywordtype}{float} yCoord);}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102             \mbox{\hyperlink{classgeometry_1_1_point}{\string~Point}}(\textcolor{keywordtype}{void}) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104             \textcolor{keyword}{inline} \textcolor{keywordtype}{float} getX(\textcolor{keywordtype}{void})\textcolor{keyword}{ const}\{}
+\DoxyCodeLine{105                 \textcolor{keywordflow}{return} x\_;}
+\DoxyCodeLine{106             \}}
+\DoxyCodeLine{107             \textcolor{keyword}{inline} \textcolor{keywordtype}{float} getY(\textcolor{keywordtype}{void})\textcolor{keyword}{ const}\{}
+\DoxyCodeLine{108                 \textcolor{keywordflow}{return} y\_;}
+\DoxyCodeLine{109             \}}
+\DoxyCodeLine{110      }
+\DoxyCodeLine{111             \textcolor{keyword}{inline} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} getIndex(\textcolor{keywordtype}{void})\textcolor{keyword}{ const}\{}
+\DoxyCodeLine{112                 \textcolor{keywordflow}{return} idx\_;}
+\DoxyCodeLine{113             \}}
+\DoxyCodeLine{114             }
+\DoxyCodeLine{115             \textcolor{keyword}{inline} \textcolor{keywordtype}{void} setCoordinates(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y)\{}
+\DoxyCodeLine{116                 x\_ = x; y\_ = y;}
+\DoxyCodeLine{117             \}}
+\DoxyCodeLine{118             }
+\DoxyCodeLine{119             \textcolor{keywordtype}{bool} isSingle(\textcolor{keywordtype}{void})\textcolor{keyword}{ const}\{}
+\DoxyCodeLine{120                 \textcolor{keywordflow}{return} segList\_.size() == 0;}
+\DoxyCodeLine{121             \}}
+\DoxyCodeLine{122             }
+\DoxyCodeLine{123             \textcolor{keywordtype}{size\_t} getConnectivityDegree(\textcolor{keywordtype}{void})\textcolor{keyword}{ const}\{}
+\DoxyCodeLine{124                 \textcolor{keywordflow}{return} segList\_.size();}
+\DoxyCodeLine{125             \}}
+\DoxyCodeLine{126             std::set<unsigned int> getSegList(\textcolor{keywordtype}{void})\textcolor{keyword}{ const}\{}
+\DoxyCodeLine{127                 \textcolor{keywordflow}{return} segList\_;}
+\DoxyCodeLine{128             \}}
+\DoxyCodeLine{129             \textcolor{keywordtype}{void} render(PointType type = PointType::DEDUCED\_TYPE) \textcolor{keyword}{const};}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131             \textcolor{keywordtype}{float} distance(\textcolor{keyword}{const} \mbox{\hyperlink{structgeometry_1_1_point_struct}{PointStruct}}\& pt) \textcolor{keyword}{const};}
+\DoxyCodeLine{132             \textcolor{keywordtype}{float} distance(\textcolor{keyword}{const} \mbox{\hyperlink{classgeometry_1_1_point}{Point}}\& pt) \textcolor{keyword}{const};}
+\DoxyCodeLine{133             \textcolor{keywordtype}{float} distanceSq(\textcolor{keyword}{const} \mbox{\hyperlink{structgeometry_1_1_point_struct}{PointStruct}}\& pt) \textcolor{keyword}{const};}
+\DoxyCodeLine{134             \textcolor{keywordtype}{float} distanceSq(\textcolor{keyword}{const} \mbox{\hyperlink{classgeometry_1_1_point}{Point}}\& pt) \textcolor{keyword}{const};}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136             \textcolor{keyword}{static} \textcolor{keywordtype}{void} render(\textcolor{keyword}{const} \mbox{\hyperlink{structgeometry_1_1_point_struct}{PointStruct}}\& pt,}
+\DoxyCodeLine{137                                PointType type = PointType::FIRST\_ENDPOINT);}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140             \textcolor{keyword}{static} std::shared\_ptr<Point> \mbox{\hyperlink{classgeometry_1_1_point_a65ca81ef79cc2227ea740c0ac16c16c9}{makeNewPointPtr}}(\textcolor{keywordtype}{float} xCoord,\textcolor{keywordtype}{float} yCoord);}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142             \textcolor{keyword}{static} \mbox{\hyperlink{classgeometry_1_1_point}{Point}}\& \mbox{\hyperlink{classgeometry_1_1_point_a4c3facac6959e2eead2f0706de9e0e3f}{makeNewPoint}}(\textcolor{keywordtype}{float} xCoord,\textcolor{keywordtype}{float} yCoord);}
+\DoxyCodeLine{143             }
+\DoxyCodeLine{144             \textcolor{keyword}{static} \textcolor{keyword}{const} std::set<std::shared\_ptr<Point> >\& getAllPoints(\textcolor{keywordtype}{void})\{}
+\DoxyCodeLine{145                 \textcolor{keywordflow}{return} pointSet\_;}
+\DoxyCodeLine{146             \}}
+\DoxyCodeLine{147             \textcolor{keyword}{static} std::shared\_ptr<Point> getPointAtIndex(\textcolor{keywordtype}{size\_t} index);}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149             \textcolor{keyword}{static} \textcolor{keywordtype}{void} clearAllPoints(\textcolor{keywordtype}{void}) \{}
+\DoxyCodeLine{150                 pointSet\_.clear();}
+\DoxyCodeLine{151                 count\_ = 0;}
+\DoxyCodeLine{152             \}}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154             \textcolor{keyword}{static} \textcolor{keywordtype}{void} setPointDiskRadius(\textcolor{keywordtype}{float} radius);}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{156             \textcolor{keyword}{static} \textcolor{keywordtype}{void} renderAllSinglePoints(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{157             }
+\DoxyCodeLine{158             \textcolor{keyword}{static} \textcolor{keywordtype}{float} distance(\textcolor{keyword}{const} \mbox{\hyperlink{structgeometry_1_1_point_struct}{PointStruct}}\& pt1, \textcolor{keyword}{const} \mbox{\hyperlink{structgeometry_1_1_point_struct}{PointStruct}}\& pt2);}
+\DoxyCodeLine{159             \textcolor{keyword}{static} \textcolor{keywordtype}{float} distanceSq(\textcolor{keyword}{const} \mbox{\hyperlink{structgeometry_1_1_point_struct}{PointStruct}}\& pt1, \textcolor{keyword}{const} \mbox{\hyperlink{structgeometry_1_1_point_struct}{PointStruct}}\& pt2);}
+\DoxyCodeLine{160     \};}
+\DoxyCodeLine{161     \textcolor{comment}{// Compare struct that helps to compare between points, to decide their position in the queue}}
+\DoxyCodeLine{162     \textcolor{keyword}{struct }\mbox{\hyperlink{structgeometry_1_1compare}{compare}}\{}
+\DoxyCodeLine{163       \textcolor{keywordtype}{bool} operator()(\textcolor{keyword}{const} \mbox{\hyperlink{classgeometry_1_1_point}{Point}} p1, \textcolor{keyword}{const} \mbox{\hyperlink{classgeometry_1_1_point}{Point}} p2)\{}
+\DoxyCodeLine{164           \textcolor{keywordtype}{float} x1 = p1.getX();}
+\DoxyCodeLine{165           \textcolor{keywordtype}{float} y1 = p1.getY();}
+\DoxyCodeLine{166           \textcolor{keywordtype}{float} x2 = p2.getX();}
+\DoxyCodeLine{167           \textcolor{keywordtype}{float} y2 = p2.getY();}
+\DoxyCodeLine{168           }
+\DoxyCodeLine{169           \textcolor{keywordflow}{if}(y1 == y2)\{}
+\DoxyCodeLine{170               \textcolor{keywordflow}{return} x1 < x2;}
+\DoxyCodeLine{171           \}}
+\DoxyCodeLine{172           \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{173              \textcolor{keywordflow}{return} y1 > y2;}
+\DoxyCodeLine{174           \}}
+\DoxyCodeLine{175       \}}
+\DoxyCodeLine{176     \};}
+\DoxyCodeLine{177     \textcolor{keyword}{using }PointPtr = std::shared\_ptr<Point>;}
+\DoxyCodeLine{178     \textcolor{comment}{//The set of all points which are on a segment including endpoints and intersectionpt}}
+\DoxyCodeLine{179     \textcolor{keyword}{static} std::set<std::shared\_ptr<Point> ,\mbox{\hyperlink{structgeometry_1_1compare}{compare}}> segPointSet\_;}
+\DoxyCodeLine{184 \textcolor{comment}{//     static void buildAllEndPointSet(void);}}
+\DoxyCodeLine{185     }
+\DoxyCodeLine{186 \}   \textcolor{comment}{//  end of namespace}}
+\DoxyCodeLine{187 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* Point\_hpp */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

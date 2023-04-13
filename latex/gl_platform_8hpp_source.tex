@@ -1,0 +1,59 @@
+\hypertarget{gl_platform_8hpp_source}{}\doxysection{gl\+Platform.\+hpp}
+\label{gl_platform_8hpp_source}\index{PointsAndSegmentInput/Code/glPlatform.hpp@{PointsAndSegmentInput/Code/glPlatform.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{2 \textcolor{comment}{ |                                                                                  |}}
+\DoxyCodeLine{3 \textcolor{comment}{ |  A Simple global header to check the development platform and load the proper    |}}
+\DoxyCodeLine{4 \textcolor{comment}{ |  OpenGL, glu, and glut headers.                                                  |}}
+\DoxyCodeLine{5 \textcolor{comment}{ |  Supports Mac OS X, Windows, Linux,                                              |}}
+\DoxyCodeLine{6 \textcolor{comment}{ |           and Xcode, gcc, Visual Studio, MinGW                                   |}}
+\DoxyCodeLine{7 \textcolor{comment}{ |                                                                                  |}}
+\DoxyCodeLine{8 \textcolor{comment}{ |  Author:     Jean-\/Yves Hervé,    University of Rhode Island                      |}}
+\DoxyCodeLine{9 \textcolor{comment}{ |                                  Dept. of Computer Science and Statistics        |}}
+\DoxyCodeLine{10 \textcolor{comment}{ |                                  3D Group for Interactive Visualization          |}}
+\DoxyCodeLine{11 \textcolor{comment}{ |  Fall 2011, Rev. Fall 2022                                                       |}}
+\DoxyCodeLine{12 \textcolor{comment}{ +-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#ifndef GL\_PLATFORM\_H}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#define GL\_PLATFORM\_H}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{17 \textcolor{comment}{//  Determines which OpenGL \& glut header files to load, based on}}
+\DoxyCodeLine{18 \textcolor{comment}{//  the development platform and target (OS \& compiler)}}
+\DoxyCodeLine{19 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \textcolor{comment}{//  Windows platform}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#if (defined(\_MSC\_VER) || defined(\_\_CYGWIN\_\_) || defined(\_\_MINGW32\_\_) || (defined( \_\_MWERKS\_\_) \&\& \_\_INTEL\_\_))}}
+\DoxyCodeLine{23     \textcolor{comment}{//  Visual}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{    \#if defined(\_MSC\_VER)}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{        \#include <GL\(\backslash\)gl.h>}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{        \#include <GL\(\backslash\)glut.h>}}
+\DoxyCodeLine{27     \textcolor{comment}{//  gcc-\/based compiler}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{    \#elif defined(\_\_CYGWIN\_\_) || defined(\_\_MINGW32\_\_)}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{        \#include <GL/gl.h>}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{        \#include <GL/glut.h>}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{    \#elif (defined( \_\_MWERKS\_\_) \&\& \_\_INTEL\_\_))}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{    \#endif}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{comment}{//  Linux and Unix}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#elif  (defined(\_\_FreeBSD\_\_) || defined(linux) || defined(sgi) || defined(\_\_NetBSD\_\_) || defined(\_\_OpenBSD) || defined(\_\_QNX\_\_))}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{    \#include <GL/gl.h>}}
+\DoxyCodeLine{37 \textcolor{preprocessor}{    \#include <GL/glut.h>}}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \textcolor{comment}{//  Macintosh}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{    \#if defined(\_\_MWERKS\_\_)}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{        \#include <gl.h>}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{        \#include <glut.h>}}
+\DoxyCodeLine{44 \textcolor{preprocessor}{    \#endif}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46     \textcolor{comment}{//  gcc-\/based compiler (Xcode, Eclipse, Code::Blocks)}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{    \#if defined(\_\_GNUC\_\_)}}
+\DoxyCodeLine{48 \textcolor{preprocessor}{        \#include <OpenGL/gl.h>}}
+\DoxyCodeLine{49 \textcolor{preprocessor}{        \#include <GLUT/glut.h>}}
+\DoxyCodeLine{50 \textcolor{preprocessor}{    \#endif}}
+\DoxyCodeLine{51 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{//  GL\_PLATFORM\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,130 @@
+\hypertarget{_segment_8hpp_source}{}\doxysection{Segment.\+hpp}
+\label{_segment_8hpp_source}\index{Library/include/Segment.hpp@{Library/include/Segment.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{//  Segment.hpp}}
+\DoxyCodeLine{3 \textcolor{comment}{//  }}
+\DoxyCodeLine{4 \textcolor{comment}{//}}
+\DoxyCodeLine{5 \textcolor{comment}{//  Created by Yusra Suhail on 2/11/23.}}
+\DoxyCodeLine{6 \textcolor{comment}{//}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#ifndef Segment\_hpp}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#define Segment\_hpp}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <utility>}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <set>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include "{}Point.hpp"{}}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{keyword}{namespace }geometry \{}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{21     \textcolor{keyword}{enum class} SegmentType\{}
+\DoxyCodeLine{22         SEGMENT,}
+\DoxyCodeLine{23         CREATED\_SEGMENT,}
+\DoxyCodeLine{24         EDITED\_SEGMENT}
+\DoxyCodeLine{25     \};}
+\DoxyCodeLine{26     }
+\DoxyCodeLine{30     \textcolor{keyword}{class }\mbox{\hyperlink{classgeometry_1_1_segment_token}{SegmentToken}}\{}
+\DoxyCodeLine{31         \textcolor{keyword}{private}:}
+\DoxyCodeLine{32             \mbox{\hyperlink{classgeometry_1_1_segment_token}{SegmentToken}}() \{\}}
+\DoxyCodeLine{33         \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classgeometry_1_1_segment}{Segment}};}
+\DoxyCodeLine{34     \};}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{39     \textcolor{keyword}{struct }\mbox{\hyperlink{structgeometry_1_1_segment_struct}{SegmentStruct}}\{}
+\DoxyCodeLine{40         \textcolor{keyword}{private}:}
+\DoxyCodeLine{41             \textcolor{keyword}{const} \mbox{\hyperlink{structgeometry_1_1_point_struct}{PointStruct}}\& p1\_;}
+\DoxyCodeLine{42             \textcolor{keyword}{const} \mbox{\hyperlink{structgeometry_1_1_point_struct}{PointStruct}}\& p2\_;}
+\DoxyCodeLine{43             }
+\DoxyCodeLine{44             \mbox{\hyperlink{structgeometry_1_1_segment_struct}{SegmentStruct}}(\textcolor{keyword}{const} \mbox{\hyperlink{structgeometry_1_1_point_struct}{PointStruct}}\& pt1, \textcolor{keyword}{const} \mbox{\hyperlink{structgeometry_1_1_point_struct}{PointStruct}}\& pt2)}
+\DoxyCodeLine{45                 : p1\_(pt1), p2\_(pt2)}
+\DoxyCodeLine{46             \{\}}
+\DoxyCodeLine{50             \textcolor{keywordtype}{bool} areOnOppositeSides(\textcolor{keyword}{const} \mbox{\hyperlink{structgeometry_1_1_point_struct}{PointStruct}}\& pt1, \textcolor{keyword}{const} \mbox{\hyperlink{structgeometry_1_1_point_struct}{PointStruct}}\& pt2)\textcolor{keyword}{ const}\{}
+\DoxyCodeLine{51                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{52             \}}
+\DoxyCodeLine{53             }
+\DoxyCodeLine{54         \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classgeometry_1_1_segment}{Segment}};}
+\DoxyCodeLine{55     \};}
+\DoxyCodeLine{56     }
+\DoxyCodeLine{57     \textcolor{keyword}{class }\mbox{\hyperlink{classgeometry_1_1_segment}{Segment}}\{}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59         \textcolor{keyword}{private}:}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61             \mbox{\hyperlink{classgeometry_1_1_point}{Point}}\& p1\_;}
+\DoxyCodeLine{62             \mbox{\hyperlink{classgeometry_1_1_point}{Point}}\& p2\_;}
+\DoxyCodeLine{63             \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} idx\_;}
+\DoxyCodeLine{64                         }
+\DoxyCodeLine{65             \textcolor{keyword}{static} std::set<std::shared\_ptr<Segment> > segSet\_;}
+\DoxyCodeLine{66             \textcolor{keyword}{static} std::vector<std::shared\_ptr<Segment> > segVect\_;}
+\DoxyCodeLine{67             \textcolor{keyword}{static} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} count\_;}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69             \mbox{\hyperlink{classgeometry_1_1_segment}{Segment}}(\mbox{\hyperlink{classgeometry_1_1_point}{Point}}\& pt1, \mbox{\hyperlink{classgeometry_1_1_point}{Point}}\& pt2);}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71             \textcolor{comment}{//  Disabled constructors and operators}}
+\DoxyCodeLine{72             \mbox{\hyperlink{classgeometry_1_1_segment}{Segment}}(\textcolor{keywordtype}{void}) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{73             \mbox{\hyperlink{classgeometry_1_1_segment}{Segment}}(\textcolor{keyword}{const} \mbox{\hyperlink{classgeometry_1_1_segment}{Segment}}\& ) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{74             \mbox{\hyperlink{classgeometry_1_1_segment}{Segment}}(\mbox{\hyperlink{classgeometry_1_1_segment}{Segment}}\&\& ) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{75             \mbox{\hyperlink{classgeometry_1_1_segment}{Segment}}\& operator = (\textcolor{keyword}{const} \mbox{\hyperlink{classgeometry_1_1_segment}{Segment}}\& ) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{76             \mbox{\hyperlink{classgeometry_1_1_segment}{Segment}}\& operator = (\mbox{\hyperlink{classgeometry_1_1_segment}{Segment}}\&\& ) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78             \textcolor{keyword}{static} \textcolor{keywordtype}{void} render\_(\textcolor{keyword}{const} \mbox{\hyperlink{classgeometry_1_1_point}{Point}}\& pt1, \textcolor{keyword}{const} \mbox{\hyperlink{classgeometry_1_1_point}{Point}}\& pt2, SegmentType type);}
+\DoxyCodeLine{79             }
+\DoxyCodeLine{80         \textcolor{keyword}{public}:}
+\DoxyCodeLine{81         }
+\DoxyCodeLine{82             \mbox{\hyperlink{classgeometry_1_1_segment}{Segment}}(\mbox{\hyperlink{classgeometry_1_1_segment_token}{SegmentToken}} token, \mbox{\hyperlink{classgeometry_1_1_point}{Point}}\& pt1, \mbox{\hyperlink{classgeometry_1_1_point}{Point}}\& pt2);}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84             \mbox{\hyperlink{classgeometry_1_1_segment_a3ae964744cd92c63862e92217ac778c7}{\string~Segment}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86             \textcolor{keyword}{inline} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} getIndex(\textcolor{keywordtype}{void})\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{87                 \textcolor{keywordflow}{return} idx\_;}
+\DoxyCodeLine{88             \}}
+\DoxyCodeLine{89             \textcolor{comment}{//The vector of segments with which this segment has swapped}}
+\DoxyCodeLine{90             std::vector<int> swappedSegs;}
+\DoxyCodeLine{91             \textcolor{comment}{//The vector of segments with which this segment has done a comparison}}
+\DoxyCodeLine{92             std::vector<int> comparedSegs;}
+\DoxyCodeLine{93             }
+\DoxyCodeLine{94             \textcolor{keywordtype}{void} \mbox{\hyperlink{classgeometry_1_1_segment_a7d167363b039213679e6cfbeaa397923}{render}}(SegmentType type = SegmentType::SEGMENT) \textcolor{keyword}{const};}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96             \textcolor{keywordtype}{bool} \mbox{\hyperlink{classgeometry_1_1_segment_a5dabe7f0e1019fcc2d66c8abccc9b714}{isOnLeftSide}}(\textcolor{keyword}{const} \mbox{\hyperlink{classgeometry_1_1_point}{Point}}\& pt) \textcolor{keyword}{const};}
+\DoxyCodeLine{101             \textcolor{keywordtype}{bool} \mbox{\hyperlink{classgeometry_1_1_segment_a5dabe7f0e1019fcc2d66c8abccc9b714}{isOnLeftSide}}(\textcolor{keyword}{const} \mbox{\hyperlink{structgeometry_1_1_point_struct}{PointStruct}}\& pt) \textcolor{keyword}{const};}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{108             \textcolor{keywordtype}{bool} \mbox{\hyperlink{classgeometry_1_1_segment_afd314986a717e3203349527dcdab4a07}{areOnOppositeSides}}(\textcolor{keyword}{const} \mbox{\hyperlink{classgeometry_1_1_point}{Point}}\& pt1, \textcolor{keyword}{const} \mbox{\hyperlink{classgeometry_1_1_point}{Point}}\& pt2) \textcolor{keyword}{const};}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{115             \textcolor{keywordtype}{bool} \mbox{\hyperlink{classgeometry_1_1_segment_afd314986a717e3203349527dcdab4a07}{areOnOppositeSides}}(\textcolor{keyword}{const} \mbox{\hyperlink{structgeometry_1_1_point_struct}{PointStruct}}\& pt1, \textcolor{keyword}{const} \mbox{\hyperlink{structgeometry_1_1_point_struct}{PointStruct}}\& pt2) \textcolor{keyword}{const};}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{123             \textcolor{keywordtype}{bool} \mbox{\hyperlink{classgeometry_1_1_segment_a3c2fb82cada7f76887ee684d7caca188}{intersects}}(\textcolor{keyword}{const} \mbox{\hyperlink{classgeometry_1_1_segment}{Segment}}\& seg) \textcolor{keyword}{const};}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{130             \textcolor{keywordtype}{bool} \mbox{\hyperlink{classgeometry_1_1_segment_a3c2fb82cada7f76887ee684d7caca188}{intersects}}(\textcolor{keyword}{const} \mbox{\hyperlink{classgeometry_1_1_point}{Point}}\& pt1, \textcolor{keyword}{const} \mbox{\hyperlink{classgeometry_1_1_point}{Point}}\& pt2) \textcolor{keyword}{const};}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{137             \textcolor{keywordtype}{bool} \mbox{\hyperlink{classgeometry_1_1_segment_a3c2fb82cada7f76887ee684d7caca188}{intersects}}(\textcolor{keyword}{const} \mbox{\hyperlink{structgeometry_1_1_point_struct}{PointStruct}}\& pt1, \textcolor{keyword}{const} \mbox{\hyperlink{structgeometry_1_1_point_struct}{PointStruct}}\& pt2) \textcolor{keyword}{const};}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{143             std::unique\_ptr<PointStruct> \mbox{\hyperlink{classgeometry_1_1_segment_a2802a5df54c0dcc48315a3f0d1e04cf1}{findIntersection}}(\textcolor{keyword}{const} \mbox{\hyperlink{classgeometry_1_1_segment}{Segment}}\& seg);}
+\DoxyCodeLine{149             \textcolor{keyword}{static} std::shared\_ptr<Segment> \mbox{\hyperlink{classgeometry_1_1_segment_aa4a29e6da5109bd712d6cb6801f7ce83}{makeNewSegPtr}}(\mbox{\hyperlink{classgeometry_1_1_point}{Point}}\& pt1, \mbox{\hyperlink{classgeometry_1_1_point}{Point}}\& pt2);}
+\DoxyCodeLine{155             \textcolor{keyword}{static} \mbox{\hyperlink{classgeometry_1_1_segment}{Segment}}\& \mbox{\hyperlink{classgeometry_1_1_segment_ac6c31c561122faefed5ac89246b084a4}{makeNewSeg}}(\mbox{\hyperlink{classgeometry_1_1_point}{Point}}\& pt1, \mbox{\hyperlink{classgeometry_1_1_point}{Point}}\& pt2);}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{157             \textcolor{keyword}{static} \mbox{\hyperlink{classgeometry_1_1_segment}{Segment}} makeNewTempSeg(\mbox{\hyperlink{classgeometry_1_1_point}{Point}}\& pt1, \mbox{\hyperlink{classgeometry_1_1_point}{Point}}\& pt2);}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{159             \textcolor{keyword}{static} \textcolor{keyword}{const} std::vector<std::shared\_ptr<Segment> >\& getAllSegments(\textcolor{keywordtype}{void})\{}
+\DoxyCodeLine{160                 \textcolor{keywordflow}{return} segVect\_;}
+\DoxyCodeLine{161             \}}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163             \textcolor{keyword}{static} \textcolor{keywordtype}{void} clearAllSegments(\textcolor{keywordtype}{void})\{}
+\DoxyCodeLine{164                 segSet\_.clear();}
+\DoxyCodeLine{165                 count\_ = 0;}
+\DoxyCodeLine{166             \}}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{168             \textcolor{keyword}{static} \textcolor{keywordtype}{void} renderCreated(\textcolor{keyword}{const} \mbox{\hyperlink{structgeometry_1_1_point_struct}{PointStruct}}\& pt1, \textcolor{keyword}{const} \mbox{\hyperlink{structgeometry_1_1_point_struct}{PointStruct}}\& pt2);}
+\DoxyCodeLine{169             \textcolor{keyword}{static} \textcolor{keywordtype}{void} renderAllSegments(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{170     \};}
+\DoxyCodeLine{171     }
+\DoxyCodeLine{172     }
+\DoxyCodeLine{173     std::vector<std::unique\_ptr<PointStruct> > findAllIntersectionsSmart(\textcolor{keyword}{const} std::vector<std::shared\_ptr<Segment> >\& vect);}
+\DoxyCodeLine{174     }
+\DoxyCodeLine{175     \textcolor{keywordtype}{void} orderMap(std::map<int,unsigned int> \&prioritySegMap, \textcolor{keyword}{const} vector<std::shared\_ptr<Segment> >\& segVect);}
+\DoxyCodeLine{176     std::vector<std::unique\_ptr<PointStruct> > findAllIntersectionsBruteForce(\textcolor{keyword}{const} std::vector<std::shared\_ptr<Segment> >\& vect);}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{178 \}}
+\DoxyCodeLine{179 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* Segment\_hpp */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

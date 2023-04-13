@@ -1,0 +1,80 @@
+\hypertarget{_world_8hpp_source}{}\doxysection{World.\+hpp}
+\label{_world_8hpp_source}\index{PointsAndSegmentInput/Code/World.hpp@{PointsAndSegmentInput/Code/World.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef WORLD\_HPP}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define WORLD\_HPP}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <cmath>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}Point.hpp"{}}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{12 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_world}{World}} \{}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{18     \textcolor{keyword}{static} \textcolor{keywordtype}{float} \mbox{\hyperlink{struct_world_a18aded95aeb8ee054e25c02139310ba8}{X\_MIN}};}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{24     \textcolor{keyword}{static} \textcolor{keywordtype}{float} \mbox{\hyperlink{struct_world_a78cdf3fe34a3302edd722f8161cbf4f1}{X\_MAX}};}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{30     \textcolor{keyword}{static} \textcolor{keywordtype}{float} \mbox{\hyperlink{struct_world_a4eb671799d5b4d65714d718e577ed886}{Y\_MIN}};}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{36     \textcolor{keyword}{static} \textcolor{keywordtype}{float} \mbox{\hyperlink{struct_world_a8c989606d13be76d377d415f62473668}{Y\_MAX}};}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{41     \textcolor{keyword}{static} \textcolor{keywordtype}{float} \mbox{\hyperlink{struct_world_a24bc56e58a0d8a85a61788a7b69bc022}{WORLD\_WIDTH}};}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{46     \textcolor{keyword}{static} \textcolor{keywordtype}{float} \mbox{\hyperlink{struct_world_a4caee66302ee54cc58ff3c2a17075bca}{WORLD\_HEIGHT}};}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{52     \textcolor{keyword}{static} \textcolor{keywordtype}{float} \mbox{\hyperlink{struct_world_ab2fd9e08935ac6c6842dec0b7c047943}{PIXEL\_TO\_WORLD}};}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{58     \textcolor{keyword}{static} \textcolor{keywordtype}{float} \mbox{\hyperlink{struct_world_ad68790ab83b708ced7362c7f38c12acd}{WORLD\_TO\_PIXEL}};}
+\DoxyCodeLine{59     }
+\DoxyCodeLine{63     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{float} \mbox{\hyperlink{struct_world_a825336f28350e40afe1d306518742188}{POINT\_PIXEL\_RADIUS}};}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{69     \textcolor{keyword}{static} \textcolor{keywordtype}{float} \mbox{\hyperlink{struct_world_a29a26b0b17d30c1a8b35be07ae9ae024}{POINT\_DISK\_RADIUS}};}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{74     \textcolor{keyword}{static} \textcolor{keywordtype}{float} \mbox{\hyperlink{struct_world_af37d41975ce13f7071089ccc1932f3e2}{SNAP\_TO\_ANGLE\_TOL}};}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{81     \textcolor{keyword}{static} \textcolor{keywordtype}{float} \mbox{\hyperlink{struct_world_a10c710f927d3e2c0603ae6962247b87a}{SNAP\_TO\_POINT\_TOL}};}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{88     \textcolor{keyword}{static} \textcolor{keywordtype}{float} \mbox{\hyperlink{struct_world_af285d82d76daa9b54ddc5f077e63a1e1}{SNAP\_TO\_SEGMENT\_TOL}};}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{95     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{float} \mbox{\hyperlink{struct_world_a5c6c401f536017831f9a268aac7ac8a3}{DISTANCE\_TOL}};}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{102     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{float} \mbox{\hyperlink{struct_world_aecbdb6dfb829e9ea9ad8574dfee33bb3}{DISTANCE\_SQ\_TOL}};}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{115     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_world_ac12a53b98b83210648d509874e4db7d5}{setWorldBounds}}(\textcolor{keywordtype}{float} xmin, \textcolor{keywordtype}{float} xmax, \textcolor{keywordtype}{float} ymin, \textcolor{keywordtype}{float} ymax,}
+\DoxyCodeLine{116                                 \textcolor{keywordtype}{int}\& paneWidth, \textcolor{keywordtype}{int}\& paneHeight)\{}
+\DoxyCodeLine{117         \textcolor{keywordflow}{if} ((xmax <= xmin) || (ymax <= xmin))\{}
+\DoxyCodeLine{118             exit(5);}
+\DoxyCodeLine{119         \}}
+\DoxyCodeLine{120         \mbox{\hyperlink{struct_world_a18aded95aeb8ee054e25c02139310ba8}{X\_MIN}} = xmin;}
+\DoxyCodeLine{121         \mbox{\hyperlink{struct_world_a78cdf3fe34a3302edd722f8161cbf4f1}{X\_MAX}} = xmax;}
+\DoxyCodeLine{122         \mbox{\hyperlink{struct_world_a4eb671799d5b4d65714d718e577ed886}{Y\_MIN}} = ymin;}
+\DoxyCodeLine{123         \mbox{\hyperlink{struct_world_a8c989606d13be76d377d415f62473668}{Y\_MAX}} = ymax;}
+\DoxyCodeLine{124         \mbox{\hyperlink{struct_world_a24bc56e58a0d8a85a61788a7b69bc022}{WORLD\_WIDTH}} = xmax -\/ xmin;}
+\DoxyCodeLine{125         \mbox{\hyperlink{struct_world_a4caee66302ee54cc58ff3c2a17075bca}{WORLD\_HEIGHT}} = ymax -\/ ymin;}
+\DoxyCodeLine{126         }
+\DoxyCodeLine{127         \textcolor{keywordtype}{float} widthRatio = \mbox{\hyperlink{struct_world_a24bc56e58a0d8a85a61788a7b69bc022}{WORLD\_WIDTH}} / paneWidth;}
+\DoxyCodeLine{128         \textcolor{keywordtype}{float} heightRatio = \mbox{\hyperlink{struct_world_a4caee66302ee54cc58ff3c2a17075bca}{WORLD\_HEIGHT}} / paneHeight;}
+\DoxyCodeLine{129         \textcolor{keywordtype}{float} maxRatio = fmax(widthRatio,heightRatio);}
+\DoxyCodeLine{131         \textcolor{keywordflow}{if} (fabsf(widthRatio-\/heightRatio)/maxRatio > 0.05)\{}
+\DoxyCodeLine{132             exit(15);}
+\DoxyCodeLine{133         \}}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135         \mbox{\hyperlink{struct_world_ab2fd9e08935ac6c6842dec0b7c047943}{PIXEL\_TO\_WORLD}} = maxRatio;}
+\DoxyCodeLine{136         \mbox{\hyperlink{struct_world_ad68790ab83b708ced7362c7f38c12acd}{WORLD\_TO\_PIXEL}} = 1.f / \mbox{\hyperlink{struct_world_ab2fd9e08935ac6c6842dec0b7c047943}{PIXEL\_TO\_WORLD}};}
+\DoxyCodeLine{137         }
+\DoxyCodeLine{138         paneWidth = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(round(\mbox{\hyperlink{struct_world_a24bc56e58a0d8a85a61788a7b69bc022}{WORLD\_WIDTH}} * \mbox{\hyperlink{struct_world_ad68790ab83b708ced7362c7f38c12acd}{WORLD\_TO\_PIXEL}}));}
+\DoxyCodeLine{139         paneHeight = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(round(\mbox{\hyperlink{struct_world_a4caee66302ee54cc58ff3c2a17075bca}{WORLD\_HEIGHT}} * \mbox{\hyperlink{struct_world_ad68790ab83b708ced7362c7f38c12acd}{WORLD\_TO\_PIXEL}}));}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141         \mbox{\hyperlink{struct_world_a29a26b0b17d30c1a8b35be07ae9ae024}{POINT\_DISK\_RADIUS}} = \mbox{\hyperlink{struct_world_a825336f28350e40afe1d306518742188}{POINT\_PIXEL\_RADIUS}} * \mbox{\hyperlink{struct_world_ab2fd9e08935ac6c6842dec0b7c047943}{PIXEL\_TO\_WORLD}};}
+\DoxyCodeLine{142         geometry::Point::setPointDiskRadius(\mbox{\hyperlink{struct_world_a29a26b0b17d30c1a8b35be07ae9ae024}{POINT\_DISK\_RADIUS}});}
+\DoxyCodeLine{143         }
+\DoxyCodeLine{144         \textcolor{comment}{// snap stuff}}
+\DoxyCodeLine{145         \mbox{\hyperlink{struct_world_a10c710f927d3e2c0603ae6962247b87a}{SNAP\_TO\_POINT\_TOL}} = 1.5f*\mbox{\hyperlink{struct_world_a29a26b0b17d30c1a8b35be07ae9ae024}{POINT\_DISK\_RADIUS}};}
+\DoxyCodeLine{146         \mbox{\hyperlink{struct_world_af285d82d76daa9b54ddc5f077e63a1e1}{SNAP\_TO\_SEGMENT\_TOL}} = 1.5f*\mbox{\hyperlink{struct_world_a29a26b0b17d30c1a8b35be07ae9ae024}{POINT\_DISK\_RADIUS}};}
+\DoxyCodeLine{147     \}}
+\DoxyCodeLine{148 \};}
+\DoxyCodeLine{149 }
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{//  WORLD\_HPP}}
+
+\end{DoxyCode}
