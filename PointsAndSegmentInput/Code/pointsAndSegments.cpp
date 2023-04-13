@@ -50,6 +50,7 @@
 #include <cmath>
 //
 #include "glPlatform.hpp"
+#include "Geometry.hpp"
 #include "World.hpp"
 #include "Point.hpp"
 #include "Segment.hpp"
@@ -116,8 +117,11 @@ float World::SNAP_TO_ANGLE_TOL;
 float World::SNAP_TO_POINT_TOL;
 float World::SNAP_TO_SEGMENT_TOL;
 const float World::POINT_PIXEL_RADIUS = 5.f;
-const float World::DISTANCE_TOL = (float) 1E-5;
-const float World::DISTANCE_SQ_TOL = World::DISTANCE_TOL*World::DISTANCE_TOL;
+const float Geometry::DISTANCE_ABS_TOL = 1E-8f;
+const float Geometry::DISTANCE_REL_TOL = 1E-6f;
+const float Geometry::DISTANCE_ABS_SQ_TOL = 1E-15f;
+const float Geometry::DISTANCE_REL_SQ_TOL = 1E-8f;
+
 
 //-----------------------------------------------------------------
 //  GUI constants
@@ -387,10 +391,13 @@ void menuHandlerFunc(int value){
 			break;
 
 		case FIND_INTERSECTION_BRUTE:
+			intersectionPointList.clear();
 			intersectionPointList = geometry::findAllIntersectionsBruteForce(Segment::getAllSegments());
 			break;
 			
 		case FIND_INTERSECTION_SMART:
+			intersectionPointList.clear();
+			intersectionPointList = geometry::findAllIntersectionsSmart(Segment::getAllSegments());
 			break;
 
 		case SAVE_TO_FILE:

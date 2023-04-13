@@ -12,6 +12,7 @@
 #include <memory>
 #include <vector>
 #include <set>
+#include <map>
 #include "Point.hpp"
 
 namespace geometry {
@@ -86,6 +87,12 @@ namespace geometry {
 			inline unsigned int getIndex(void) const {
 				return idx_;
 			}
+            inline const Point& getP1(void) const {
+                return p1_;
+            }
+            inline const Point& getP2(void) const {
+                return p2_;
+            }
             //The vector of segments with which this segment has swapped
             std::vector<int> swappedSegs;
             //The vector of segments with which this segment has done a comparison
@@ -113,7 +120,7 @@ namespace geometry {
 			 *@return boolean that tells if the 2 points are on the opposite sides of the currSeg
 			 */
 			bool areOnOppositeSides(const PointStruct& pt1, const PointStruct& pt2) const;
-
+        
 			/**Intersection possible iff:
 			 *  Seg1.pt1 and seg1.pt2 are on different sides of Seg2
 			 *  Seg2.pt1 and seg2.pt2 are on different sides of Seg1
@@ -140,7 +147,7 @@ namespace geometry {
 			 *@param interSeg A const reference to a segment which is possible candidate of an intersection
 			 *@return A pointer to Point struct variable which is the intersection point of both segments
 			 */
-            std::unique_ptr<PointStruct> findIntersection(const Segment& seg);
+            std::unique_ptr<PointStruct> findIntersection(const Segment& interSeg);
             /**Maker function for the segment that will create a shared pointer to the segment so it can be stored in the set
              * @param pt1 a reference to a point 1 which will be used to create a segment
              * @param pt2 a reference to a point 2 which will be used to create a segment
@@ -168,12 +175,79 @@ namespace geometry {
 			static void renderCreated(const PointStruct& pt1, const PointStruct& pt2);
 			static void renderAllSegments(void);
 	};
-	
-	
-	std::vector<std::unique_ptr<PointStruct> > findAllIntersectionsSmart(const std::vector<std::shared_ptr<Segment> >& vect);
+    /**Intersection function that finds all intersections between the segments using brute force
+     * @param vect  reference to a vector of shared pointers to the segments whose intersections need to be found
+     * @return a vector of unique pointers to type pointStruct that are intersection points
+     */
+    std::vector<std::unique_ptr<PointStruct> > findAllIntersectionsBruteForce(const std::vector<std::shared_ptr<Segment> >& vect);
     
-    void orderMap(std::map<int,unsigned int> &prioritySegMap, const vector<std::shared_ptr<Segment> >& segVect);
-	std::vector<std::unique_ptr<PointStruct> > findAllIntersectionsBruteForce(const std::vector<std::shared_ptr<Segment> >& vect);
+    // Enum used to store all types of points in the queue
+    struct InterQueueEvent{
+        bool isIntersection;
+        std::shared_ptr<Point> endpt;
+        bool isFirst;
+        unsigned int segIdx;
+        std::shared_ptr<PointStruct> interPt;
+    };
+    //enum class InterQueueEvent{
+    //    bool isIntersection,
+    //    Point& endpt,
+    //    bool isFirst,
+    //    unsigned int segIdx,
+    //    PointStruct& interPt,
+    ////        InterQueueEvent(bool isIntersection, Point& endpt, bool isFirst, unsigned int segIdx,PointStruct& interPt)
+    //};
+    /**
+     *This function takes the points which lies on the segment and put them in the a vector
+     *@param vect  reference to a vector of shared pointers to the segments whose endpoints need to be found
+     *@return a vector of shared pointers to the endpoints of type Point
+     */
+    std::vector<std::shared_ptr<Point> > getAllEndPoints(const std::vector<std::shared_ptr<Segment> >& vect);
+    
+    // Compare struct that helps to compare between InterQueueEvent points, to decide their position in the queue
+    struct compare{
+      bool operator()(const std::shared_ptr<geometry::InterQueueEvent>  p1, const std::shared_ptr<geometry::InterQueueEvent> p2){
+          float x1;
+          float y1;
+          float x2;
+          float y2;
+          if((*p1).isIntersection){
+              x1 = ((*p1).interPt)->x;
+              y1 = ((*p1).interPt)->y;
+              x2 = ((*p2).interPt)->x;
+              y2 = ((*p2).interPt)->y;
+          }else{
+              x1 = ((*p1).endpt)->getX();
+              y1 = ((*p1).endpt)->getY();
+              x2 = ((*p2).endpt)->getX();
+              y2 = ((*p2).endpt)->getY();
+          }
+          
+          if(y1 == y2){
+              return x1 < x2;
+          }else{
+             return y1 > y2;
+          }
+      }
+    };
+    /**
+     *This function creates a set of type InterQueueEvent, which is the event Queue
+     *@param vect  reference to a vector of shared pointers to the segments whose endpoints & intersection points need to be added in the queue
+     *@return a vector of shared pointers to the the points of queue of type InterQueueEvent
+     */
+     std::set<std::shared_ptr<InterQueueEvent> , compare> buildEventSet(const std::vector<std::shared_ptr<Segment> >& vect);
+    /**
+     *This function adds the intersection points in the eventQueue
+     *@param eventQueue - a reference to the eventQueue set in which we will add the intersection point
+     *@param currInterPt - the intersection point which has to be added in the eventQueue
+     */
+     void addEvent(std::set<std::shared_ptr<InterQueueEvent> , compare>& eventQueue,std::shared_ptr<PointStruct> currInterPt);
+    /**Intersection function that finds all intersections between the segments using smart way of computational geometry
+     * @param vect  reference to a vector of shared pointers to the segments whose intersections need to be found
+     * @return a vector of unique pointers to type PointStruct that are intersection points
+     */
+    std::vector<std::unique_ptr<PointStruct> > findAllIntersectionsSmart(const std::vector<std::shared_ptr<Segment> >& vect);
+    void orderMap(std::map<int,unsigned int> &prioritySegMap,const std::vector<std::shared_ptr<Segment> >& segVect, std::shared_ptr<InterQueueEvent> currPoint);
 
 }
 #endif /* Segment_hpp */
