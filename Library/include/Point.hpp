@@ -67,7 +67,8 @@ namespace geometry {
 	class Point{
 
 		friend class Segment;
-		
+        friend struct InterQueueEvent;
+        
 		private:
 
 			float x_;
@@ -92,8 +93,8 @@ namespace geometry {
 
 		public:
 
-			Point(void) = delete;
-			Point(const Point& pt) = delete;
+        Point(void) = delete;
+        Point(const Point& pt) = delete;
 			Point(Point&& pt) = delete;
 			Point& operator = (const Point& pt) = delete;
 			Point& operator = (Point&& pt) = delete;

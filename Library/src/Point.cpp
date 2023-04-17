@@ -25,7 +25,7 @@ float Point::pointDiskRadius_;
 GLuint Point::diskList_ = 0;
 GLuint Point::circleList_ = 0;
 bool Point::displayListsInitialized_ = false;
- 
+
 #define NUM_CIRCLE_PTS	12
 
 const GLfloat POINT_COLOR[][4] = {

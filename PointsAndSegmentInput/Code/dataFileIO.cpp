@@ -97,7 +97,7 @@ void readDataFile(const string& filePath, int& paneWidth, int& paneHeight){
             iSStr >> word >> index1 >> index2;
             if ((word == "s")){
                 /**	Create the point */
-                Segment::makeNewSeg(*(pointList[index1]), *(pointList[index2]));
+                Segment::makeNewSeg((pointList[index1]), (pointList[index2]));
             }else{
                 cout << "Invalid Segment format line: " << line << endl;
                 cout << "\tExpected format: s  <point index 1> <point index 2>" << endl;
