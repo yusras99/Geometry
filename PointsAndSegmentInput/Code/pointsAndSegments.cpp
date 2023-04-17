@@ -335,8 +335,8 @@ void mouseHandlerFunc(int button, int state, int ix ,int iy){
 					isFirstClick = false;
 				}
 				else{
-					Segment::makeNewSegPtr(Point::makeNewPoint(firstEndpoint.x, firstEndpoint.y),
-										   Point::makeNewPoint(pt.x, pt.y));
+					Segment::makeNewSegPtr(Point::makeNewPointPtr(firstEndpoint.x, firstEndpoint.y),
+										   Point::makeNewPointPtr(pt.x, pt.y));
 					isFirstClick = true;
 				}
 				break;

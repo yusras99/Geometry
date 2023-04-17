@@ -37,22 +37,22 @@ const GLfloat SEGMENT_COLOR[][4] = {
  * @param pt2 a reference to a point 2 which will be used to create a segment
  * @param token - the object of segmentToken class (which acts like passkey attribute) so that it is not accessible by anyone else
  */
-Segment::Segment(SegmentToken token, Point& pt1, Point& pt2)
+Segment::Segment(SegmentToken token, shared_ptr<Point> pt1, shared_ptr<Point> pt2)
     :
-		p1_((pt1.y_ < pt2.y_) || ((pt1.y_ < pt2.y_) && (pt1.x_ < pt2.x_)) ? pt1 :  pt2),
-		p2_((pt1.y_ < pt2.y_) || ((pt1.y_ < pt2.y_) && (pt1.x_ < pt2.x_)) ? pt2 :  pt1),
+		p1_((pt1->y_ < pt2->y_) || ((pt1->y_ < pt2->y_) && (pt1->x_ < pt2->x_)) ? pt1 :  pt2),
+		p2_((pt1->y_ < pt2->y_) || ((pt1->y_ < pt2->y_) && (pt1->x_ < pt2->x_)) ? pt2 :  pt1),
         idx_(count_++)
 {
 	(void) token;
 	
 	/**	add myself to segList of p1 and p2*/
-	p1_.segList_.insert(idx_);
-	p2_.segList_.insert(idx_);
+	p1_->segList_.insert(idx_);
+	p2_->segList_.insert(idx_);
 }
-Segment::Segment(Point& pt1, Point& pt2)
+Segment::Segment(shared_ptr<Point>  pt1, shared_ptr<Point>  pt2)
     :
-		p1_((pt1.y_ < pt2.y_) || ((pt1.y_ < pt2.y_) && (pt1.x_ < pt2.x_)) ? pt1 :  pt2),
-		p2_((pt1.y_ < pt2.y_) || ((pt1.y_ < pt2.y_) && (pt1.x_ < pt2.x_)) ? pt2 :  pt1),
+        p1_((pt1->y_ < pt2->y_) || ((pt1->y_ < pt2->y_) && (pt1->x_ < pt2->x_)) ? pt1 :  pt2),
+        p2_((pt1->y_ < pt2->y_) || ((pt1->y_ < pt2->y_) && (pt1->x_ < pt2->x_)) ? pt2 :  pt1),
         idx_(UINT_MAX)
 {
 }
@@ -60,8 +60,8 @@ Segment::Segment(Point& pt1, Point& pt2)
 /**Destructor function that clears the segment */
 Segment::~Segment(void){
 	/**	remove myself from segList of p1 and p2*/
-	p1_.segList_.erase(idx_);
-	p2_.segList_.erase(idx_);
+	p1_->segList_.erase(idx_);
+	p2_->segList_.erase(idx_);
 }
 
 #if 0
@@ -71,15 +71,15 @@ Segment::~Segment(void){
 //-----------------------------------------------------------------
 #endif
 
-shared_ptr<Segment> Segment::makeNewSegPtr(Point& pt1, Point& pt2){
+shared_ptr<Segment> Segment::makeNewSegPtr(shared_ptr<Point> pt1, shared_ptr<Point> pt2){
     bool found = false;
     shared_ptr<Segment> p;
     for(auto iter = segSet_.begin(); iter!=segSet_.end();iter++){
         /** segSet is a set of pointers to segments
          *  so we need to dereference the segment pointer  to check the point pairs
          */
-        if( ((*iter)->p1_.idx_ == pt1.idx_ && (*iter)->p2_.idx_ == pt2.idx_) ||
-			((*iter)->p2_.idx_ == pt1.idx_ && (*iter)->p1_.idx_ == pt2.idx_)){
+        if( ((*iter)->p1_->idx_ == pt1->idx_ && (*iter)->p2_->idx_ == pt2->idx_) ||
+			((*iter)->p2_->idx_ == pt1->idx_ && (*iter)->p1_->idx_ == pt2->idx_)){
             found = true;
             /**return pointer to the segment*/
             p = *iter;
@@ -92,17 +92,17 @@ shared_ptr<Segment> Segment::makeNewSegPtr(Point& pt1, Point& pt2){
         shared_ptr<Segment> currSeg = make_shared<Segment>(SegmentToken{}, pt1, pt2);
         segSet_.insert(currSeg);
         segVect_.push_back(currSeg);
-		pt1.segList_.insert(currSeg->idx_);
-		pt2.segList_.insert(currSeg->idx_);
+		pt1->segList_.insert(currSeg->idx_);
+		pt2->segList_.insert(currSeg->idx_);
         return currSeg;
     }
 }
 
-Segment& Segment::makeNewSeg(Point& pt1, Point& pt2){
+Segment& Segment::makeNewSeg(shared_ptr<Point> pt1, shared_ptr<Point> pt2){
    return *(makeNewSegPtr(pt1, pt2));
 }
 
-Segment Segment::makeNewTempSeg(Point& pt1, Point& pt2){
+Segment Segment::makeNewTempSeg(shared_ptr<Point> pt1, shared_ptr<Point> pt2){
     return Segment(pt1, pt2);
 }
 
@@ -116,9 +116,9 @@ Segment Segment::makeNewTempSeg(Point& pt1, Point& pt2){
 
 void Segment::render(SegmentType type) const{
 	/**	first draw the segment, then draw its endpoints*/
-	render_(p1_, p2_, type);
-	p1_.render(PointType::ENDPOINT);
-	p2_.render(PointType::ENDPOINT);
+	render_(*p1_, *p2_, type);
+	p1_->render(PointType::ENDPOINT);
+	p2_->render(PointType::ENDPOINT);
 }
 
 void Segment::render_(const Point& pt1, const Point& pt2, SegmentType type){
@@ -172,11 +172,11 @@ void Segment::renderAllSegments(void){
  *@param pt - a reference to a constant point which has to be checked on its direction to the segment
  *@return boolean that tells if the point is on left or not
  */
-bool Segment::isOnLeftSide(const Point& pt) const{
+bool Segment::isOnLeftSide(const shared_ptr<Point> pt) const{
     /**The determinant of a pt to the segment is:
      *  det( p2 - p1, pt - p1)
      */
-    float det  = ((pt.x_ - p1_.x_) * (p2_.y_ - p1_.y_)) - ((p2_.x_ - p1_.x_) * (pt.y_ - p1_.y_ ));
+    float det  = ((pt->x_ - p1_->x_) * (p2_->y_ - p1_->y_)) - ((p2_->x_ - p1_->x_) * (pt->y_ - p1_->y_ ));
     if(det > 0){
         return true;
     }else{
@@ -188,14 +188,14 @@ bool Segment::isOnLeftSide(const Point& pt) const{
 }
 
 bool Segment::isOnLeftSide(const PointStruct& pt) const{
-    float det  = ((pt.x - p1_.x_) * (p2_.y_ - p1_.y_)) - ((p2_.x_ - p1_.x_) * (pt.y - p1_.y_ ));
+    float det  = ((pt.x - p1_->x_) * (p2_->y_ - p1_->y_)) - ((p2_->x_ - p1_->x_) * (pt.y - p1_->y_ ));
     if(det > 0){
         return true;
     }else{
         return false;
     }
 }
-bool Segment::areOnOppositeSides(const Point& pt1, const Point& pt2) const{
+bool Segment::areOnOppositeSides(const shared_ptr<Point> pt1, const shared_ptr<Point> pt2) const{
 	bool pt1IsLeft = isOnLeftSide(pt1);
 	bool pt2IsLeft = isOnLeftSide(pt2);
 	return ((pt1IsLeft && !pt2IsLeft) || (!pt1IsLeft && pt2IsLeft));
@@ -208,29 +208,29 @@ bool Segment::areOnOppositeSides(const PointStruct& pt1, const PointStruct& pt2)
 bool Segment::intersects(const Segment& seg) const{
     return areOnOppositeSides(seg.p1_, seg.p2_) && seg.areOnOppositeSides(p1_, p2_);;
 }
-bool Segment::intersects(const Point& pt1, const Point& pt2) const{
-		Segment seg(const_cast<Point&>(pt1), const_cast<Point&>(pt2));
+bool Segment::intersects(const shared_ptr<Point> pt1, const shared_ptr<Point> pt2) const{
+		Segment seg(pt1, pt2);
         return areOnOppositeSides(pt1, pt2) && seg.areOnOppositeSides(p1_, p2_);
 }
 bool Segment::intersects(const PointStruct& pt1, const PointStruct& pt2) const{
 		SegmentStruct segStruct(pt1, pt2);
-		PointStruct ps1{p1_.x_, p1_.y_};
-		PointStruct ps2{p2_.x_, p2_.y_};
+		PointStruct ps1{p1_->x_, p1_->y_};
+		PointStruct ps2{p2_->x_, p2_->y_};
         return areOnOppositeSides(pt1, pt2) && segStruct.areOnOppositeSides(ps1, ps2);
 }
 unique_ptr<PointStruct> Segment::findIntersection(const Segment& interSeg){
     if(intersects(interSeg)){
-		const float interSegDX = interSeg.p2_.x_ - interSeg.p1_.x_;
-		const float currSegDX = p2_.x_ - p1_.x_;
-		const float interSegDY = interSeg.p2_.y_ - interSeg.p1_.y_;
-		const float currSegDY = p2_.y_ - p1_.y_;
+		const float interSegDX = interSeg.p2_->x_ - interSeg.p1_->x_;
+		const float currSegDX = p2_->x_ - p1_->x_;
+		const float interSegDY = interSeg.p2_->y_ - interSeg.p1_->y_;
+		const float currSegDY = p2_->y_ - p1_->y_;
 
 		float denom = interSegDX*currSegDY - interSegDY*currSegDX;
-		float num = interSegDY*(p1_.x_ - interSeg.p1_.x_) -
-					interSegDX*(p1_.y_ - interSeg.p1_.y_);
+		float num = interSegDY*(p1_->x_ - interSeg.p1_->x_) -
+					interSegDX*(p1_->y_ - interSeg.p1_->y_);
 		float alpha = num/denom;
-		float interX = p1_.x_ + alpha*currSegDX;
-		float interY = p1_.y_ + alpha*currSegDY;
+		float interX = p1_->x_ + alpha*currSegDX;
+		float interY = p1_->y_ + alpha*currSegDY;
         return make_unique<PointStruct>(interX, interY);
 
     }else{
@@ -270,9 +270,9 @@ vector<unique_ptr<PointStruct> > geometry::findAllIntersectionsBruteForce(const 
 //    return endpointVect;
 //}
 
-std::set<std::shared_ptr<InterQueueEvent> , compare> geometry::buildEventSet(const std::vector<std::shared_ptr<Segment> >& vect){
+std::set<std::shared_ptr<InterQueueEvent> , compareEvent> geometry::buildEventSet(const std::vector<std::shared_ptr<Segment> >& vect){
 //    vector<shared_ptr<Point> > endpointVect = getAllEndPoints(vect);
-    std::set<std::shared_ptr<InterQueueEvent> , compare> eventQueue;
+    std::set<std::shared_ptr<InterQueueEvent> , compareEvent> eventQueue;
         for (auto itr = vect.begin(); itr != vect.end(); itr++){
             const std::shared_ptr<InterQueueEvent> endPt1 = make_shared<InterQueueEvent>();
             const std::shared_ptr<InterQueueEvent> endPt2 = make_shared<InterQueueEvent>();
@@ -280,83 +280,82 @@ std::set<std::shared_ptr<InterQueueEvent> , compare> geometry::buildEventSet(con
 //            std::shared_ptr<Point> currPoint = allPointSet.find(&(*itr)->getP1());
             endPt1->endpt = (*itr)->getP1();
             endPt1->isIntersection = false;
-            endPt1->isFirst = true;
-            endPt1->segIdx = (*itr)->getIndex();
             eventQueue.insert(endPt1);
             
             endPt2->endpt = (*itr)->getP2();
             endPt2->isIntersection = false;
-            endPt2->isFirst = false;
-            endPt2->segIdx = (*itr)->getIndex();
             eventQueue.insert(endPt2);
         }
     return eventQueue;
 }
 
-void geometry::addEvent(set<shared_ptr<InterQueueEvent> , compare>& eventQueue,shared_ptr<PointStruct> currInterPt){
+void geometry::addEvent(set<shared_ptr<InterQueueEvent> , compareEvent>& eventQueue,shared_ptr<PointStruct> currInterPt){
     const std::shared_ptr<InterQueueEvent> currPoint;
     currPoint->interPt = currInterPt;
     currPoint->isIntersection = true;
     eventQueue.insert(currPoint);
 }
-void geometry::orderMap(std::map<int,unsigned int> &prioritySegMap,const vector<shared_ptr<Segment> >& segVect,shared_ptr<InterQueueEvent> currPoint){
+void geometry::orderMap(std::map<int,unsigned int> prioritySegMap,const vector<shared_ptr<Segment> >& segVect,shared_ptr<InterQueueEvent> currPoint){
     
-//  go through all the segments and see which if they are on the left or right of the segment that they are supposed to check
-    for(auto itr = prioritySegMap.begin(); itr != prioritySegMap.end(); itr++){
-        unsigned int currSeg = (itr)->second;
-    }
-}
+////  go through all the segments and see which if they are on the left or right of the segment that they are supposed to check
+//    for(auto itr = prioritySegMap.begin(); itr != prioritySegMap.end(); itr++){
+//        unsigned int currSeg = (itr)->second;
 //        auto itr2 = std::next(itr,1);
-//        if(segVect[itr2].isOnLeftSide(currPoint->endpt)){
-////                swap priorities
-//                itr++
-//        }else{
-//
+//        unsigned int nextSeg = (itr2)->second;
+//    //    if next seg is on left side of curr point then swap priorities
+//        int tempPriority = 0;
+//        if(segVect[nextSeg]->isOnLeftSide(currPoint->endpt)){
+//            tempPriority = prioritySegMap[itr]->first;
+//            prioritySegMap[itr2]->first = prioritySegMap[itr]->first;
+//            prioritySegMap[itr]->first = tempPriority;
 //        }
+//    }
+}
+
 vector<unique_ptr<PointStruct> > geometry::findAllIntersectionsSmart(const vector<shared_ptr<Segment> >& segVect){
     
     vector<unique_ptr<PointStruct> > intersectVect;
     //    Call this function to populate the segmentPoints
-    std::set<std::shared_ptr<InterQueueEvent> , compare> eventQueue = buildEventSet(segVect);
-	//   The T data structure is an ordered map with key being segment priority number, and value is the segment number
-	std::map<int,unsigned int> prioritySegMap;
+    std::set<std::shared_ptr<InterQueueEvent> , compareEvent> eventQueue = buildEventSet(segVect);
+	//   The T data structure is a set of shared pointers to segments and compare function that will sort the segments
+	std::set<shared_ptr<Segment>,compareSegment> prioritySegSet;
 	int segPriority = 0;
-	for(auto itr = eventQueue.begin(); itr != eventQueue.end(); itr++){
-		std::shared_ptr<InterQueueEvent> currPoint = *itr;
-        std::set<unsigned int> currSegSet;
-		//Get the segmentlist of each point and push it in the priority seg map according to the order
-		if(!(*currPoint).isIntersection){
-			currSegSet = (currPoint->endpt)->getSegList();
-		}
-        //if it is the first endpt, put it in the map
-        if(currPoint->isFirst){
-            //populate segMap
-            //if segList size is larger than one then execute this loop to add them all
-            if(currSegSet.size()>1){
-                for(auto segItr = currSegSet.begin(); segItr != currSegSet.end(); segItr++){
-                    prioritySegMap[segPriority] = *(segItr);
-                    segPriority++;
-                }
-            }else{
-                prioritySegMap[segPriority] = *(currSegSet.begin());
-            }
-            
-            //if only one segment in map then continue
-            if(prioritySegMap.size() == 1){
-                continue;
-            }else{
-                // if there are more than one segments in the map then sort them
-                orderMap(prioritySegMap,segVect,currPoint);
-            }
-        }else{
-            //remove the segment from the map, if we are on the second endpt
-            for (auto mapItr= prioritySegMap.begin(); mapItr!=prioritySegMap.end(); mapItr++){
-                if(mapItr->second == currPoint->segIdx){
-                    prioritySegMap.erase(mapItr->first);
-                }
-            }
-        }
-        segPriority++;
-	}
+//	for(auto itr = eventQueue.begin(); itr != eventQueue.end(); itr++){
+//		std::shared_ptr<InterQueueEvent> currPoint = *itr;
+//        std::set<unsigned int> currSegSet;
+//		//Get the segmentlist of each point and push it in the priority seg map according to the order
+//		if(!(*currPoint).isIntersection){
+//			currSegSet = (currPoint->endpt)->getSegList();
+//		}
+//        //if it is the first endpt, put it in the map
+//        if(currPoint->isFirst){
+//            //populate segMap
+//            //if segList size is larger than one then execute this loop to add them all
+//            if(currSegSet.size()>1){
+//                for(auto segItr = currSegSet.begin(); segItr != currSegSet.end(); segItr++){
+//                    prioritySegMap[segPriority] = *(segItr);
+//                    segPriority++;
+//                }
+//            }else{
+//                prioritySegMap[segPriority] = *(currSegSet.begin());
+//            }
+//
+//            //if only one segment in map then continue
+//            if(prioritySegMap.size() == 1){
+//                continue;
+//            }else{
+//                // if there are more than one segments in the map then sort them
+//                orderMap(prioritySegMap,segVect,currPoint);
+//            }
+//        }else{
+//            //remove the segment from the map, if we are on the second endpt
+//            for (auto mapItr= prioritySegMap.begin(); mapItr!=prioritySegMap.end(); mapItr++){
+//                if(mapItr->second == currPoint->segIdx){
+//                    prioritySegMap.erase(mapItr->first);
+//                }
+//            }
+//        }
+//        segPriority++;
+//	}
     return intersectVect;
 }
