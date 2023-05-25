@@ -10,9 +10,8 @@
 #include <memory>
 #include <set>
 #include <cmath>
-#include "Geometry.hpp"
-#include "Point.hpp"
 #include "Segment.hpp"
+#include "Point.hpp"
 
 using namespace std;
 using namespace geometry;
@@ -36,11 +35,6 @@ const GLfloat POINT_COLOR[][4] = {
 								{0.f, 1.f, 0.f, 1.f}	//	INTERSECTION_POINT
 };
 
-/**Constructor function that can only be called using the class itself and not by user
- * @param xCoord  the x coordinate which will be used to create a point
- * @param yCoord  the y coordinate which will be used to create a point
- * @param token - the object of segmentToken class (which acts like passkey attribute) so that it is not accessible by anyone else
- */
 Point::Point(PointToken token, float xCoord, float yCoord)
     :
         x_(xCoord),
@@ -57,11 +51,7 @@ Point::Point(PointToken token, float xCoord, float yCoord)
 #pragma mark "Maker" functions
 //-----------------------------------------------------------------
 #endif
-/**This is a maker function that returns a shared pointer to a point that can auto destruct itself when the point is no longer needed
- *@params xCoord - The x coordinate of the point
- *@params yCoord - The y coordinate of the point
- *@return a shared pointer to the point
- */
+
 shared_ptr<Point> Point::makeNewPointPtr(float xCoord,float yCoord){
     bool found = false;
     shared_ptr<Point> p;
@@ -81,23 +71,10 @@ shared_ptr<Point> Point::makeNewPointPtr(float xCoord,float yCoord){
         return currPt;
     }
 }
-/**Maker function that calls the other constructor function and gets the point on that pointer
- * @params xCoord - The x coordinate of the point
- * @params yCoord - The y coordinate of the point
- * @return the reference to a point
- */
+
 Point& Point::makeNewPoint(float xCoord,float yCoord){
     return *(makeNewPointPtr(xCoord, yCoord));
 }
-//Yusra: what is this function doing?
-//I don't remember why I have this. Its definetly wrong
-//shared_ptr<Point> Point::getPointAtIndex(size_t index){
-//	shared_ptr<Point> ptr = nullptr;
-//	if (index < pointSet_.size()){
-//
-//	}
-//	return ptr;
-//}
 
 #if 0
 //-----------------------------------------------------------------

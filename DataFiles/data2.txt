@@ -19,26 +19,24 @@ YMAX = +100
 #---------------------------------
 
 #	Some defined using 'p' label
-p 40 50.5		#	index 0
-p -30 70		#	index 1
-p -50 -75.5		#	index 2
-p 24 66			#	index 3
-p 66 -57.5		#	index 4
-
-#	Some defined using the 'v' label, just 'cause (and to test the reader)
-v 12 -43		#	index 5
-v 75 38.5		#	index 6
-v -44 -20		#	index 7
-p 0 0			#	index 8
+p	-80 80
+p 	70 -50
+p 	40	60
+p	-80	-60
+p	-20	50
+p	-50	0
+p	0	40
+p	-60	-80
+p	70	0
+p	-80	-40
 
 #---------------------------------
 #   Section 3: List of Segments
 #---------------------------------
 
-s	0	6
-s	0	4
-s	1	3
-s	4	3
-s	5	7
-s	5	6
+s	0	1
+s	2	3
+s	4	5
+s	6	7
+s	8	9
 

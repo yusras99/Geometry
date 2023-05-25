@@ -1,0 +1,441 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		160AB6EC2A1688770006D51D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 160AB6EA2A1688770006D51D /* OpenGL.framework */; };
+		160AB6ED2A1688770006D51D /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 160AB6EB2A1688770006D51D /* GLUT.framework */; };
+		160AB6FA2A1688D30006D51D /* Segment.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 160AB6EF2A1688D30006D51D /* Segment.hpp */; };
+		160AB6FC2A1688D30006D51D /* Point.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 160AB6F12A1688D30006D51D /* Point.hpp */; };
+		160AB6FD2A1688D30006D51D /* IntersectionQuery.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 160AB6F22A1688D30006D51D /* IntersectionQuery.hpp */; };
+		160AB6FF2A1688D30006D51D /* Geometry.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 160AB6F42A1688D30006D51D /* Geometry.hpp */; };
+		160AB7002A1688D30006D51D /* IntersectionQuery.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 160AB6F62A1688D30006D51D /* IntersectionQuery.cpp */; };
+		160AB7022A1688D30006D51D /* Point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 160AB6F82A1688D30006D51D /* Point.cpp */; };
+		160AB7032A1688D30006D51D /* Segment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 160AB6F92A1688D30006D51D /* Segment.cpp */; };
+		160AB7052A168AA20006D51D /* GeometryLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 160AB7042A168AA20006D51D /* GeometryLib.cpp */; };
+		16FCE6892A168C3600501946 /* GeometryLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 160AB7042A168AA20006D51D /* GeometryLib.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		160AB6D92A1687570006D51D /* libGeometryLib.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libGeometryLib.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		160AB6EA2A1688770006D51D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		160AB6EB2A1688770006D51D /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		160AB6EF2A1688D30006D51D /* Segment.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Segment.hpp; sourceTree = "<group>"; };
+		160AB6F12A1688D30006D51D /* Point.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Point.hpp; sourceTree = "<group>"; };
+		160AB6F22A1688D30006D51D /* IntersectionQuery.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = IntersectionQuery.hpp; sourceTree = "<group>"; };
+		160AB6F42A1688D30006D51D /* Geometry.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Geometry.hpp; sourceTree = "<group>"; };
+		160AB6F62A1688D30006D51D /* IntersectionQuery.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IntersectionQuery.cpp; sourceTree = "<group>"; };
+		160AB6F82A1688D30006D51D /* Point.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Point.cpp; sourceTree = "<group>"; };
+		160AB6F92A1688D30006D51D /* Segment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Segment.cpp; sourceTree = "<group>"; };
+		160AB7042A168AA20006D51D /* GeometryLib.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GeometryLib.cpp; sourceTree = "<group>"; };
+		16FCE67E2A168BA300501946 /* libGeometryLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGeometryLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		160AB6D72A1687570006D51D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				160AB6ED2A1688770006D51D /* GLUT.framework in Frameworks */,
+				160AB6EC2A1688770006D51D /* OpenGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		16FCE67C2A168BA300501946 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		160AB6D02A1687570006D51D = {
+			isa = PBXGroup;
+			children = (
+				160AB6EE2A1688D30006D51D /* include */,
+				160AB6F52A1688D30006D51D /* src */,
+				160AB6DA2A1687570006D51D /* Products */,
+				160AB6E92A1688770006D51D /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		160AB6DA2A1687570006D51D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				160AB6D92A1687570006D51D /* libGeometryLib.dylib */,
+				16FCE67E2A168BA300501946 /* libGeometryLib.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		160AB6E92A1688770006D51D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				160AB6EB2A1688770006D51D /* GLUT.framework */,
+				160AB6EA2A1688770006D51D /* OpenGL.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		160AB6EE2A1688D30006D51D /* include */ = {
+			isa = PBXGroup;
+			children = (
+				160AB6EF2A1688D30006D51D /* Segment.hpp */,
+				160AB6F12A1688D30006D51D /* Point.hpp */,
+				160AB6F22A1688D30006D51D /* IntersectionQuery.hpp */,
+				160AB6F42A1688D30006D51D /* Geometry.hpp */,
+			);
+			name = include;
+			path = Library/include;
+			sourceTree = GeometryLib;
+		};
+		160AB6F52A1688D30006D51D /* src */ = {
+			isa = PBXGroup;
+			children = (
+				160AB6F62A1688D30006D51D /* IntersectionQuery.cpp */,
+				160AB6F82A1688D30006D51D /* Point.cpp */,
+				160AB7042A168AA20006D51D /* GeometryLib.cpp */,
+				160AB6F92A1688D30006D51D /* Segment.cpp */,
+			);
+			name = src;
+			path = Library/src;
+			sourceTree = GeometryLib;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		160AB6D52A1687570006D51D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				160AB6FD2A1688D30006D51D /* IntersectionQuery.hpp in Headers */,
+				160AB6FC2A1688D30006D51D /* Point.hpp in Headers */,
+				160AB6FF2A1688D30006D51D /* Geometry.hpp in Headers */,
+				160AB6FA2A1688D30006D51D /* Segment.hpp in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		16FCE67A2A168BA300501946 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		160AB6D82A1687570006D51D /* Dynamic Lib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 160AB6E42A1687570006D51D /* Build configuration list for PBXNativeTarget "Dynamic Lib" */;
+			buildPhases = (
+				160AB6D52A1687570006D51D /* Headers */,
+				160AB6D62A1687570006D51D /* Sources */,
+				160AB6D72A1687570006D51D /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Dynamic Lib";
+			productName = Geometry;
+			productReference = 160AB6D92A1687570006D51D /* libGeometryLib.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+		16FCE67D2A168BA300501946 /* Static Lib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 16FCE6862A168BA300501946 /* Build configuration list for PBXNativeTarget "Static Lib" */;
+			buildPhases = (
+				16FCE67A2A168BA300501946 /* Headers */,
+				16FCE67B2A168BA300501946 /* Sources */,
+				16FCE67C2A168BA300501946 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Static Lib";
+			productName = GeometryStaticLib;
+			productReference = 16FCE67E2A168BA300501946 /* libGeometryLib.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		160AB6D12A1687570006D51D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					160AB6D82A1687570006D51D = {
+						CreatedOnToolsVersion = 14.3;
+					};
+					16FCE67D2A168BA300501946 = {
+						CreatedOnToolsVersion = 14.3;
+					};
+				};
+			};
+			buildConfigurationList = 160AB6D42A1687570006D51D /* Build configuration list for PBXProject "GeometryLib" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 160AB6D02A1687570006D51D;
+			productRefGroup = 160AB6DA2A1687570006D51D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				160AB6D82A1687570006D51D /* Dynamic Lib */,
+				16FCE67D2A168BA300501946 /* Static Lib */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		160AB6D62A1687570006D51D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				160AB7022A1688D30006D51D /* Point.cpp in Sources */,
+				160AB7002A1688D30006D51D /* IntersectionQuery.cpp in Sources */,
+				160AB7032A1688D30006D51D /* Segment.cpp in Sources */,
+				160AB7052A168AA20006D51D /* GeometryLib.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		16FCE67B2A168BA300501946 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				16FCE6892A168C3600501946 /* GeometryLib.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		160AB6E22A1687570006D51D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = $GeometryLib/include;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		160AB6E32A1687570006D51D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = $GeometryLib/include;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		160AB6E52A1687570006D51D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 38H6W4VN4A;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				PRODUCT_MODULE_NAME = GeometryLib;
+				PRODUCT_NAME = GeometryLib;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		160AB6E62A1687570006D51D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 38H6W4VN4A;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				PRODUCT_MODULE_NAME = GeometryLib;
+				PRODUCT_NAME = GeometryLib;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		16FCE6872A168BA300501946 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 38H6W4VN4A;
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				HEADER_SEARCH_PATHS = $GeometryLib/include;
+				PRODUCT_MODULE_NAME = GeometryLib;
+				PRODUCT_NAME = GeometryLib;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		16FCE6882A168BA300501946 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 38H6W4VN4A;
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				HEADER_SEARCH_PATHS = $GeometryLib/include;
+				PRODUCT_MODULE_NAME = GeometryLib;
+				PRODUCT_NAME = GeometryLib;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		160AB6D42A1687570006D51D /* Build configuration list for PBXProject "GeometryLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				160AB6E22A1687570006D51D /* Debug */,
+				160AB6E32A1687570006D51D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		160AB6E42A1687570006D51D /* Build configuration list for PBXNativeTarget "Dynamic Lib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				160AB6E52A1687570006D51D /* Debug */,
+				160AB6E62A1687570006D51D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		16FCE6862A168BA300501946 /* Build configuration list for PBXNativeTarget "Static Lib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				16FCE6872A168BA300501946 /* Debug */,
+				16FCE6882A168BA300501946 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 160AB6D12A1687570006D51D /* Project object */;
+}

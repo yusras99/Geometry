@@ -11,16 +11,19 @@
 #include <memory>
 #include <set>
 #include <cmath>
-#include "glPlatform.hpp"
+#include "Geometry.hpp"
+
 
 namespace geometry {
+    /** Forward segment decleration
+     */
+    class Segment;
 
 	/** Enum type only used for rendering.  I am wodering whether it should be
 	 *	renamed PointRenderMode
 	 */
 	enum class PointType{
 		DEDUCED_TYPE,
-		//
 		SINGLE_POINT,
 		ENDPOINT,
 		FIRST_ENDPOINT,
@@ -74,9 +77,9 @@ namespace geometry {
 			float x_;
 			float y_;
 			// Seglist of all the segments these endpoints belong to
-			std::set<unsigned int> segList_;
+			std::set<std::shared_ptr<Segment> > segList_;
 			unsigned int idx_;
-
+        
 			static unsigned int count_;
             //The set of all points which are unique and can autosort itself
 			static std::set<std::shared_ptr<Point> > pointSet_;
@@ -98,7 +101,12 @@ namespace geometry {
 			Point(Point&& pt) = delete;
 			Point& operator = (const Point& pt) = delete;
 			Point& operator = (Point&& pt) = delete;
-
+            
+            /**Constructor function that can only be called using the class itself and not by user
+             * @param xCoord  the x coordinate which will be used to create a point
+             * @param yCoord  the y coordinate which will be used to create a point
+             * @param token - the object of segmentToken class (which acts like passkey attribute) so that it is not accessible by anyone else
+             */
 			Point(PointToken token, float xCoord, float yCoord);
 
 			~Point(void) = default;
@@ -125,7 +133,7 @@ namespace geometry {
 			size_t getConnectivityDegree(void) const{
 				return segList_.size();
 			}
-            std::set<unsigned int> getSegList(void) const{
+            std::set<std::shared_ptr<Segment> > getSegList(void) const{
                 return segList_;
             }
 			void render(PointType type = PointType::DEDUCED_TYPE) const;
@@ -134,16 +142,22 @@ namespace geometry {
 			static void render(const PointStruct& pt,
 							   PointType type = PointType::FIRST_ENDPOINT);
 
-
+            /**This is a maker function that returns a shared pointer to a point that can auto destruct itself when the point is no longer needed
+             *@params xCoord - The x coordinate of the point
+             *@params yCoord - The y coordinate of the point
+             *@return a shared pointer to the point
+             */
 			static std::shared_ptr<Point> makeNewPointPtr(float xCoord,float yCoord);
-
+            /**Maker function that calls the other constructor function and gets the point on that pointer
+             * @params xCoord - The x coordinate of the point
+             * @params yCoord - The y coordinate of the point
+             * @return the reference to a point
+             */
 			static Point& makeNewPoint(float xCoord,float yCoord);
 			
-			static const std::set<std::shared_ptr<Point> >& getAllPoints(void){
-				return pointSet_;
-			}
-//			static std::shared_ptr<Point> getPointAtIndex(size_t index);
-
+            static const std::set<std::shared_ptr<Point> >& getAllPoints(void){
+                return pointSet_;
+            }
 			static float distanceSq(float x1, float y1, float x2, float y2);
 
 			inline float distance(const PointStruct& pt) const{
@@ -202,25 +216,7 @@ namespace geometry {
 			static void renderAllSinglePoints(void);
 			
 	};
-//    // Compare struct that helps to compare between points, to decide their position in the queue
-//    struct compare{
-//      bool operator()(const Point p1, const Point p2){
-//          float x1 = p1.getX();
-//          float y1 = p1.getY();
-//          float x2 = p2.getX();
-//          float y2 = p2.getY();
-//
-//          if(y1 == y2){
-//              return x1 < x2;
-//          }
-//          else{
-//             return y1 > y2;
-//          }
-//      }
-//    };
 	using PointPtr = std::shared_ptr<Point>;
-    //The set of all points which are on a segment including endpoints and intersectionpt
-//    static std::set<std::shared_ptr<Point> ,compare> segPointSet_;
-	
+
 }	//	end of namespace
 #endif /* Point_hpp */

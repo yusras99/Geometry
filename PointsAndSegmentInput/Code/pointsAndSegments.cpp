@@ -49,11 +49,11 @@
 #include <cstdlib>
 #include <cmath>
 //
-#include "glPlatform.hpp"
 #include "Geometry.hpp"
 #include "World.hpp"
 #include "Point.hpp"
 #include "Segment.hpp"
+#include "IntersectionQuery.hpp"
 #include "dataFileIO.hpp"
 
 using namespace std;
@@ -195,7 +195,8 @@ bool snapToSegment = false;
 
 string dataFilePath;
 
-vector <unique_ptr<PointStruct> > intersectionPointList;
+vector <shared_ptr<PointStruct> > intersectionPointList;
+
 
 #if 0
 //-----------------------------------------------------------------
@@ -371,11 +372,13 @@ void menuHandlerFunc(int value){
 			switch (mode){
 				using enum ApplicationMode;
 				case POINT_CREATION:
-//					pointList.clear();
+                    Point::clearAllPoints();
+                    intersectionPointList.clear();
 					break;
 
 				case SEGMENT_CREATION:
-//					segmentList.clear();
+                    Segment::clearAllSegments();
+                    intersectionPointList.clear();
 					isFirstClick = true;
 					break;
 		    
@@ -385,19 +388,21 @@ void menuHandlerFunc(int value){
 			break;
 
 		case CLEAR_ALL_MENU_ITEM:
-//			segmentList.clear();
-//			pointList.clear();
 			isFirstClick = true;
 			break;
 
-		case FIND_INTERSECTION_BRUTE:
+		case FIND_INTERSECTION_BRUTE:{
 			intersectionPointList.clear();
-			intersectionPointList = geometry::findAllIntersectionsBruteForce(Segment::getAllSegments());
+			IntersectionQuery query(Segment::getAllSegments());
+			intersectionPointList = query.findAllIntersectionsBruteForce();
+			}
 			break;
 			
-		case FIND_INTERSECTION_SMART:
+		case FIND_INTERSECTION_SMART:{
 			intersectionPointList.clear();
-			intersectionPointList = geometry::findAllIntersectionsSmart(Segment::getAllSegments());
+			IntersectionQuery query(Segment::getAllSegments());
+			intersectionPointList = query.findAllIntersectionsSmart();
+			}
 			break;
 
 		case SAVE_TO_FILE:
