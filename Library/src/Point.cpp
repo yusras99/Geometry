@@ -41,7 +41,7 @@ Point::Point(PointToken token, float xCoord, float yCoord)
         x_(xCoord),
         y_(yCoord),
         segList_(),
-        idx_(count_++)
+        ptIdx_(count_++)
 {
 	(void) token;
 }

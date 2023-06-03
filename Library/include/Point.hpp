@@ -102,7 +102,7 @@ namespace geometry {
 			/** Seglist of all the segments these endpoints belong to
 			*/
 			std::set<std::shared_ptr<Segment> > segList_;
-			unsigned int idx_;
+			unsigned int ptIdx_;
         
 			static unsigned int count_;
             /**	The set of all points which are unique and can autosort itself
@@ -152,7 +152,7 @@ namespace geometry {
 			 * @return this point's index
 			 */
 			inline unsigned int getIndex() const{
-				return idx_;
+				return ptIdx_;
 			}
 			/** Setter for the x and ycoordinates
 			 * @param x  new x coordinate to assign to the point
