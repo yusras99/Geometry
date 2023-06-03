@@ -101,6 +101,7 @@ struct World {
 	 */
 	static const float DISTANCE_SQ_TOL;
 
+
 	/** Function called through the initialization of a global variable in the
 	 *	main program.  Although the user specifies dimensions for the rendering pane,
 	 *	the function may set different values that agree better with the world
@@ -145,7 +146,18 @@ struct World {
 		SNAP_TO_POINT_TOL = 1.5f*POINT_DISK_RADIUS;
 		SNAP_TO_SEGMENT_TOL = 1.5f*POINT_DISK_RADIUS;
 	}
+	
+
 };
+
+/**	Free function to render the label of a point or segment
+ *	@param prefix the string prefix of the label (e.g. "P_ or "S_")
+ *	@param index	the index of the opeject to render the label of
+ *	@param xPos		x coordinate of where to render the label
+ *	@param yPos		y coordinate of where to render the label
+ *	@param isLarge	whether to use large or small font for the rendering
+*/
+void renderLabel(const std::string& prefix, unsigned int index, int xPos, int yPos, bool isLarge);
 
 
 #endif  //  WORLD_HPP

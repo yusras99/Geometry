@@ -78,12 +78,24 @@ namespace geometry{
 			 */
 			static const float DISTANCE_REL_SQ_TOL;
 
+			static const int SMALL_FONT_HEIGHT;
+			static const int LARGE_FONT_HEIGHT;
+			static const int TEXT_PADDING;
+			static const float TextColor[4];
+
+			static bool renderLabels;
+
 			//	disable all constructors
 			Geometry() = delete;
 			Geometry(const Geometry&) = delete;
 			Geometry(Geometry&&) = delete;
 
 	};
+
+	
+	#define SMALL_DISPLAY_FONT    GLUT_BITMAP_HELVETICA_12
+	#define LARGE_DISPLAY_FONT    GLUT_BITMAP_HELVETICA_18
+
 }
 
 #endif //	GEOMETRY_HPP

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "4AE575F6-D323-4355-BDDB-A60F71C3454D"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5598555F-BF01-4E5C-9CB3-584433D003E8"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../Library/src/Segment.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
+            landmarkName = "Segment::findIntersection(interSeg)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F2BBA4BD-8A18-4679-A57A-E3F7CEC48CB2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../Library/src/IntersectionQuery.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
+            landmarkName = "IntersectionQuery::findAllIntersectionsSmart()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F2BBA4BD-8A18-4679-A57A-E3F7CEC48CB2 - 267a30186261b827"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "geometry::IntersectionQuery::findAllIntersectionsSmart()"
+                  moduleName = "Point Input - source"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jyh/Library/CloudStorage/Dropbox/Developer/csc491-Yusra-Suhail/Geometry/Library/src/IntersectionQuery.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "158"
+                  endingLineNumber = "158"
+                  offsetFromSymbolStart = "238">
+               </Location>
+               <Location
+                  uuid = "F2BBA4BD-8A18-4679-A57A-E3F7CEC48CB2 - 267a30186261b827"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "geometry::IntersectionQuery::findAllIntersectionsSmart()"
+                  moduleName = "Point Input - source"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jyh/Library/CloudStorage/Dropbox/Developer/csc491-Yusra-Suhail/Geometry/Library/src/IntersectionQuery.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "158"
+                  endingLineNumber = "158"
+                  offsetFromSymbolStart = "362">
+               </Location>
+               <Location
+                  uuid = "F2BBA4BD-8A18-4679-A57A-E3F7CEC48CB2 - 267a30186261b8c6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "geometry::IntersectionQuery::findAllIntersectionsSmart()"
+                  moduleName = "Point Input - source"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jyh/Library/CloudStorage/Dropbox/Developer/csc491-Yusra-Suhail/Geometry/Library/src/IntersectionQuery.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "159"
+                  endingLineNumber = "159"
+                  offsetFromSymbolStart = "362">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

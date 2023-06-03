@@ -6,6 +6,7 @@
 //
 
 #include <iostream>
+#include <string>
 #include <algorithm>
 #include <memory>
 #include <set>
@@ -74,6 +75,12 @@ shared_ptr<Point> Point::makeNewPointPtr(float xCoord,float yCoord){
 
 Point& Point::makeNewPoint(float xCoord,float yCoord){
     return *(makeNewPointPtr(xCoord, yCoord));
+}
+
+IntersectionPointStruct::IntersectionPointStruct(std::shared_ptr<PointStruct> pt,
+			std::pair<std::shared_ptr<Segment>,std::shared_ptr<Segment> > theSegPair)
+	:	PointStruct(*pt),
+		segPair(theSegPair){
 }
 
 #if 0
@@ -158,7 +165,7 @@ void Point::render(const PointStruct& pt, PointType type){
 	glPopMatrix();
 }
 
-void Point::renderAllSinglePoints(void){
+void Point::renderAllSinglePoints(){
 	for (auto pt : pointSet_){
 		if (pt->isSingle()){
 			pt->render(PointType::SINGLE_POINT);
@@ -170,7 +177,7 @@ void Point::setPointDiskRadius(float radius){
 	pointDiskRadius_ = radius;
 }
 
-void Point::initDisplayLists_(void){
+void Point::initDisplayLists_(){
 	Point::diskList_ = glGenLists(1);
 	glNewList(Point::diskList_, GL_COMPILE);
 		glBegin(GL_POLYGON);
@@ -211,6 +218,6 @@ float Point::distanceSq(float x1, float y1, float x2, float y2){
 		d2 = 0.f;
 	}
 	return d2;
-
 }
+
 

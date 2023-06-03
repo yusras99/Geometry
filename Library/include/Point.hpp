@@ -9,6 +9,7 @@
 #define Point_hpp
 
 #include <memory>
+#include <utility>
 #include <set>
 #include <cmath>
 #include "Geometry.hpp"
@@ -46,6 +47,11 @@ namespace geometry {
 		/** Empty constructor */
 		PointStruct() {};
 		
+		/**	Copy constructor
+		 *	@parameter pt	the point to copy
+		 */
+		PointStruct(const PointStruct& pt) = default;
+		
 		/** Intializes a PointStruct object.  This constructor (and therefore the
 		 *	previous one, seem to be needed because make_unique doesn't play nice
 		 *	with brace initialization [???]
@@ -55,13 +61,30 @@ namespace geometry {
 		PointStruct(float theX, float theY)
 			: x(theX), y(theY) {};
 	};
+	/** Struct used to  store the intersection point of two (or more?) segments.
+	 *	This type only adds to its parent class shared pointers to the segments
+	 *	that intersect at this point.
+	 */
+	struct IntersectionPointStruct : public PointStruct{
+	//IntersectionPointStruct is a subclass of PointStruct
+		
+//		~IntersectionPointStruct() = default;
+		
+		/** A list of the segments that intersect at this point
+		 */
+		std::pair<std::shared_ptr<Segment>,std::shared_ptr<Segment> > segPair;
+		
+		IntersectionPointStruct(std::shared_ptr<PointStruct> pt,
+			std::pair<std::shared_ptr<Segment>,std::shared_ptr<Segment> > theSegPair);
+		
+	};
 
 	/**	Class created for passkey purposes (so that make_shared can make calls to
 	 *	a public constructor, but nobody else can.
 	 */
 	class PointToken{
 		private:
-			PointToken(void) {}
+			PointToken() {}
 		
 		friend class Point;
 	};
@@ -76,12 +99,14 @@ namespace geometry {
 
 			float x_;
 			float y_;
-			// Seglist of all the segments these endpoints belong to
+			/** Seglist of all the segments these endpoints belong to
+			*/
 			std::set<std::shared_ptr<Segment> > segList_;
 			unsigned int idx_;
         
 			static unsigned int count_;
-            //The set of all points which are unique and can autosort itself
+            /**	The set of all points which are unique and can autosort itself
+			 */
 			static std::set<std::shared_ptr<Point> > pointSet_;
         
 			static std::vector<std::shared_ptr<Point> > pointVect_;
@@ -91,12 +116,12 @@ namespace geometry {
 			static bool displayListsInitialized_;
 			
 			
-			static void initDisplayLists_(void);
+			static void initDisplayLists_();
 			
 
 		public:
 
-        Point(void) = delete;
+        Point() = delete;
         Point(const Point& pt) = delete;
 			Point(Point&& pt) = delete;
 			Point& operator = (const Point& pt) = delete;
@@ -108,32 +133,48 @@ namespace geometry {
              * @param token - the object of segmentToken class (which acts like passkey attribute) so that it is not accessible by anyone else
              */
 			Point(PointToken token, float xCoord, float yCoord);
-
-			~Point(void) = default;
-
-			inline float getX(void) const{
+			/** Destructor
+			 */
+			~Point() = default;
+			/** Getter for the x coordinate
+			 * @return this point's x coordinate
+			 */
+			inline float getX() const{
 				return x_;
 			}
-			inline float getY(void) const{
+			/** Getter for the y coordinate
+			 * @return this point's y coordinate
+			 */
+			inline float getY() const{
 				return y_;
 			}
-	 
-			inline unsigned int getIndex(void) const{
+			/** Getter for the index
+			 * @return this point's index
+			 */
+			inline unsigned int getIndex() const{
 				return idx_;
 			}
-			
+			/** Setter for the x and ycoordinates
+			 * @param x  new x coordinate to assign to the point
+			 * @param y  new y coordinate to assign to the point
+			 */
 			inline void setCoordinates(float x, float y){
 				x_ = x; y_ = y;
 			}
-			
-			bool isSingle(void) const{
+			/** Checks whether this point is free/single or assigned to one or more segments
+			 *	@return true if the point is free/single (not a segment's endpoint), false otherwise
+			 */
+			bool isSingle() const{
 				return segList_.size() == 0;
 			}
-			
-			size_t getConnectivityDegree(void) const{
+			/**	Provides the coonectivity of the point (the number of segments that it is an
+			 *	endpoint of).
+			 * 	@return	the degree of connectivity of this segment
+			 */
+			size_t getConnectivityDegree() const{
 				return segList_.size();
 			}
-            std::set<std::shared_ptr<Segment> > getSegList(void) const{
+            const std::set<std::shared_ptr<Segment> > getSegList() const{
                 return segList_;
             }
 			void render(PointType type = PointType::DEDUCED_TYPE) const;
@@ -155,7 +196,7 @@ namespace geometry {
              */
 			static Point& makeNewPoint(float xCoord,float yCoord);
 			
-            static const std::set<std::shared_ptr<Point> >& getAllPoints(void){
+            static const std::set<std::shared_ptr<Point> >& getAllPoints(){
                 return pointSet_;
             }
 			static float distanceSq(float x1, float y1, float x2, float y2);
@@ -206,17 +247,20 @@ namespace geometry {
 				return (distanceSq(pt1.x, pt1.y, pt2.x, pt2.y) == 0.f);
 			}
 
-			static void clearAllPoints(void) {
+			static void clearAllPoints() {
 				pointSet_.clear();
 				count_ = 0;
 			}
 
 			static void setPointDiskRadius(float radius);
-
-			static void renderAllSinglePoints(void);
+			inline static float getPointDiskRadius(){
+				return pointDiskRadius_;
+			}
+			static void renderAllSinglePoints();
 			
 	};
 	using PointPtr = std::shared_ptr<Point>;
+
 
 }	//	end of namespace
 #endif /* Point_hpp */

@@ -41,11 +41,11 @@ namespace geometry {
      */
 	struct SegmentStruct{
 		private:
-			const PointStruct& p1_;
-			const PointStruct& p2_;
+			const PointStruct& potentialSegP1_;
+			const PointStruct& potentialSegP2_;
 			
 			SegmentStruct(const PointStruct& pt1, const PointStruct& pt2)
-				: p1_(pt1), p2_(pt2)
+				: potentialSegP1_(pt1), potentialSegP2_(pt2)
 			{}
 			/**
              * we need this function because we need to check if the potential segment is on the opposite side or not
@@ -61,14 +61,19 @@ namespace geometry {
 
 		private:
 
-            std::shared_ptr<Point> p1_;
-            std::shared_ptr<Point> p2_;
-			unsigned int idx_;
+            std::shared_ptr<Point> segP1_;
+            std::shared_ptr<Point> segP2_;
+			unsigned int segIdx_;
 						
 			static std::set<std::shared_ptr<Segment> > segSet_;
 			static std::vector<std::shared_ptr<Segment> > segVect_;
 			static unsigned int count_;
 
+			/**	Called for imntersection testing.  Creates a temporary Segment object
+			 *	with no index.
+			 * @param pt1 first endpoint
+			 * @param pt2 second endpoint
+			 */
 			Segment(std::shared_ptr<Point> pt1, std::shared_ptr<Point> pt2);
 
 			//	Disabled constructors and operators
@@ -82,18 +87,19 @@ namespace geometry {
 			
 		public:
 		
-			Segment(SegmentToken token, std::shared_ptr<Point> pt1, std::shared_ptr<Point> pt2);
+			Segment(SegmentToken token, std::shared_ptr<Point> pt1, std::shared_ptr<Point> pt2,
+					bool endpointsOrdered=false);
 	 
-			~Segment(void);
+			~Segment();
 
-			inline unsigned int getIndex(void) const {
-				return idx_;
+			inline unsigned int getIndex() const {
+				return segIdx_;
 			}
-            inline const std::shared_ptr<Point> getP1(void) const {
-                return p1_;
+            inline const std::shared_ptr<Point> getP1() const {
+                return segP1_;
             }
-            inline const std::shared_ptr<Point> getP2(void) const {
-                return p2_;
+            inline const std::shared_ptr<Point> getP2() const {
+                return segP2_;
             }
 			
 			void render(SegmentType type = SegmentType::SEGMENT) const;
@@ -156,6 +162,7 @@ namespace geometry {
 			 *@return A pointer to Point struct variable which is the intersection point of both segments
 			 */
             std::shared_ptr<PointStruct> findIntersection(const Segment& interSeg);
+
             /**Maker function for the segment that will create a shared pointer to the segment so it can be stored in the set
              * @param pt1 a reference to a point 1 which will be used to create a segment
              * @param pt2 a reference to a point 2 which will be used to create a segment
@@ -173,18 +180,18 @@ namespace geometry {
             /**
              * @return segVect which is a vector of shared pointers to the Segments
              */
-			static const std::vector<std::shared_ptr<Segment> >& getAllSegments(void){
+			static const std::vector<std::shared_ptr<Segment> >& getAllSegments(){
 				return segVect_;
 			}
             /**Destructor function that clears all segments.
              */
-			static void clearAllSegments(void){
+			static void clearAllSegments(){
 				segSet_.clear();
 				count_ = 0;
 			}
 
 			static void renderCreated(const PointStruct& pt1, const PointStruct& pt2);
-			static void renderAllSegments(void);
+			static void renderAllSegments();
 	};
 	
     /**

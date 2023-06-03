@@ -17,6 +17,9 @@
 		160AB7022A1688D30006D51D /* Point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 160AB6F82A1688D30006D51D /* Point.cpp */; };
 		160AB7032A1688D30006D51D /* Segment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 160AB6F92A1688D30006D51D /* Segment.cpp */; };
 		160AB7052A168AA20006D51D /* GeometryLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 160AB7042A168AA20006D51D /* GeometryLib.cpp */; };
+		1634DE712A1FB8A400568C9C /* Segment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 160AB6F92A1688D30006D51D /* Segment.cpp */; };
+		1634DE722A1FB8AC00568C9C /* Point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 160AB6F82A1688D30006D51D /* Point.cpp */; };
+		1634DE732A1FB8B000568C9C /* IntersectionQuery.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 160AB6F62A1688D30006D51D /* IntersectionQuery.cpp */; };
 		16FCE6892A168C3600501946 /* GeometryLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 160AB7042A168AA20006D51D /* GeometryLib.cpp */; };
 /* End PBXBuildFile section */
 
@@ -217,7 +220,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1634DE722A1FB8AC00568C9C /* Point.cpp in Sources */,
 				16FCE6892A168C3600501946 /* GeometryLib.cpp in Sources */,
+				1634DE712A1FB8A400568C9C /* Segment.cpp in Sources */,
+				1634DE732A1FB8B000568C9C /* IntersectionQuery.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

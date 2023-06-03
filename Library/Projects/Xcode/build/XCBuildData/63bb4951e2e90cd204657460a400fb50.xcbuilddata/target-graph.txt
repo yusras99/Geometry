@@ -1,0 +1,3 @@
+Target dependency graph (2 targets)
+Dynamic Lib in GeometryLib, no dependencies
+Static Lib in GeometryLib, no dependencies

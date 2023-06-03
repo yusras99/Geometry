@@ -68,7 +68,7 @@ PointStruct worldToPixel(float x, float y);
 void menuHandlerFunc(int value);
 void modeMenuHandlerFunc(int value);
 void snapMenuHandlerFunc(int value);
-void displayFunc(void);
+void displayFunc();
 void resizeFunc(int w, int h);
 void mouseHandlerFunc(int b, int s, int x, int y);
 void passiveMotionHandlerFunc(int x, int y);
@@ -78,17 +78,17 @@ void keyboardHandlerFunc(unsigned char, int x, int y);
  *	snap-to-point and snap-to-segment settings.
  *	@return true if the current pointer position has been modified, flase otherwise
  */
-bool snapPoint(void);
+bool snapPoint();
 
 /**	This function modifies the current pointer position according to the
  *	all the snap-to settings.
  *	@return true if the current pointer position has been modified, flase otherwise
  */
-bool snapAll(void);
+bool snapAll();
 
-void interfaceInit(void);
+void interfaceInit();
 void applicationInit(int argc, char* argv[]);
-void zeEnd(void);
+void zeEnd();
 void myTimerFunc(int val);
 
 //-----------------------------------------------------------------
@@ -117,11 +117,17 @@ float World::SNAP_TO_ANGLE_TOL;
 float World::SNAP_TO_POINT_TOL;
 float World::SNAP_TO_SEGMENT_TOL;
 const float World::POINT_PIXEL_RADIUS = 5.f;
+
+
 const float Geometry::DISTANCE_ABS_TOL = 1E-8f;
 const float Geometry::DISTANCE_REL_TOL = 1E-6f;
 const float Geometry::DISTANCE_ABS_SQ_TOL = 1E-15f;
 const float Geometry::DISTANCE_REL_SQ_TOL = 1E-8f;
-
+const int Geometry::SMALL_FONT_HEIGHT = 12;
+const int Geometry::LARGE_FONT_HEIGHT = 18;
+const int Geometry::TEXT_PADDING = 0;
+const float Geometry::TextColor[4] = {1.f, 1.f, 1.f, 1.f};
+bool Geometry::renderLabels = true;
 
 //-----------------------------------------------------------------
 //  GUI constants
@@ -135,14 +141,16 @@ int WIN_WIDTH=PANE_WIDTH, WIN_HEIGHT=PANE_HEIGHT;
 
 
 const GLint	EXIT_MENU_ITEM = 0,
-            CLEAR_MENU_ITEM = 1,
-			CLEAR_ALL_MENU_ITEM = 2,
+			TOGGLE_RENDER_LABELS = 1,
+            CLEAR_MENU_ITEM = 2,
+			CLEAR_ALL_MENU_ITEM = 3,
 			//
-			FIND_INTERSECTION_BRUTE = 3,
-			FIND_INTERSECTION_SMART = 4,
 			//
-			SAVE_TO_FILE = 5,
-			RESTORE_FROM_FILE = 6,
+			FIND_INTERSECTION_BRUTE = 4,
+			FIND_INTERSECTION_SMART = 5,
+			//
+			SAVE_TO_FILE = 6,
+			RESTORE_FROM_FILE = 7,
             //
             SEPARATOR = -1;
 
@@ -230,13 +238,85 @@ PointStruct worldToPixel(float x, float y){
 	return pixelPt;
 }
 
-bool snapPoint(void){
+bool snapPoint(){
 	return false;
 }
 
-bool snapAll(void){
+bool snapAll(){
 	return false;
 }
+
+void renderLabel(const string& prefix, unsigned int index, int xPos, int yPos, bool isLarge){
+    //-----------------------------------------------
+    //  0.  get current material properties
+    //-----------------------------------------------
+    float oldAmb[4], oldDif[4], oldSpec[4], oldShiny;
+    glGetMaterialfv(GL_FRONT, GL_AMBIENT, oldAmb);
+    glGetMaterialfv(GL_FRONT, GL_DIFFUSE, oldDif);
+    glGetMaterialfv(GL_FRONT, GL_SPECULAR, oldSpec);
+    glGetMaterialfv(GL_FRONT, GL_SHININESS, &oldShiny);
+
+    glPushMatrix();
+	
+    //-----------------------------------------------
+    //  1.  Build the string to display <-- parameter
+    //-----------------------------------------------
+    string label = prefix + to_string(index);
+    const char* labelStr = label.c_str();
+    size_t labelLn = label.length();
+
+    //-----------------------------------------------
+    //  2.  Determine the string's length (in pixels)
+    //-----------------------------------------------
+    int textWidth = 0;
+    for (size_t k=0; k<labelLn; k++)
+	{
+		if (isLarge)
+			textWidth += glutBitmapWidth(LARGE_DISPLAY_FONT, labelStr[k]);
+		else
+			textWidth += glutBitmapWidth(SMALL_DISPLAY_FONT, labelStr[k]);
+		
+    }
+	//  add a few pixels of padding
+	textWidth += 2*Geometry::TEXT_PADDING;
+	
+	// Finally, scale back
+	textWidth = (int)(textWidth / World::PIXEL_TO_WORLD + 1);
+		
+    //-----------------------------------------------
+    //  3.  Draw the string
+    //-----------------------------------------------
+    glColor4fv(Geometry::TextColor);
+    int x = xPos;
+    for (size_t k=0; k<labelLn; k++)
+    {
+        glRasterPos2i(x, yPos);
+		if (isLarge)
+		{
+			glutBitmapCharacter(LARGE_DISPLAY_FONT, labelStr[k]);
+			x += static_cast<int>(glutBitmapWidth(LARGE_DISPLAY_FONT, labelStr[k])*World::PIXEL_TO_WORLD);
+		}
+		else
+		{
+			glutBitmapCharacter(SMALL_DISPLAY_FONT, labelStr[k]);
+			x += static_cast<int>(glutBitmapWidth(SMALL_DISPLAY_FONT, labelStr[k])*World::PIXEL_TO_WORLD);
+		}
+	}
+
+    //-----------------------------------------------
+    //  5.  Restore old material properties
+    //-----------------------------------------------
+	glMaterialfv(GL_FRONT, GL_AMBIENT, oldAmb);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, oldDif);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, oldSpec);
+	glMaterialf(GL_FRONT, GL_SHININESS, oldShiny);
+    
+    //-----------------------------------------------
+    //  6.  Restore reference frame
+    //-----------------------------------------------
+    glPopMatrix();
+}
+
 
 
 #if 0
@@ -296,6 +376,26 @@ void displayFunc(void){
 		Point::render(*(intersectionPointList[k]), PointType::INTERSECTION_POINT);
 	}
 
+	//	Possibly render the label, on the right side of the point
+	if (Geometry::renderLabels){
+		const float deltaX = 1.8f*Point::getPointDiskRadius(),
+					deltaY = 0.5f*Point::getPointDiskRadius();
+		const set<shared_ptr<Point> >& pointList = Point::getAllPoints();
+		for (const auto& pt : pointList){
+			renderLabel("P_", pt->getIndex(), static_cast<int>(pt->getX() + deltaX),
+								static_cast<int>(pt->getY() - deltaY), false);
+		}
+		
+		const vector<shared_ptr<Segment> >& segList = Segment::getAllSegments();
+		for (const auto& seg : segList){
+			float x = seg->getP1()->getX() - Point::getPointDiskRadius(),
+				  y = seg->getP1()->getY() + 2.5f*Point::getPointDiskRadius();
+			renderLabel("S_", seg->getIndex(), static_cast<int>(x),
+								static_cast<int>(y), false);
+		}
+		
+	}
+	
 	glPopMatrix();
 	glutSwapBuffers();
 }
@@ -390,7 +490,11 @@ void menuHandlerFunc(int value){
 		case CLEAR_ALL_MENU_ITEM:
 			isFirstClick = true;
 			break;
-
+		
+		case TOGGLE_RENDER_LABELS:
+			Geometry::renderLabels = !Geometry::renderLabels;
+			break;
+			
 		case FIND_INTERSECTION_BRUTE:{
 			intersectionPointList.clear();
 			IntersectionQuery query(Segment::getAllSegments());
@@ -547,7 +651,7 @@ void keyboardHandlerFunc(unsigned char key, int x, int y){
 //-----------------------------------------------------------------
 #endif
 
-void interfaceInit(void){
+void interfaceInit(){
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowSize(WIN_WIDTH, WIN_HEIGHT);
 	glutInitWindowPosition(100,40);
@@ -586,6 +690,7 @@ void interfaceInit(void){
 	mainMenu = glutCreateMenu(menuHandlerFunc);
 	glutAddSubMenu("Mode", modeSubMenu);
 	glutAddSubMenu("Snap to", snapSubMenu);
+	glutAddMenuEntry("Toggle render labels", TOGGLE_RENDER_LABELS);
 	glutAddMenuEntry("Clear for mode", CLEAR_MENU_ITEM);
 	glutAddMenuEntry("-", SEPARATOR);
 	glutAddMenuEntry("Clear All", CLEAR_ALL_MENU_ITEM);
@@ -607,7 +712,7 @@ void applicationInit(int argc, char* argv[]){
 		dataFilePath = argv[1];
 		readDataFile(dataFilePath, PANE_WIDTH, PANE_HEIGHT);
 	}else if (argc > 2){
-		cout << "This program accets only one argument (path to a data file " <<
+		cout << "This program accepts only one argument (path to a data file " <<
 				"or none at all." << endl;
 		exit(3);
 	}else{
@@ -619,7 +724,7 @@ void applicationInit(int argc, char* argv[]){
 	
 }
 
-void zeEnd(void){
+void zeEnd(){
 //	pointList.clear();
 //	segmentList.clear();
 	Point::clearAllPoints();
@@ -631,7 +736,7 @@ int main(int argc, char** argv){
 	/** It's generally recommended to initialize glut early. */
 	glutInit(&argc, argv);
 
-	/**	This only checcks if by any chance we have a file path as argument, in which case we will load lists of  predefined points and segments.*/
+	/**	This only checks if by any chance we have a file path as argument, in which case we will load lists of  predefined points and segments.*/
 	applicationInit(argc, argv);
 	
 	/**	Initialize the GUI (create window, set up menus and callback functions*/
