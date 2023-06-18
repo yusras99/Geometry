@@ -41,7 +41,7 @@ Point::Point(PointToken token, float xCoord, float yCoord)
         x_(xCoord),
         y_(yCoord),
         segList_(),
-        ptIdx_(count_++)
+        idx_(count_++)
 {
 	(void) token;
 }
@@ -125,7 +125,7 @@ void Point::render(PointType type) const{
 	glPopMatrix();
 }
 
-void Point::render(const PointStruct& pt, PointType type){
+void Point::render(const PointStruct& potentialPt1, PointType type){
 	if (!Point::displayListsInitialized_){
 		Point::initDisplayLists_();
 	}
@@ -158,7 +158,7 @@ void Point::render(const PointStruct& pt, PointType type){
 	}
 	
 	glPushMatrix();
-	glTranslatef(pt.x, pt.y, 0.f);
+	glTranslatef(potentialPt1.x, potentialPt1.y, 0.f);
 	glScalef(pointDiskRadius_, pointDiskRadius_, 1.f);
 	glCallList(diskList_);
 	glFlush();

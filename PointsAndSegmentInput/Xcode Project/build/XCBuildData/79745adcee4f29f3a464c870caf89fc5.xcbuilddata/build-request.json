@@ -1,16 +1,16 @@
 {
   "buildCommand" : {
-    "command" : "build",
-    "skipDependencies" : false,
-    "style" : "buildOnly"
+    "command" : "prepareForIndexing",
+    "enableIndexBuildArena" : false,
+    "targets" : null
   },
   "configuredTargets" : [
     {
       "guid" : "eaee17aee96df92022dd96a9efbd9d1c15aca1f807c5d1a40de2a12e675b2aad"
     }
   ],
-  "containerPath" : "/Users/jyh/Library/CloudStorage/Dropbox/Developer/csc491-Yusra-Suhail/Geometry/PointsAndSegmentInput/Xcode Project/Demo.xcodeproj",
-  "continueBuildingAfterErrors" : false,
+  "containerPath" : "/Users/yusrasuhail/Dropbox/csc491-Yusra-Suhail/Geometry/PointsAndSegmentInput/Xcode Project/Demo.xcodeproj",
+  "continueBuildingAfterErrors" : true,
   "enableIndexBuildArena" : false,
   "hideShellScriptEnvironment" : false,
   "parameters" : {
@@ -30,10 +30,10 @@
     "arenaInfo" : {
       "buildIntermediatesPath" : "",
       "buildProductsPath" : "",
-      "derivedDataPath" : "/Users/jyh/Library/Developer/Xcode/DerivedData",
-      "indexDataStoreFolderPath" : "/Users/jyh/Library/Developer/Xcode/DerivedData/Demo-emkkyociqvbinoekeclyyeovzxhu/Index.noindex/DataStore",
+      "derivedDataPath" : "/Users/yusrasuhail/Library/Developer/Xcode/DerivedData",
+      "indexDataStoreFolderPath" : "/Users/yusrasuhail/Library/Developer/Xcode/DerivedData/Demo-dgrgaontmhzecihgkebptyqutshx/Index.noindex/DataStore",
       "indexEnableDataStore" : true,
-      "indexPCHPath" : "/Users/jyh/Library/Developer/Xcode/DerivedData/Demo-emkkyociqvbinoekeclyyeovzxhu/Index.noindex/PrecompiledHeaders",
+      "indexPCHPath" : "/Users/yusrasuhail/Library/Developer/Xcode/DerivedData/Demo-dgrgaontmhzecihgkebptyqutshx/Index.noindex/PrecompiledHeaders",
       "pchPath" : ""
     },
     "configurationName" : "Debug",

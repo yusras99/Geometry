@@ -26,16 +26,16 @@ using namespace geometry;
 #define DEBUG_OUT	1
 
 IntersectionQuery::IntersectionQuery(const vector<shared_ptr<Segment> >& vect)
-	:	vect_(vect){
+	:	potentialInterSegVect_(vect){
 	
 }
 
 vector<shared_ptr<PointStruct> > IntersectionQuery::findAllIntersectionsBruteForce(){
     
     vector<shared_ptr<PointStruct> > intersectVect;
-    for (size_t i=0; i<vect_.size(); i++){
-        for (size_t j=i+1; j<vect_.size(); j++){
-            shared_ptr<PointStruct> pt = vect_[i]->findIntersection(*(vect_[j]));
+    for (size_t i=0; i<potentialInterSegVect_.size(); i++){
+        for (size_t j=i+1; j<potentialInterSegVect_.size(); j++){
+            shared_ptr<PointStruct> pt = potentialInterSegVect_[i]->findIntersection(*(potentialInterSegVect_[j]));
             if (pt != nullptr){
                 intersectVect.push_back(pt);
             }
@@ -50,8 +50,9 @@ vector<shared_ptr<PointStruct> > IntersectionQuery::findAllIntersectionsBruteFor
 //-----------------------------------------------------------------
 #endif
 set<shared_ptr<InterQueueEvent>, compareEvent> IntersectionQuery::buildEventSet(){
+    //check the potentialInterSegVect_ and grab endpoints of each segment in the vector and add it in the queue, change the type of these points to be an InterQueueEvent.
     set<shared_ptr<InterQueueEvent>, compareEvent> eventQueue;
-        for (auto itr = vect_.begin(); itr != vect_.end(); itr++){
+        for (auto itr = potentialInterSegVect_.begin(); itr != potentialInterSegVect_.end(); itr++){
             
             const std::shared_ptr<InterQueueEvent> endPt1 = make_shared<InterQueueEvent>();
             const std::shared_ptr<InterQueueEvent> endPt2 = make_shared<InterQueueEvent>();
@@ -68,74 +69,76 @@ set<shared_ptr<InterQueueEvent>, compareEvent> IntersectionQuery::buildEventSet(
 }
 
 void IntersectionQuery::addEvent(set<shared_ptr<InterQueueEvent> , compareEvent>& eventQueue,shared_ptr<IntersectionPointStruct> currInterPt){
-    const std::shared_ptr<InterQueueEvent> currPoint = make_shared<InterQueueEvent>();
-    currPoint->interPtPtr = currInterPt;
-    currPoint->isIntersection = true;
-    eventQueue.insert(currPoint);
+    //for each intersection point found, add it in the eventQueue
+    const std::shared_ptr<InterQueueEvent> currEventPt = make_shared<InterQueueEvent>();
+    currEventPt->interPtPtr = currInterPt;
+    currEventPt->isIntersection = true;
+    eventQueue.insert(currEventPt);
 }
-void IntersectionQuery::checkSegIntersection(shared_ptr<Segment> currentSeg,shared_ptr<Segment> compareSeg,vector< pair<shared_ptr<Segment>, shared_ptr<Segment> > >& segIntersectionCheckedVec,set<shared_ptr<InterQueueEvent> , compareEvent>& eventQueue,  vector<shared_ptr<PointStruct> >& smartIntersectVect,set< shared_ptr<Segment>, compareSegment>& prioritySegSet){
-    auto checkSegPair = currentSeg->getIndex() < compareSeg->getIndex() ?
-							make_pair(currentSeg,compareSeg) : make_pair(compareSeg,currentSeg);
-    //call vector's iterator to check if the currentSeg and prevSeg are already compared or not
-    vector< pair<shared_ptr<Segment>, shared_ptr<Segment> > >::iterator findPairItr = std::find(segIntersectionCheckedVec.begin(), segIntersectionCheckedVec.end(), checkSegPair );
+void IntersectionQuery::checkSegIntersection(shared_ptr<Segment> currSegOfEvent,shared_ptr<Segment> compareSeg,vector< pair<shared_ptr<Segment>, shared_ptr<Segment> > >& comparedSegForInterVec,set<shared_ptr<InterQueueEvent> , compareEvent>& eventQueue,  vector<shared_ptr<PointStruct> >& smartIntersectVect,set< shared_ptr<Segment>, compareSegment>& prioritySegSet){
+    
+    auto checkSegPair = currSegOfEvent->getIndex() < compareSeg->getIndex() ?
+							make_pair(currSegOfEvent,compareSeg) : make_pair(compareSeg,currSegOfEvent);
+    //call vector's iterator to check if the currSegOfEvent and prevSeg are already compared or not
+    auto findComparedSegPairItr = std::find(comparedSegForInterVec.begin(), comparedSegForInterVec.end(), checkSegPair );
 	//if the segs are not compared before, find intersection and put the point in the vector and in the eventQueue
-    if (findPairItr == segIntersectionCheckedVec.end()){
-        auto potentialIntersection = compareSeg->findIntersection(*currentSeg);
-        if (potentialIntersection != nullptr){
-            shared_ptr<IntersectionPointStruct> smartIntersectionPt = make_shared<IntersectionPointStruct>(
-                                potentialIntersection,
+    if (findComparedSegPairItr == comparedSegForInterVec.end()){
+        auto potentialInterPtPtr = compareSeg->findIntersection(*currSegOfEvent);
+        if (potentialInterPtPtr != nullptr){
+            shared_ptr<IntersectionPointStruct> smartInterPtPtr = make_shared<IntersectionPointStruct>(
+                                potentialInterPtPtr,
                                 checkSegPair);
-            smartIntersectVect.push_back(smartIntersectionPt);
-            addEvent(eventQueue, smartIntersectionPt);
+            smartIntersectVect.push_back(smartInterPtPtr);
+            addEvent(eventQueue, smartInterPtPtr);
             #if DEBUG_OUT
-                cout << "After adding intersection between S_" << compareSeg->getIndex() << " and S_" << currentSeg->getIndex() << endl;
+                cout << "After adding intersection between S_" << compareSeg->getIndex() << " and S_" << currSegOfEvent->getIndex() << endl;
                 cout << "Event Queue:\n" <<getEventQueueContent(eventQueue, true) << endl;
-                //cout << "T list: " << getTListContent(prioritySegSet,segIntersectionCheckedVec, swappedSegmentVec) << endl;
             #endif
         }
     }
     //	In any case, push the segment pair on the "checked" list
-	segIntersectionCheckedVec.push_back(checkSegPair);
+	comparedSegForInterVec.push_back(checkSegPair);
 }
 void IntersectionQuery::postInsertSegCheck(set< shared_ptr<Segment>, compareSegment>& prioritySegSet,
-            set< shared_ptr<Segment>, compareSegment>::iterator iteratorToCurrentSeg,
-            vector< pair<shared_ptr<Segment>, shared_ptr<Segment> > >& segIntersectionCheckedVec,
+            set< shared_ptr<Segment>, compareSegment>::iterator currSegOfEventItr,
+            vector< pair<shared_ptr<Segment>, shared_ptr<Segment> > >& comparedSegForInterVec,
 			set<shared_ptr<InterQueueEvent> , compareEvent>& eventQueue, vector<shared_ptr<PointStruct> > &smartIntersectVect){
-	auto currentSeg = *iteratorToCurrentSeg;
+    
+	auto currSegOfEvent = *currSegOfEventItr;
 	if(prioritySegSet.size() > 1){
-		bool isLastSeg = next(iteratorToCurrentSeg) == prioritySegSet.end();
-		bool isFirstSeg = iteratorToCurrentSeg == prioritySegSet.begin();
-		if(!isFirstSeg){//unless the current segment is first, compare the previous one
-			auto compareSeg = *(prev(iteratorToCurrentSeg));
-			checkSegIntersection(compareSeg, currentSeg,segIntersectionCheckedVec,eventQueue,smartIntersectVect,prioritySegSet);
+		bool isLastSeg = next(currSegOfEventItr) == prioritySegSet.end();
+		bool isFirstSeg = currSegOfEventItr == prioritySegSet.begin();
+		if(!isFirstSeg){//unless the current segment is first, compare the previous one, since currSegOfEvent is on right make it second argument
+			auto compareSeg = *(prev(currSegOfEventItr));
+			checkSegIntersection(compareSeg, currSegOfEvent,comparedSegForInterVec,eventQueue,smartIntersectVect,prioritySegSet);
 		}
-		if (!isLastSeg){//unless the current segment is last, compare to the next one
-			auto compareSeg = *(next(iteratorToCurrentSeg));
-			checkSegIntersection(currentSeg,compareSeg,segIntersectionCheckedVec,eventQueue,smartIntersectVect,prioritySegSet);
+		if (!isLastSeg){//unless the current segment is last, compare to the next one, since currSegOfEvent is on left make it first argument
+			auto compareSeg = *(next(currSegOfEventItr));
+			checkSegIntersection(currSegOfEvent,compareSeg,comparedSegForInterVec,eventQueue,smartIntersectVect,prioritySegSet);
 		}
 	}
 }
 void IntersectionQuery::removeSeg(set< shared_ptr<Segment>, compareSegment>&prioritySegSet,
-                                  set< shared_ptr<Segment>, compareSegment>::iterator iteratorToCurrentSeg,
-                                  vector< pair<shared_ptr<Segment>, shared_ptr<Segment> > >&segIntersectionCheckedVec,
+                                  set< shared_ptr<Segment>, compareSegment>::iterator currSegOfEventItr,
+                                  vector< pair<shared_ptr<Segment>, shared_ptr<Segment> > >&comparedSegForInterVec,
                                   set<shared_ptr<InterQueueEvent> , compareEvent>& eventQueue,
                                   vector<shared_ptr<PointStruct> >& smartIntersectVect){
     
-	auto currentSeg = *iteratorToCurrentSeg;
+	auto currSegOfEvent = *currSegOfEventItr;
     if(prioritySegSet.size() > 1){
-        bool isLastSeg = next(iteratorToCurrentSeg) == prioritySegSet.end();
-        bool isFirstSeg = iteratorToCurrentSeg == prioritySegSet.begin();
+        bool isLastSeg = next(currSegOfEventItr) == prioritySegSet.end();
+        bool isFirstSeg = currSegOfEventItr == prioritySegSet.begin();
         
         //Initialize the compare segment
-        auto compareSeg = *(iteratorToCurrentSeg);
+        auto compareSeg = *(currSegOfEventItr);
+        //if the current segment has neighbors on both left and right side then compare the neighbors for intersection
         if(!isLastSeg && !isFirstSeg){
-            //if the current segment is last only compare the previous one
-            compareSeg = *(prev(iteratorToCurrentSeg));
-            currentSeg = *(next(iteratorToCurrentSeg));
-            checkSegIntersection(compareSeg,currentSeg,segIntersectionCheckedVec,eventQueue,smartIntersectVect,prioritySegSet);
+            compareSeg = *(prev(currSegOfEventItr));
+            currSegOfEvent = *(next(currSegOfEventItr));
+            checkSegIntersection(compareSeg,currSegOfEvent,comparedSegForInterVec,eventQueue,smartIntersectVect,prioritySegSet);
         }
     }
-    prioritySegSet.erase(iteratorToCurrentSeg);
+    prioritySegSet.erase(currSegOfEventItr);
 }
 vector<shared_ptr<PointStruct> > IntersectionQuery::findAllIntersectionsSmart(){
     
@@ -147,86 +150,87 @@ vector<shared_ptr<PointStruct> > IntersectionQuery::findAllIntersectionsSmart(){
     //The vector of segment pairs which have been swapped
     vector< pair<shared_ptr<Segment>, shared_ptr<Segment> > > swappedSegmentVec;
     //The vector segment pairs which have been checked for intersection
-    vector< pair<shared_ptr<Segment>, shared_ptr<Segment> > > segIntersectionCheckedVec;
+    vector< pair<shared_ptr<Segment>, shared_ptr<Segment> > > comparedSegForInterVec;
   
 	#if DEBUG_OUT
 		cout << "Initial Event Queue:\n" <<getEventQueueContent(eventQueue, true) << endl;
 	#endif
 	
-    for(auto itr = eventQueue.begin(); itr != eventQueue.end(); itr++){
-        shared_ptr<InterQueueEvent> currPoint = *itr;
+    for(auto eventQueueItr = eventQueue.begin(); eventQueueItr != eventQueue.end(); eventQueueItr++){
+        shared_ptr<InterQueueEvent> currEventPt = *eventQueueItr;
         
-        if(!currPoint->isIntersection){
+        if(!currEventPt->isIntersection){
             //Get the segmentlist of each point and push it in the priority seg set according to the order
-            set<shared_ptr<Segment>> currPointSegList = (currPoint->endptPtr)->getSegList();
+            set<shared_ptr<Segment>> eventPtSegList = (currEventPt->endptPtr)->getSegList();
             //scanY is the current y value of the point of the eventQueue.
-            scanY = (currPoint->endptPtr)->getY();
+            scanY = (currEventPt->endptPtr)->getY();
             //Execute this loop to add/remove each of the segments one by one in the segSet
-            for(auto currSegPtr : currPointSegList){
+            for(auto currSegOfEvent : eventPtSegList){
 				//this the iterator of priority seg set which we will be using for checking intersections
-				decltype(prioritySegSet)::iterator iteratorToCurrentSeg;
-				//If currPoint is the first point of the segment push it on the prioritySegSet else remove it
-                if(currPoint->endptPtr == (currSegPtr)->getP1()){
-                    auto insertItr = prioritySegSet.insert(currSegPtr);
-                    iteratorToCurrentSeg = insertItr.first;
+				decltype(prioritySegSet)::iterator currSegOfEventItr;
+				//If currEventPt is the first point of the segment push it on the prioritySegSet else remove it
+                if(currEventPt->endptPtr == (currSegOfEvent)->getP1()){
+                    auto insertSegItr = prioritySegSet.insert(currSegOfEvent);
+                    currSegOfEventItr = insertSegItr.first;
   
                     //	If inserted iterator is not begin, check with prev neighbor
                     //	If inserted iterator is not last, check with next neighbor
-                    postInsertSegCheck(prioritySegSet,iteratorToCurrentSeg, segIntersectionCheckedVec, eventQueue,smartIntersectVect);
+                    postInsertSegCheck(prioritySegSet,currSegOfEventItr, comparedSegForInterVec, eventQueue,smartIntersectVect);
                 }
                 else{//If it is the second point of the segment, then find the segment to remove
-//                    iteratorToCurrentSeg = prioritySegSet.find(currSegPtr);
-                    iteratorToCurrentSeg = prioritySegSet.end();
-                    for (auto iter = prioritySegSet.begin(); iter != prioritySegSet.end(); iter++){
-						if (*iter == currSegPtr) {
-							iteratorToCurrentSeg = iter;
+//                    currSegOfEventItr = prioritySegSet.find(currSegOfEvent);
+                    currSegOfEventItr = prioritySegSet.end();
+                    for (auto prioritySegItr = prioritySegSet.begin(); prioritySegItr != prioritySegSet.end(); prioritySegItr++){
+						if (*prioritySegItr == currSegOfEvent) {
+							currSegOfEventItr = prioritySegItr;
 							break;
 						}
 					}
-                    if (iteratorToCurrentSeg == prioritySegSet.end()) {
+                    if (currSegOfEventItr == prioritySegSet.end()) {
 						cout << "should not happen " << endl;
 						exit(10);
 					}
-                    removeSeg(prioritySegSet, iteratorToCurrentSeg, segIntersectionCheckedVec, eventQueue,smartIntersectVect);
+                    removeSeg(prioritySegSet, currSegOfEventItr, comparedSegForInterVec, eventQueue,smartIntersectVect);
                 }
             }
 			#if DEBUG_OUT
-				//cout << "After processing endpoint P_" << currPoint->endptPtr->getIndex() << endl;
-				cout << "T list: " << getTListContent(prioritySegSet,segIntersectionCheckedVec, swappedSegmentVec) << endl;
+				cout << "After processing endpoint P_" << currEventPt->endptPtr->getIndex() << endl;
+				cout << "T list: " << getTListContent(prioritySegSet,comparedSegForInterVec, swappedSegmentVec) << endl;
 			#endif
              
-        }else{ //if currPoint is an intersection point then execute this code snippet
-            //Get the segmentlist of each point and push it in the priority seg set according to the order
-            pair<shared_ptr<Segment>,shared_ptr<Segment> > currSegPair = (currPoint->interPtPtr)->segPair;
+        }else{ //if currEventPt is an intersection point then execute this code snippet
+            //Get the segmentlist of each point and push it on the priority seg set according to the order
+            pair<shared_ptr<Segment>,shared_ptr<Segment> > interPtSegPair = (currEventPt->interPtPtr)->segPair;
 
-			auto currentSeg = currSegPair.first;  //this is current seg
-			auto nextSeg = currSegPair.second;   //and this is next
-			auto checkSegPair = currentSeg->getIndex() < nextSeg->getIndex() ?
-									make_pair(currentSeg,nextSeg) : make_pair(nextSeg,currentSeg);
+			auto currSegOfEvent = interPtSegPair.first;  //this is current seg
+			auto nextSeg = interPtSegPair.second;   //and this is next
+			auto checkSegPair = currSegOfEvent->getIndex() < nextSeg->getIndex() ?
+									make_pair(currSegOfEvent,nextSeg) : make_pair(nextSeg,currSegOfEvent);
 			//check if these 2 segments are swapped before or not
-			vector< pair<shared_ptr<Segment>, shared_ptr<Segment> > >::iterator findPairItr2 = std::find(swappedSegmentVec.begin(),swappedSegmentVec.end(),checkSegPair );
-			if (findPairItr2 == swappedSegmentVec.end()){
+			auto findSwappedSegPairItr = std::find(swappedSegmentVec.begin(),swappedSegmentVec.end(),checkSegPair );
+			if (findSwappedSegPairItr == swappedSegmentVec.end()){
 				//swap them
 				//take them out and put it back with respect to new y coordinate
-				prioritySegSet.erase(currentSeg);
+				prioritySegSet.erase(currSegOfEvent);
 				prioritySegSet.erase(nextSeg);
-				scanY = (currPoint->interPtPtr)->y;
-				
-				auto insertIter = prioritySegSet.insert(nextSeg).first;
-				if (insertIter != prioritySegSet.begin()){
-                    checkSegIntersection(*(prev(insertIter)), *insertIter,segIntersectionCheckedVec,eventQueue,smartIntersectVect,prioritySegSet);
+				scanY = (currEventPt->interPtPtr)->y;
+				//reinsertion of the seg that was the next(on right side of current) and check it for intersection with the seg on left of it
+				auto reInsertSegItr = prioritySegSet.insert(nextSeg).first;
+				if (reInsertSegItr != prioritySegSet.begin()){
+                    checkSegIntersection(*(prev(reInsertSegItr)), *reInsertSegItr,comparedSegForInterVec,eventQueue,smartIntersectVect,prioritySegSet);
 				}
-				insertIter = prioritySegSet.insert(currentSeg).first;
-				if (next(insertIter) != prioritySegSet.end()){
-                    checkSegIntersection(*insertIter, *(next(insertIter)),segIntersectionCheckedVec,eventQueue,smartIntersectVect,prioritySegSet);
+                //reinsertion of the seg that was current(left of next seg) and check it for intersection with the seg on right of it
+				reInsertSegItr = prioritySegSet.insert(currSegOfEvent).first;
+				if (next(reInsertSegItr) != prioritySegSet.end()){
+                    checkSegIntersection(*reInsertSegItr, *(next(reInsertSegItr)),comparedSegForInterVec,eventQueue,smartIntersectVect,prioritySegSet);
 				}
 				
 				swappedSegmentVec.push_back(checkSegPair);
 				
 				#if DEBUG_OUT
-					cout << "After processing intersection between S_" << currentSeg->getIndex() << " and S_" << nextSeg->getIndex() << endl;
+					cout << "After processing intersection between S_" << currSegOfEvent->getIndex() << " and S_" << nextSeg->getIndex() << endl;
 					cout << "Event Queue:\n" <<getEventQueueContent(eventQueue, true) << endl;
-					cout << "T list: " << getTListContent(prioritySegSet,segIntersectionCheckedVec, swappedSegmentVec) << endl;
+					cout << "T list: " << getTListContent(prioritySegSet,comparedSegForInterVec, swappedSegmentVec) << endl;
 				#endif
 			}
 			//	should eventually be removed
@@ -248,17 +252,17 @@ string IntersectionQuery::getEventQueueContent(const set<shared_ptr<InterQueueEv
 	
 	ostringstream outStream;
     for(auto itr = eventQueue.begin(); itr != eventQueue.end(); itr++){
-        shared_ptr<InterQueueEvent> currPoint = *itr;
+        shared_ptr<InterQueueEvent> currEventPt = *itr;
         
-        if(currPoint->isIntersection){
-			shared_ptr<IntersectionPointStruct> pt = currPoint->interPtPtr;
+        if(currEventPt->isIntersection){
+			shared_ptr<IntersectionPointStruct> pt = currEventPt->interPtPtr;
 			outStream << "\tInt " << "(" << pt->x << ", " << pt->y << "), ";
 			outStream << "intersection of Segments ";
 			outStream << "S_" << pt->segPair.first->getIndex() << " and " <<
 						 "S_" << pt->segPair.second->getIndex() << endl;
 		}
 		else{
-			shared_ptr<Point> pt = currPoint->endptPtr;
+			shared_ptr<Point> pt = currEventPt->endptPtr;
 			set<std::shared_ptr<Segment> > segList = pt->getSegList();
 			outStream << "\tP_" << pt->getIndex() <<  " (" << pt->getX() << ", " << pt->getY() << "), " <<
 						 "endpoint of Segment";
@@ -282,7 +286,7 @@ string IntersectionQuery::getEventQueueContent(const set<shared_ptr<InterQueueEv
 }
 			
 string IntersectionQuery::getTListContent(const set<shared_ptr<Segment>, compareSegment>& prioritySegSet,
-										const vector<pair<shared_ptr<Segment>, shared_ptr<Segment> > >& segIntersectionCheckedVec,
+										const vector<pair<shared_ptr<Segment>, shared_ptr<Segment> > >& comparedSegForInterVec,
 										const vector<pair<shared_ptr<Segment>, shared_ptr<Segment> > >& swappedSegmentVec) const{
 	ostringstream outStream;
 	
@@ -291,7 +295,7 @@ string IntersectionQuery::getTListContent(const set<shared_ptr<Segment>, compare
 					 "P_" << seg->getP2()->getIndex() << "] ";
 	}
 	outStream << endl << "Segment pair tested: ";
-	for (const auto& segPair : segIntersectionCheckedVec){
+	for (const auto& segPair : comparedSegForInterVec){
 		outStream << "(S_" << segPair.first->getIndex() << ", " << "S_" << segPair.second->getIndex() << ") ";
 	}
 	outStream << endl << "Segment pair swapped: ";

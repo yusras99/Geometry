@@ -44,13 +44,13 @@ namespace geometry {
 			const PointStruct& potentialSegP1_;
 			const PointStruct& potentialSegP2_;
 			
-			SegmentStruct(const PointStruct& pt1, const PointStruct& pt2)
-				: potentialSegP1_(pt1), potentialSegP2_(pt2)
+			SegmentStruct(const PointStruct& potentialEndpt1, const PointStruct& potentialEndpt2)
+				: potentialSegP1_(potentialEndpt1), potentialSegP2_(potentialEndpt2)
 			{}
 			/**
              * we need this function because we need to check if the potential segment is on the opposite side or not
              */
-			bool areOnOppositeSides(const PointStruct& pt1, const PointStruct& pt2) const{
+			bool areOnOppositeSides(const PointStruct& potentialEndpt1, const PointStruct& potentialEndpt2) const{
 				return false;
 			}
 			
@@ -61,9 +61,9 @@ namespace geometry {
 
 		private:
 
-            std::shared_ptr<Point> segP1_;
-            std::shared_ptr<Point> segP2_;
-			unsigned int segIdx_;
+            std::shared_ptr<Point> p1_;
+            std::shared_ptr<Point> p2_;
+			unsigned int idx_;
 						
 			static std::set<std::shared_ptr<Segment> > segSet_;
 			static std::vector<std::shared_ptr<Segment> > segVect_;
@@ -71,10 +71,10 @@ namespace geometry {
 
 			/**	Called for imntersection testing.  Creates a temporary Segment object
 			 *	with no index.
-			 * @param pt1 first endpoint
-			 * @param pt2 second endpoint
+			 * @param endpt1Ptr first endpoint
+			 * @param endpt2Ptr second endpoint
 			 */
-			Segment(std::shared_ptr<Point> pt1, std::shared_ptr<Point> pt2);
+			Segment(std::shared_ptr<Point> endpt1Ptr, std::shared_ptr<Point> endpt2Ptr);
 
 			//	Disabled constructors and operators
 			Segment(void) = delete;
@@ -83,57 +83,84 @@ namespace geometry {
 			Segment& operator = (const Segment& ) = delete;
 			Segment& operator = (Segment&& ) = delete;
 
-			static void render_(const Point& pt1, const Point& pt2, SegmentType type);
+			static void render_(const Point& endpt1, const Point& endpt2, SegmentType type);
 			
 		public:
 		
-			Segment(SegmentToken token, std::shared_ptr<Point> pt1, std::shared_ptr<Point> pt2,
+			Segment(SegmentToken token, std::shared_ptr<Point> endpt1Ptr, std::shared_ptr<Point> endpt2Ptr,
 					bool endpointsOrdered=false);
 	 
 			~Segment();
 
 			inline unsigned int getIndex() const {
-				return segIdx_;
+				return idx_;
 			}
             inline const std::shared_ptr<Point> getP1() const {
-                return segP1_;
+                return p1_;
             }
             inline const std::shared_ptr<Point> getP2() const {
-                return segP2_;
+                return p2_;
             }
-			
-			void render(SegmentType type = SegmentType::SEGMENT) const;
+            /**Maker function for the segment that will create a shared pointer to the segment so it can be stored in the set
+             * @param endpt1Ptr a reference to a point 1 which will be used to create a segment
+             * @param endpt2Ptr a reference to a point 2 which will be used to create a segment
+             * @return a shared pointer to the segment
+             */
+            static std::shared_ptr<Segment> makeNewSegPtr(std::shared_ptr<Point> endpt1Ptr, std::shared_ptr<Point> endpt2Ptr);
+             /**Maker function that calls the other constructor function and gets the segment on that pointer
+              * @param endpt1Ptr a reference to a point 1 which will be used to create a segment
+              * @param endpt2Ptr a reference to a point 2 which will be used to create a segment
+              * @return the reference to a segment
+             */
+            static Segment& makeNewSeg(std::shared_ptr<Point>  endpt1Ptr, std::shared_ptr<Point>  endpt2Ptr);
+
+            static Segment makeNewTempSeg(std::shared_ptr<Point>  endpt1Ptr, std::shared_ptr<Point>  endpt2Ptr);
+            /**
+             * @return segVect which is a vector of shared pointers to the Segments
+             */
+            static const std::vector<std::shared_ptr<Segment> >& getAllSegments(){
+                return segVect_;
+            }
+            /**Destructor function that clears all segments.
+             */
+            static void clearAllSegments(){
+                segSet_.clear();
+                count_ = 0;
+            }
+            void render(SegmentType type = SegmentType::SEGMENT) const;
+            static void renderCreated(const PointStruct& potentialEndpt1, const PointStruct& potentialEndpt2);
+            static void renderAllSegments();
 
             /**Function that checks if the point is on left of the segment or not
-             *@param pt a point object which has to be checked on its position relative to the segment
+             *@param referencePt a point object which has to be checked on its position relative to the segment
              *@return boolean that tells if the point is on left or not
              */
-			bool isOnLeftSide(const Point& pt) const;
+			bool isOnLeftSide(const Point& referencePt) const;
             /**Function that checks if the point is on left of the segment or not
-             *@param pt a point object which has to be checked on its position relative to the segment
+             *@param referencePtPtr a point object which has to be checked on its position relative to the segment
              *@return boolean that tells if the point is on left or not
              */
-            bool isOnLeftSide(const std::shared_ptr<Point> pt) const;
+            bool isOnLeftSide(const std::shared_ptr<Point> referencePtPtr) const;
         
             /**Function that checks if the point is on left of the segment or not
-             *@param pt a point object which has to be checked on its position relative to the segment
+             *@param potentialPt a point object which has to be checked on its position relative to the segment
              *@return boolean that tells if the point is on left or not
              */
-			bool isOnLeftSide(const PointStruct& pt) const;
+			bool isOnLeftSide(const PointStruct& potentialPt) const;
 
 			/**Function that checks the points of the intersecting segment if they are on opposite sides which will set the basis of intersection
-			 *@param pt1 - a reference to a constant point 1 which has to be checked on its direction to the segment
-			 *@param pt2 - a reference to a constant point 2 which has to be checked on its direction to the segment
+			 *@param endpt1Ptr - a reference to a constant point 1 which has to be checked on its direction to the segment
+			 *@param endpt2Ptr - a reference to a constant point 2 which has to be checked on its direction to the segment
 			 *@return boolean that tells if the 2 points are on the opposite sides of the currSeg
 			 */
-			bool areOnOppositeSides(const std::shared_ptr<Point> pt1, const std::shared_ptr<Point> pt2) const;
+			bool areOnOppositeSides(const std::shared_ptr<Point> endpt1Ptr, const std::shared_ptr<Point> endpt2Ptr) const;
 
 			/**Function that checks the points of the intersecting segment if they are on opposite sides which will set the basis of intersection
-			 *@param pt1 - a reference to a constant point 1 struct which has to be checked on its direction to the segment
-			 *@param pt2 - a reference to a constant point 2 struct which has to be checked on its direction to the segment
+			 *@param potentialEndpt1 - a reference to a constant point 1 struct which has to be checked on its direction to the segment
+			 *@param potentialEndpt2 - a reference to a constant point 2 struct which has to be checked on its direction to the segment
 			 *@return boolean that tells if the 2 points are on the opposite sides of the currSeg
 			 */
-			bool areOnOppositeSides(const PointStruct& pt1, const PointStruct& pt2) const;
+			bool areOnOppositeSides(const PointStruct& potentialEndpt1, const PointStruct& potentialEndpt2) const;
         
 			/**Intersection possible iff:
 			 *  Seg1.pt1 and seg1.pt2 are on different sides of Seg2
@@ -144,18 +171,18 @@ namespace geometry {
 			bool intersects(const Segment& seg) const;
 
 			/**
-			 *@param pt1 - a const reference to point  - part of a possibly intersecting segment
-			 *@param pt2 - a const reference to another point - part of a possibly intersecting segment
+			 *@param endpt1Ptr - a const reference to point  - part of a possibly intersecting segment
+			 *@param endpt2Ptr - a const reference to another point - part of a possibly intersecting segment
 			 *@return boolean that tells if the intersection exists between two segments
 			 */
-			bool intersects(const std::shared_ptr<Point> pt1, const std::shared_ptr<Point> pt2) const;
+			bool intersects(const std::shared_ptr<Point> endpt1Ptr, const std::shared_ptr<Point> endpt2Ptr) const;
 
 			/**
-			 *@param pt1 - a const reference to pointStruct  - part of a possibly intersecting segment
-			 *@param pt2 - a const reference to another pointStruct - part of a possibly intersecting segment
+			 *@param potentialEndpt1 - a const reference to pointStruct  - part of a possibly intersecting segment
+			 *@param potentialEndpt2 - a const reference to another pointStruct - part of a possibly intersecting segment
 			 *@return boolean that tells if the intersection exists between two segments
 			 */
-			bool intersects(const PointStruct& pt1, const PointStruct& pt2) const;
+			bool intersects(const PointStruct& potentialEndpt1, const PointStruct& potentialEndpt2) const;
 
 			/**Function that checks interSeg with the currSeg to see if there is an intersection, if there is pointer to the intersection pt is returned otherwise a null pointer is returned
 			 *@param interSeg A const reference to a segment which is possible candidate of an intersection
@@ -163,35 +190,6 @@ namespace geometry {
 			 */
             std::shared_ptr<PointStruct> findIntersection(const Segment& interSeg);
 
-            /**Maker function for the segment that will create a shared pointer to the segment so it can be stored in the set
-             * @param pt1 a reference to a point 1 which will be used to create a segment
-             * @param pt2 a reference to a point 2 which will be used to create a segment
-             * @return a shared pointer to the segment
-             */
-            static std::shared_ptr<Segment> makeNewSegPtr(std::shared_ptr<Point> pt1, std::shared_ptr<Point> pt2);
-             /**Maker function that calls the other constructor function and gets the segment on that pointer
-              * @param pt1 a reference to a point 1 which will be used to create a segment
-              * @param pt2 a reference to a point 2 which will be used to create a segment
-              * @return the reference to a segment
-             */
-			static Segment& makeNewSeg(std::shared_ptr<Point>  pt1, std::shared_ptr<Point>  pt2);
-
-            static Segment makeNewTempSeg(std::shared_ptr<Point>  pt1, std::shared_ptr<Point>  pt2);
-            /**
-             * @return segVect which is a vector of shared pointers to the Segments
-             */
-			static const std::vector<std::shared_ptr<Segment> >& getAllSegments(){
-				return segVect_;
-			}
-            /**Destructor function that clears all segments.
-             */
-			static void clearAllSegments(){
-				segSet_.clear();
-				count_ = 0;
-			}
-
-			static void renderCreated(const PointStruct& pt1, const PointStruct& pt2);
-			static void renderAllSegments();
 	};
 	
     /**

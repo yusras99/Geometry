@@ -151,7 +151,7 @@ namespace geometry{
 			
 		private:
 		
-			const std::vector<std::shared_ptr<Segment> >& vect_;
+			const std::vector<std::shared_ptr<Segment> >& potentialInterSegVect_;
             /**
              *This function creates a set of type InterQueueEvent, which is the event Queue. It uses  a vector of shared pointers to the segments whose endpoints & intersection points need to be added in the queue
              *@return a vector of shared pointers to the the points of queue of type InterQueueEvent
@@ -164,42 +164,40 @@ namespace geometry{
              */
              void addEvent(std::set<std::shared_ptr<geometry::InterQueueEvent> , compareEvent>& eventQueue,std::shared_ptr<IntersectionPointStruct> currInterPt);
              /**IntersectionChecking function that sees if the the two segments passed to it intersect or not. If they do the intersection point is added to the eventQueue and the smartIntersectVect 
-              *@param currentSeg - the segment which will be checked for intersection
-              *@param compareSeg  - neighbor of current seg which will be checked for intersection with currentSeg
-              *@param segIntersectionCheckedVec - the vector that will have a pair of shared pointers to segments that have been checked for intersection
+              *@param currSegOfEvent - the segment which will be checked for intersection
+              *@param compareSeg  - neighbor of current seg which will be checked for intersection with currSegOfEvent
+              *@param comparedSegForInterVec - the vector that will have a pair of shared pointers to segments that have been checked for intersection
               *@param eventQueue  - the queue that holds all points that need to be processed
               *@param smartIntersectVect - Vector that contains all intersection points
               *@param prioritySegSet - The T structure that contains all segments which will be checked for intersection
               */
-             void checkSegIntersection(std::shared_ptr<Segment> currentSeg,
+             void checkSegIntersection(std::shared_ptr<Segment> currSegOfEvent,
                                  std::shared_ptr<Segment> compareSeg,
-                                 std::vector< std::pair<std::shared_ptr<Segment>,std::shared_ptr<Segment> > >& segIntersectionCheckedVec,
+                                 std::vector< std::pair<std::shared_ptr<Segment>,std::shared_ptr<Segment> > >& comparedSegForInterVec,
                                  std::set<std::shared_ptr<InterQueueEvent> , compareEvent>& eventQueue,  std::vector<std::shared_ptr<PointStruct> >& smartIntersectVect,
                                  std::set< std::shared_ptr<Segment>, compareSegment>& prioritySegSet);
             /**A function to check the neighbors of the segment which is just added in the T structure to see if they intersect with the seg that is just inserted  or not.
              *@param prioritySegSet - The T structure that contains all segments which will be checked for intersection
-             *@param iteraratorToCurrentSeg - the iterator to the segment that is just added
-             *@param segIntersectionCheckedVec - the vector that will have a pair of shared pointers to segments that have been checked for intersection
+             *@param currSegOfEventItr - the iterator to the segment that is just added
+             *@param comparedSegForInterVec - the vector that will have a pair of shared pointers to segments that have been checked for intersection
              *@param eventQueue  - the queue that holds all points that need to be processed
              *@param smartIntersectVect - Vector that contains all intersection points
-             *@param compareSeg  - neighbor of current seg which will be checked for intersection with currentSeg
              */
              void postInsertSegCheck(std::set<std::shared_ptr<Segment>, compareSegment>& prioritySegSet,
-                                      std::set<std::shared_ptr<Segment>, compareSegment>::iterator iteraratorToCurrentSeg,
-                                      std::vector< std::pair<std::shared_ptr<Segment>,std::shared_ptr<Segment> > >&segIntersectionCheckedVec,
+                                      std::set<std::shared_ptr<Segment>, compareSegment>::iterator currSegOfEventItr,
+                                      std::vector< std::pair<std::shared_ptr<Segment>,std::shared_ptr<Segment> > >&comparedSegForInterVec,
                                       std::set<std::shared_ptr<InterQueueEvent> , compareEvent>& eventQueue,
                                       std::vector<std::shared_ptr<PointStruct> >& smartIntersectVect);
             /**A function to remove the segment which is being processed right not and check if its left and right neighbors intersect with each other or not.
              *@param prioritySegSet - The T structure that contains all segments which will be checked for intersection
-             *@param iteraratorToCurrentSeg - the iterator to the segment that is just added
-             *@param segIntersectionCheckedVec - the vector that will have a pair of shared pointers to segments that have been checked for intersection
+             *@param currSegOfEventItr - the iterator to the segment that is just added
+             *@param comparedSegForInterVec - the vector that will have a pair of shared pointers to segments that have been checked for intersection
              *@param eventQueue  - the queue that holds all points that need to be processed
              *@param smartIntersectVect - Vector that contains all intersection points
-             *@param compareSeg  - neighbor of current seg which will be checked for intersection with currentSeg
              */
             void removeSeg(std::set<std::shared_ptr<Segment>, compareSegment>& prioritySegSet,
-                                          std::set<std::shared_ptr<Segment>, compareSegment>::iterator iteraratorToCurrentSeg,
-                                          std::vector< std::pair<std::shared_ptr<Segment>,std::shared_ptr<Segment> > >&segIntersectionCheckedVec,
+                                          std::set<std::shared_ptr<Segment>, compareSegment>::iterator currSegOfEventItr,
+                                          std::vector< std::pair<std::shared_ptr<Segment>,std::shared_ptr<Segment> > >&comparedSegForInterVec,
                                           std::set<std::shared_ptr<InterQueueEvent> , compareEvent>& eventQueue,
                                           std::vector<std::shared_ptr<PointStruct> >& smartIntersectVect);
             /**Produces a string (for file or terminal output) giving the current content of
