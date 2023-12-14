@@ -44,10 +44,10 @@ Segment::Segment(SegmentToken token, shared_ptr<Point> endpt1Ptr, shared_ptr<Poi
 {
 	(void) token;
 }
-Segment::Segment(shared_ptr<Point>  endpt1Ptr, shared_ptr<Point>  endpt2Ptr)
+Segment::Segment(shared_ptr<Point>  endpt1Ptr, shared_ptr<Point>  endpt2Ptr, bool endpointsOrdered)
     :
-		p1_((endpt1Ptr->getY() > endpt2Ptr->getY()) || ((endpt1Ptr->getY() == endpt2Ptr->getY()) && (endpt1Ptr->getX() < endpt2Ptr->getX())) ? endpt1Ptr :  endpt2Ptr),
-		p2_((endpt1Ptr->getY() > endpt2Ptr->getY()) || ((endpt1Ptr->getY() == endpt2Ptr->getY()) && (endpt1Ptr->getX() < endpt2Ptr->getX())) ? endpt2Ptr :  endpt1Ptr),
+		p1_(endpointsOrdered ? endpt1Ptr : (endpt1Ptr->getY() > endpt2Ptr->getY()) || ((endpt1Ptr->getY() == endpt2Ptr->getY()) && (endpt1Ptr->getX() < endpt2Ptr->getX())) ? endpt1Ptr :  endpt2Ptr),
+		p2_(endpointsOrdered ? endpt2Ptr : (endpt1Ptr->getY() > endpt2Ptr->getY()) || ((endpt1Ptr->getY() == endpt2Ptr->getY()) && (endpt1Ptr->getX() < endpt2Ptr->getX())) ? endpt2Ptr :  endpt1Ptr),
         idx_(UINT_MAX)
 {
 }

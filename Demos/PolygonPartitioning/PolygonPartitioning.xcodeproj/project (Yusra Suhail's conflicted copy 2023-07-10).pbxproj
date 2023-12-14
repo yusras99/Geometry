@@ -1,0 +1,502 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		165EA3382A53D9D10051C6C3 /* ConvexPolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 165EA3362A53D9D10051C6C3 /* ConvexPolygon.cpp */; };
+		165EA33B2A53D9E30051C6C3 /* Triangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 165EA3392A53D9E30051C6C3 /* Triangle.cpp */; };
+		16D371D12A2A4CC40082B205 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16D371D02A2A4CC40082B205 /* main.cpp */; };
+		16D371D92A2A4D250082B205 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16D371D02A2A4CC40082B205 /* main.cpp */; };
+		16D371E22A2A4D340082B205 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16D371D02A2A4CC40082B205 /* main.cpp */; };
+		16D371EF2A2A4DBF0082B205 /* Point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16D371EB2A2A4DBF0082B205 /* Point.cpp */; };
+		16D371F02A2A4DBF0082B205 /* Segment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16D371EC2A2A4DBF0082B205 /* Segment.cpp */; };
+		16D371F12A2A4DBF0082B205 /* GeometryLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16D371ED2A2A4DBF0082B205 /* GeometryLib.cpp */; };
+		6EF464BB2A4A0B0600CE0CEC /* IntersectionQuery.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16D371EA2A2A4DBF0082B205 /* IntersectionQuery.cpp */; };
+		6EF464C12A4BDA5600CE0CEC /* Vertex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EF464BF2A4BDA5600CE0CEC /* Vertex.cpp */; };
+		6EF464C42A4CE3AD00CE0CEC /* Polygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EF464C22A4CE3AD00CE0CEC /* Polygon.cpp */; };
+		6EF464C72A4CEB2A00CE0CEC /* Edge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EF464C52A4CEB2A00CE0CEC /* Edge.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		16D371CB2A2A4CC40082B205 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		16D371DB2A2A4D250082B205 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		16D371E42A2A4D340082B205 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		165EA3362A53D9D10051C6C3 /* ConvexPolygon.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ConvexPolygon.cpp; sourceTree = "<group>"; };
+		165EA3372A53D9D10051C6C3 /* ConvexPolygon.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ConvexPolygon.hpp; sourceTree = "<group>"; };
+		165EA3392A53D9E30051C6C3 /* Triangle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Triangle.cpp; sourceTree = "<group>"; };
+		165EA33A2A53D9E30051C6C3 /* Triangle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Triangle.hpp; sourceTree = "<group>"; };
+		16D371CD2A2A4CC40082B205 /* Polygon-Source */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Polygon-Source"; sourceTree = BUILT_PRODUCTS_DIR; };
+		16D371D02A2A4CC40082B205 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		16D371DF2A2A4D250082B205 /* Polygon-StaticLib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Polygon-StaticLib"; sourceTree = BUILT_PRODUCTS_DIR; };
+		16D371E82A2A4D340082B205 /* Polygon-DynamicLib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Polygon-DynamicLib"; sourceTree = BUILT_PRODUCTS_DIR; };
+		16D371EA2A2A4DBF0082B205 /* IntersectionQuery.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = IntersectionQuery.cpp; path = Library/src/IntersectionQuery.cpp; sourceTree = GeometryLib; };
+		16D371EB2A2A4DBF0082B205 /* Point.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Point.cpp; path = Library/src/Point.cpp; sourceTree = GeometryLib; };
+		16D371EC2A2A4DBF0082B205 /* Segment.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Segment.cpp; path = Library/src/Segment.cpp; sourceTree = GeometryLib; };
+		16D371ED2A2A4DBF0082B205 /* GeometryLib.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = GeometryLib.cpp; path = Library/src/GeometryLib.cpp; sourceTree = GeometryLib; };
+		16D371F32A2A4DEC0082B205 /* Segment.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Segment.hpp; sourceTree = "<group>"; };
+		16D371F42A2A4DEC0082B205 /* Point.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Point.hpp; sourceTree = "<group>"; };
+		16D371F52A2A4DEC0082B205 /* IntersectionQuery.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = IntersectionQuery.hpp; sourceTree = "<group>"; };
+		16D371F62A2A4DEC0082B205 /* Geometry.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Geometry.hpp; sourceTree = "<group>"; };
+		6EF464BF2A4BDA5600CE0CEC /* Vertex.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Vertex.cpp; sourceTree = "<group>"; };
+		6EF464C02A4BDA5600CE0CEC /* Vertex.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Vertex.hpp; sourceTree = "<group>"; };
+		6EF464C22A4CE3AD00CE0CEC /* Polygon.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Polygon.cpp; sourceTree = "<group>"; };
+		6EF464C32A4CE3AD00CE0CEC /* Polygon.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Polygon.hpp; sourceTree = "<group>"; };
+		6EF464C52A4CEB2A00CE0CEC /* Edge.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Edge.cpp; sourceTree = "<group>"; };
+		6EF464C62A4CEB2A00CE0CEC /* Edge.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Edge.hpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		16D371CA2A2A4CC40082B205 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		16D371DA2A2A4D250082B205 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		16D371E32A2A4D340082B205 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		16D371C42A2A4CC40082B205 = {
+			isa = PBXGroup;
+			children = (
+				16D371F22A2A4DEC0082B205 /* include */,
+				16D371E92A2A4DBF0082B205 /* src */,
+				16D371CF2A2A4CC40082B205 /* PolygonPartitioning */,
+				16D371CE2A2A4CC40082B205 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		16D371CE2A2A4CC40082B205 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				16D371CD2A2A4CC40082B205 /* Polygon-Source */,
+				16D371DF2A2A4D250082B205 /* Polygon-StaticLib */,
+				16D371E82A2A4D340082B205 /* Polygon-DynamicLib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		16D371CF2A2A4CC40082B205 /* PolygonPartitioning */ = {
+			isa = PBXGroup;
+			children = (
+				16D371D02A2A4CC40082B205 /* main.cpp */,
+			);
+			path = PolygonPartitioning;
+			sourceTree = "<group>";
+		};
+		16D371E92A2A4DBF0082B205 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				6EF464C52A4CEB2A00CE0CEC /* Edge.cpp */,
+				16D371EA2A2A4DBF0082B205 /* IntersectionQuery.cpp */,
+				6EF464C22A4CE3AD00CE0CEC /* Polygon.cpp */,
+				165EA3362A53D9D10051C6C3 /* ConvexPolygon.cpp */,
+				165EA3392A53D9E30051C6C3 /* Triangle.cpp */,
+				16D371EB2A2A4DBF0082B205 /* Point.cpp */,
+				16D371EC2A2A4DBF0082B205 /* Segment.cpp */,
+				16D371ED2A2A4DBF0082B205 /* GeometryLib.cpp */,
+				6EF464BF2A4BDA5600CE0CEC /* Vertex.cpp */,
+			);
+			name = src;
+			path = Library/src;
+			sourceTree = GeometryLib;
+		};
+		16D371F22A2A4DEC0082B205 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				6EF464C02A4BDA5600CE0CEC /* Vertex.hpp */,
+				6EF464C32A4CE3AD00CE0CEC /* Polygon.hpp */,
+				165EA3372A53D9D10051C6C3 /* ConvexPolygon.hpp */,
+				165EA33A2A53D9E30051C6C3 /* Triangle.hpp */,
+				16D371F32A2A4DEC0082B205 /* Segment.hpp */,
+				16D371F42A2A4DEC0082B205 /* Point.hpp */,
+				16D371F52A2A4DEC0082B205 /* IntersectionQuery.hpp */,
+				16D371F62A2A4DEC0082B205 /* Geometry.hpp */,
+				6EF464C62A4CEB2A00CE0CEC /* Edge.hpp */,
+			);
+			name = include;
+			path = ../../Library/include;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		16D371CC2A2A4CC40082B205 /* Polygon-Source */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 16D371D42A2A4CC40082B205 /* Build configuration list for PBXNativeTarget "Polygon-Source" */;
+			buildPhases = (
+				16D371C92A2A4CC40082B205 /* Sources */,
+				16D371CA2A2A4CC40082B205 /* Frameworks */,
+				16D371CB2A2A4CC40082B205 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Polygon-Source";
+			productName = PolygonPartitioning;
+			productReference = 16D371CD2A2A4CC40082B205 /* Polygon-Source */;
+			productType = "com.apple.product-type.tool";
+		};
+		16D371D72A2A4D250082B205 /* Polygon-StaticLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 16D371DC2A2A4D250082B205 /* Build configuration list for PBXNativeTarget "Polygon-StaticLib" */;
+			buildPhases = (
+				16D371D82A2A4D250082B205 /* Sources */,
+				16D371DA2A2A4D250082B205 /* Frameworks */,
+				16D371DB2A2A4D250082B205 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Polygon-StaticLib";
+			productName = PolygonPartitioning;
+			productReference = 16D371DF2A2A4D250082B205 /* Polygon-StaticLib */;
+			productType = "com.apple.product-type.tool";
+		};
+		16D371E02A2A4D340082B205 /* Polygon-DynamicLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 16D371E52A2A4D340082B205 /* Build configuration list for PBXNativeTarget "Polygon-DynamicLib" */;
+			buildPhases = (
+				16D371E12A2A4D340082B205 /* Sources */,
+				16D371E32A2A4D340082B205 /* Frameworks */,
+				16D371E42A2A4D340082B205 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Polygon-DynamicLib";
+			productName = PolygonPartitioning;
+			productReference = 16D371E82A2A4D340082B205 /* Polygon-DynamicLib */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		16D371C52A2A4CC40082B205 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					16D371CC2A2A4CC40082B205 = {
+						CreatedOnToolsVersion = 14.3;
+					};
+				};
+			};
+			buildConfigurationList = 16D371C82A2A4CC40082B205 /* Build configuration list for PBXProject "PolygonPartitioning" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 16D371C42A2A4CC40082B205;
+			productRefGroup = 16D371CE2A2A4CC40082B205 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				16D371CC2A2A4CC40082B205 /* Polygon-Source */,
+				16D371D72A2A4D250082B205 /* Polygon-StaticLib */,
+				16D371E02A2A4D340082B205 /* Polygon-DynamicLib */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		16D371C92A2A4CC40082B205 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				165EA3382A53D9D10051C6C3 /* ConvexPolygon.cpp in Sources */,
+				16D371F12A2A4DBF0082B205 /* GeometryLib.cpp in Sources */,
+				6EF464C42A4CE3AD00CE0CEC /* Polygon.cpp in Sources */,
+				165EA33B2A53D9E30051C6C3 /* Triangle.cpp in Sources */,
+				16D371EF2A2A4DBF0082B205 /* Point.cpp in Sources */,
+				16D371D12A2A4CC40082B205 /* main.cpp in Sources */,
+				6EF464C12A4BDA5600CE0CEC /* Vertex.cpp in Sources */,
+				16D371F02A2A4DBF0082B205 /* Segment.cpp in Sources */,
+				6EF464C72A4CEB2A00CE0CEC /* Edge.cpp in Sources */,
+				6EF464BB2A4A0B0600CE0CEC /* IntersectionQuery.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		16D371D82A2A4D250082B205 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				16D371D92A2A4D250082B205 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		16D371E12A2A4D340082B205 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				16D371E22A2A4D340082B205 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		16D371D22A2A4CC40082B205 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		16D371D32A2A4CC40082B205 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		16D371D52A2A4CC40082B205 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2APN5RACH2;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		16D371D62A2A4CC40082B205 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2APN5RACH2;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		16D371DD2A2A4D250082B205 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 38H6W4VN4A;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		16D371DE2A2A4D250082B205 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 38H6W4VN4A;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		16D371E62A2A4D340082B205 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 38H6W4VN4A;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		16D371E72A2A4D340082B205 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 38H6W4VN4A;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		16D371C82A2A4CC40082B205 /* Build configuration list for PBXProject "PolygonPartitioning" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				16D371D22A2A4CC40082B205 /* Debug */,
+				16D371D32A2A4CC40082B205 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		16D371D42A2A4CC40082B205 /* Build configuration list for PBXNativeTarget "Polygon-Source" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				16D371D52A2A4CC40082B205 /* Debug */,
+				16D371D62A2A4CC40082B205 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		16D371DC2A2A4D250082B205 /* Build configuration list for PBXNativeTarget "Polygon-StaticLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				16D371DD2A2A4D250082B205 /* Debug */,
+				16D371DE2A2A4D250082B205 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		16D371E52A2A4D340082B205 /* Build configuration list for PBXNativeTarget "Polygon-DynamicLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				16D371E62A2A4D340082B205 /* Debug */,
+				16D371E72A2A4D340082B205 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 16D371C52A2A4CC40082B205 /* Project object */;
+}

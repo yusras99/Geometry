@@ -19,7 +19,7 @@ using namespace geometry;
 
 //Static variables redeclared in source code
 set<shared_ptr<Point> > Point::pointSet_;
-vector<shared_ptr<Point> > Point::pointVect_;
+//vector<shared_ptr<Point> > Point::pointVect_;
 unsigned int Point::count_ = 0;
 float Point::pointDiskRadius_;
 GLuint Point::diskList_ = 0;

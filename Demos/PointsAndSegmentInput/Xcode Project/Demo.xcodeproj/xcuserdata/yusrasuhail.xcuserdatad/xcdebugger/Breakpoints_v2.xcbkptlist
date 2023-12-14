@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "6FAA406B-6C51-4F17-A39B-D95BD3FE4E33"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "746F292A-6CD4-47BD-8C0E-A2B0F2255BCF"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../Library/include/IntersectionQuery.hpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "operator()(p1, p2)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8205194A-4D87-439D-9485-2EFF6A62FBD6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../Library/src/IntersectionQuery.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
+            landmarkName = "IntersectionQuery::findAllIntersectionsSmart()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "8205194A-4D87-439D-9485-2EFF6A62FBD6 - 398a4aa2192f8f5c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "geometry::IntersectionQuery::findAllIntersectionsSmart()"
+                  moduleName = "Point Input - source"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yusrasuhail/Dropbox/csc491-Yusra-Suhail/Geometry/Library/src/IntersectionQuery.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "205"
+                  endingLineNumber = "205"
+                  offsetFromSymbolStart = "1896">
+               </Location>
+               <Location
+                  uuid = "8205194A-4D87-439D-9485-2EFF6A62FBD6 - 398a4aa2192f8f5c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "geometry::IntersectionQuery::findAllIntersectionsSmart()"
+                  moduleName = "Point Input - source"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yusrasuhail/Dropbox/csc491-Yusra-Suhail/Geometry/Library/src/IntersectionQuery.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "205"
+                  endingLineNumber = "205"
+                  offsetFromSymbolStart = "1772">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

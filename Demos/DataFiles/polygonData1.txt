@@ -1,0 +1,47 @@
+#===============================================
+#	Sample data file
+#===============================================
+
+#	Blank lines are skipped.
+#	Everything following a # sign is a comment, ignored
+
+
+#---------------------------------
+#   Section 1: World Bounds
+#---------------------------------
+XMIN = -100
+XMAX = +100
+YMIN = -100
+YMAX = +100
+
+#---------------------------------
+#   Section 2: List of Vertices
+#---------------------------------
+
+#	Some defined using the 'p' label, just 'cause (and to test the reader)
+v -25 45.5		#	index 0
+v 51.3 26		#	index 1
+v 38.8 -60		#	index 2
+v 6 -60			#	index 3
+v 8 11.2		#	index 4
+v -20 0			#	index 5
+v -20 -40		#	index 6
+v -45 -60		#	index 7
+v -45 19		#	index 8
+#v 0 0 			#	index 9
+#v 65.8 40		#	index 10
+#---------------------------------
+#   Section 3: List of Edges
+#---------------------------------
+#edge	startVert	endVert
+e	0		1
+e	1		2
+e	2		3
+e	3		4
+e	4		5
+e	5		6
+e	6		7
+e	7		8
+e	8		0
+
+f 0 1 2 3 4 5 6 7 8 

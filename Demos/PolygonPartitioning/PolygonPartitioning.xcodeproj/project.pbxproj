@@ -7,13 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1643A7842A6A3A0D0041C022 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1643A7822A6A3A0C0041C022 /* GLUT.framework */; };
+		1643A7852A6A3A0D0041C022 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1643A7832A6A3A0C0041C022 /* OpenGL.framework */; };
+		1643A7862A6A3A2A0041C022 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1643A7822A6A3A0C0041C022 /* GLUT.framework */; };
+		1643A7872A6A3A2A0041C022 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1643A7832A6A3A0C0041C022 /* OpenGL.framework */; };
+		1643A7882A6A3A370041C022 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1643A7822A6A3A0C0041C022 /* GLUT.framework */; };
+		1643A7892A6A3A370041C022 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1643A7832A6A3A0C0041C022 /* OpenGL.framework */; };
+		165EA3382A53D9D10051C6C3 /* ConvexPolygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 165EA3362A53D9D10051C6C3 /* ConvexPolygon.cpp */; };
+		165EA33B2A53D9E30051C6C3 /* Triangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 165EA3392A53D9E30051C6C3 /* Triangle.cpp */; };
 		16D371D12A2A4CC40082B205 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16D371D02A2A4CC40082B205 /* main.cpp */; };
 		16D371D92A2A4D250082B205 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16D371D02A2A4CC40082B205 /* main.cpp */; };
 		16D371E22A2A4D340082B205 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16D371D02A2A4CC40082B205 /* main.cpp */; };
-		16D371EE2A2A4DBF0082B205 /* IntersectionQuery.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16D371EA2A2A4DBF0082B205 /* IntersectionQuery.cpp */; };
 		16D371EF2A2A4DBF0082B205 /* Point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16D371EB2A2A4DBF0082B205 /* Point.cpp */; };
 		16D371F02A2A4DBF0082B205 /* Segment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16D371EC2A2A4DBF0082B205 /* Segment.cpp */; };
-		16D371F12A2A4DBF0082B205 /* GeometryLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16D371ED2A2A4DBF0082B205 /* GeometryLib.cpp */; };
+		6EDFB0112A6A168100C5B7DE /* dataFileIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EDFB0102A6A168100C5B7DE /* dataFileIO.cpp */; };
+		6EDFB0122A6A168C00C5B7DE /* dataFileIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EDFB0102A6A168100C5B7DE /* dataFileIO.cpp */; };
+		6EDFB0132A6A168C00C5B7DE /* dataFileIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EDFB0102A6A168100C5B7DE /* dataFileIO.cpp */; };
+		6EF464BB2A4A0B0600CE0CEC /* IntersectionQuery.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16D371EA2A2A4DBF0082B205 /* IntersectionQuery.cpp */; };
+		6EF464C12A4BDA5600CE0CEC /* Vertex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EF464BF2A4BDA5600CE0CEC /* Vertex.cpp */; };
+		6EF464C42A4CE3AD00CE0CEC /* Polygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EF464C22A4CE3AD00CE0CEC /* Polygon.cpp */; };
+		6EF464C72A4CEB2A00CE0CEC /* Edge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EF464C52A4CEB2A00CE0CEC /* Edge.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,18 +60,32 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1643A7802A6A39690041C022 /* World.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = World.hpp; sourceTree = "<group>"; };
+		1643A7822A6A3A0C0041C022 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		1643A7832A6A3A0C0041C022 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		165EA3362A53D9D10051C6C3 /* ConvexPolygon.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ConvexPolygon.cpp; sourceTree = "<group>"; };
+		165EA3372A53D9D10051C6C3 /* ConvexPolygon.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ConvexPolygon.hpp; sourceTree = "<group>"; };
+		165EA3392A53D9E30051C6C3 /* Triangle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Triangle.cpp; sourceTree = "<group>"; };
+		165EA33A2A53D9E30051C6C3 /* Triangle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Triangle.hpp; sourceTree = "<group>"; };
 		16D371CD2A2A4CC40082B205 /* Polygon-Source */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Polygon-Source"; sourceTree = BUILT_PRODUCTS_DIR; };
 		16D371D02A2A4CC40082B205 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		16D371DF2A2A4D250082B205 /* Polygon-StaticLib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Polygon-StaticLib"; sourceTree = BUILT_PRODUCTS_DIR; };
 		16D371E82A2A4D340082B205 /* Polygon-DynamicLib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Polygon-DynamicLib"; sourceTree = BUILT_PRODUCTS_DIR; };
-		16D371EA2A2A4DBF0082B205 /* IntersectionQuery.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IntersectionQuery.cpp; sourceTree = "<group>"; };
-		16D371EB2A2A4DBF0082B205 /* Point.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Point.cpp; sourceTree = "<group>"; };
-		16D371EC2A2A4DBF0082B205 /* Segment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Segment.cpp; sourceTree = "<group>"; };
-		16D371ED2A2A4DBF0082B205 /* GeometryLib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GeometryLib.cpp; sourceTree = "<group>"; };
+		16D371EA2A2A4DBF0082B205 /* IntersectionQuery.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = IntersectionQuery.cpp; path = Library/src/IntersectionQuery.cpp; sourceTree = GeometryLib; };
+		16D371EB2A2A4DBF0082B205 /* Point.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Point.cpp; path = Library/src/Point.cpp; sourceTree = GeometryLib; };
+		16D371EC2A2A4DBF0082B205 /* Segment.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Segment.cpp; path = Library/src/Segment.cpp; sourceTree = GeometryLib; };
 		16D371F32A2A4DEC0082B205 /* Segment.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Segment.hpp; sourceTree = "<group>"; };
 		16D371F42A2A4DEC0082B205 /* Point.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Point.hpp; sourceTree = "<group>"; };
 		16D371F52A2A4DEC0082B205 /* IntersectionQuery.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = IntersectionQuery.hpp; sourceTree = "<group>"; };
 		16D371F62A2A4DEC0082B205 /* Geometry.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Geometry.hpp; sourceTree = "<group>"; };
+		6EDFB0102A6A168100C5B7DE /* dataFileIO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dataFileIO.cpp; path = ../../PointsAndSegmentInput/Code/dataFileIO.cpp; sourceTree = "<group>"; };
+		6EDFB0142A6A16A500C5B7DE /* dataFileIO.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = dataFileIO.hpp; sourceTree = "<group>"; };
+		6EF464BF2A4BDA5600CE0CEC /* Vertex.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Vertex.cpp; sourceTree = "<group>"; };
+		6EF464C02A4BDA5600CE0CEC /* Vertex.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Vertex.hpp; sourceTree = "<group>"; };
+		6EF464C22A4CE3AD00CE0CEC /* Polygon.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Polygon.cpp; sourceTree = "<group>"; };
+		6EF464C32A4CE3AD00CE0CEC /* Polygon.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Polygon.hpp; sourceTree = "<group>"; };
+		6EF464C52A4CEB2A00CE0CEC /* Edge.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Edge.cpp; sourceTree = "<group>"; };
+		6EF464C62A4CEB2A00CE0CEC /* Edge.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Edge.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +93,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1643A7842A6A3A0D0041C022 /* GLUT.framework in Frameworks */,
+				1643A7852A6A3A0D0041C022 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +102,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1643A7862A6A3A2A0041C022 /* GLUT.framework in Frameworks */,
+				1643A7872A6A3A2A0041C022 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,12 +111,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1643A7882A6A3A370041C022 /* GLUT.framework in Frameworks */,
+				1643A7892A6A3A370041C022 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1643A7812A6A3A0C0041C022 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1643A7822A6A3A0C0041C022 /* GLUT.framework */,
+				1643A7832A6A3A0C0041C022 /* OpenGL.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		16D371C42A2A4CC40082B205 = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +135,7 @@
 				16D371E92A2A4DBF0082B205 /* src */,
 				16D371CF2A2A4CC40082B205 /* PolygonPartitioning */,
 				16D371CE2A2A4CC40082B205 /* Products */,
+				1643A7812A6A3A0C0041C022 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -109,7 +152,10 @@
 		16D371CF2A2A4CC40082B205 /* PolygonPartitioning */ = {
 			isa = PBXGroup;
 			children = (
+				1643A7802A6A39690041C022 /* World.hpp */,
 				16D371D02A2A4CC40082B205 /* main.cpp */,
+				6EDFB0102A6A168100C5B7DE /* dataFileIO.cpp */,
+				6EDFB0142A6A16A500C5B7DE /* dataFileIO.hpp */,
 			);
 			path = PolygonPartitioning;
 			sourceTree = "<group>";
@@ -117,10 +163,14 @@
 		16D371E92A2A4DBF0082B205 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				6EF464C22A4CE3AD00CE0CEC /* Polygon.cpp */,
+				165EA3362A53D9D10051C6C3 /* ConvexPolygon.cpp */,
+				165EA3392A53D9E30051C6C3 /* Triangle.cpp */,
+				6EF464BF2A4BDA5600CE0CEC /* Vertex.cpp */,
+				6EF464C52A4CEB2A00CE0CEC /* Edge.cpp */,
 				16D371EA2A2A4DBF0082B205 /* IntersectionQuery.cpp */,
 				16D371EB2A2A4DBF0082B205 /* Point.cpp */,
 				16D371EC2A2A4DBF0082B205 /* Segment.cpp */,
-				16D371ED2A2A4DBF0082B205 /* GeometryLib.cpp */,
 			);
 			name = src;
 			path = Library/src;
@@ -129,14 +179,19 @@
 		16D371F22A2A4DEC0082B205 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				6EF464C32A4CE3AD00CE0CEC /* Polygon.hpp */,
+				165EA3372A53D9D10051C6C3 /* ConvexPolygon.hpp */,
+				165EA33A2A53D9E30051C6C3 /* Triangle.hpp */,
+				6EF464C02A4BDA5600CE0CEC /* Vertex.hpp */,
+				6EF464C62A4CEB2A00CE0CEC /* Edge.hpp */,
 				16D371F32A2A4DEC0082B205 /* Segment.hpp */,
 				16D371F42A2A4DEC0082B205 /* Point.hpp */,
 				16D371F52A2A4DEC0082B205 /* IntersectionQuery.hpp */,
 				16D371F62A2A4DEC0082B205 /* Geometry.hpp */,
 			);
 			name = include;
-			path = ../../Library/include;
-			sourceTree = "<group>";
+			path = Library/include;
+			sourceTree = GeometryLib;
 		};
 /* End PBXGroup section */
 
@@ -231,11 +286,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16D371F12A2A4DBF0082B205 /* GeometryLib.cpp in Sources */,
+				165EA3382A53D9D10051C6C3 /* ConvexPolygon.cpp in Sources */,
+				6EF464C42A4CE3AD00CE0CEC /* Polygon.cpp in Sources */,
+				165EA33B2A53D9E30051C6C3 /* Triangle.cpp in Sources */,
 				16D371EF2A2A4DBF0082B205 /* Point.cpp in Sources */,
 				16D371D12A2A4CC40082B205 /* main.cpp in Sources */,
-				16D371EE2A2A4DBF0082B205 /* IntersectionQuery.cpp in Sources */,
+				6EF464C12A4BDA5600CE0CEC /* Vertex.cpp in Sources */,
+				6EDFB0112A6A168100C5B7DE /* dataFileIO.cpp in Sources */,
 				16D371F02A2A4DBF0082B205 /* Segment.cpp in Sources */,
+				6EF464C72A4CEB2A00CE0CEC /* Edge.cpp in Sources */,
+				6EF464BB2A4A0B0600CE0CEC /* IntersectionQuery.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,6 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				16D371D92A2A4D250082B205 /* main.cpp in Sources */,
+				6EDFB0132A6A168C00C5B7DE /* dataFileIO.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,6 +313,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				16D371E22A2A4D340082B205 /* main.cpp in Sources */,
+				6EDFB0122A6A168C00C5B7DE /* dataFileIO.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,6 +365,7 @@
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
@@ -355,6 +418,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;

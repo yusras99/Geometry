@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "4AE575F6-D323-4355-BDDB-A60F71C3454D"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5598555F-BF01-4E5C-9CB3-584433D003E8"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../Library/src/Segment.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
+            landmarkName = "Segment::findIntersection(interSeg)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "86125DE8-6FE3-4990-BB34-B685F29DBD02"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../Library/src/IntersectionQuery.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
+            landmarkName = "IntersectionQuery::findAllIntersectionsSmart()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "86125DE8-6FE3-4990-BB34-B685F29DBD02 - 267a30186261ae13"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "geometry::IntersectionQuery::findAllIntersectionsSmart()"
+                  moduleName = "Point Input - source"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jyh/Library/CloudStorage/Dropbox/Developer/csc491-Yusra-Suhail/Geometry/Library/src/IntersectionQuery.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "234"
+                  endingLineNumber = "234"
+                  offsetFromSymbolStart = "2937">
+               </Location>
+               <Location
+                  uuid = "86125DE8-6FE3-4990-BB34-B685F29DBD02 - 267a30186261ae13"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "geometry::IntersectionQuery::findAllIntersectionsSmart()"
+                  moduleName = "Point Input - source"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jyh/Library/CloudStorage/Dropbox/Developer/csc491-Yusra-Suhail/Geometry/Library/src/IntersectionQuery.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "234"
+                  endingLineNumber = "234"
+                  offsetFromSymbolStart = "2916">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CE135DFC-EF90-403C-B555-2F1DF1F87A35"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../Library/src/IntersectionQuery.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
+            landmarkName = "IntersectionQuery::findAllIntersectionsSmart()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9756E32D-51D5-4975-8C96-0BC4F3105216"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../Library/include/IntersectionQuery.hpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "operator()(s1, s2)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9756E32D-51D5-4975-8C96-0BC4F3105216 - 1bf1d5d48c01004f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "geometry::compareSegment::operator()(std::__1::shared_ptr&lt;geometry::Segment&gt;, std::__1::shared_ptr&lt;geometry::Segment&gt;) const"
+                  moduleName = "Point Input - source"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jyh/Library/CloudStorage/Dropbox/Developer/csc491-Yusra-Suhail/Geometry/Library/include/IntersectionQuery.hpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "123"
+                  endingLineNumber = "123"
+                  offsetFromSymbolStart = "1146">
+               </Location>
+               <Location
+                  uuid = "9756E32D-51D5-4975-8C96-0BC4F3105216 - 1bf1d5d48c01004f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "geometry::compareSegment::operator()(std::__1::shared_ptr&lt;geometry::Segment&gt;, std::__1::shared_ptr&lt;geometry::Segment&gt;) const"
+                  moduleName = "Point Input - source"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jyh/Library/CloudStorage/Dropbox/Developer/csc491-Yusra-Suhail/Geometry/Library/include/IntersectionQuery.hpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "123"
+                  endingLineNumber = "123"
+                  offsetFromSymbolStart = "1122">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FAA252CE-3498-4FF6-8277-24E56C1D3D60"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../Library/include/IntersectionQuery.hpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "operator()(s1, s2)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "84E17910-C19E-4881-B6D9-3F413CB1C4B6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../Library/include/IntersectionQuery.hpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "operator()(s1, s2)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "438A92A7-F16A-4A05-99DC-27611D2BDEAA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../Library/include/IntersectionQuery.hpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
+            landmarkName = "operator()(s1, s2)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F64635B5-A544-4B9E-8C62-2846F2589A04"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Code/pointsAndSegments.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "504"
+            endingLineNumber = "504"
+            landmarkName = "menuHandlerFunc(value)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "F64635B5-A544-4B9E-8C62-2846F2589A04 - c9e79b5f5659361f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "menuHandlerFunc(int)"
+                  moduleName = "Point Input - source"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jyh/Library/CloudStorage/Dropbox/Developer/csc491-Yusra-Suhail/Geometry/Demos/PointsAndSegmentInput/Code/pointsAndSegments.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "501"
+                  endingLineNumber = "501"
+                  offsetFromSymbolStart = "220">
+               </Location>
+               <Location
+                  uuid = "F64635B5-A544-4B9E-8C62-2846F2589A04 - c9e79b5f5659361f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "menuHandlerFunc(int)"
+                  moduleName = "Point Input - source"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jyh/Library/CloudStorage/Dropbox/Developer/csc491-Yusra-Suhail/Geometry/Demos/PointsAndSegmentInput/Code/pointsAndSegments.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "501"
+                  endingLineNumber = "501"
+                  offsetFromSymbolStart = "235">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6CB2EABE-A612-4D06-8ACA-B99871C2A9FD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Code/pointsAndSegments.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "513"
+            endingLineNumber = "513"
+            landmarkName = "menuHandlerFunc(value)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "6CB2EABE-A612-4D06-8ACA-B99871C2A9FD - c9e79b5f56593700"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "menuHandlerFunc(int)"
+                  moduleName = "Point Input - source"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jyh/Library/CloudStorage/Dropbox/Developer/csc491-Yusra-Suhail/Geometry/Demos/PointsAndSegmentInput/Code/pointsAndSegments.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "508"
+                  endingLineNumber = "508"
+                  offsetFromSymbolStart = "292">
+               </Location>
+               <Location
+                  uuid = "6CB2EABE-A612-4D06-8ACA-B99871C2A9FD - c9e79b5f56593700"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "menuHandlerFunc(int)"
+                  moduleName = "Point Input - source"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jyh/Library/CloudStorage/Dropbox/Developer/csc491-Yusra-Suhail/Geometry/Demos/PointsAndSegmentInput/Code/pointsAndSegments.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "508"
+                  endingLineNumber = "508"
+                  offsetFromSymbolStart = "307">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

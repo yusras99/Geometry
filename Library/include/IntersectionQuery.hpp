@@ -81,7 +81,7 @@ namespace geometry{
 		 */
 		bool operator()(const std::shared_ptr<geometry::Segment>  s1, const std::shared_ptr<geometry::Segment> s2) const{
 			bool returnVal;
-			std::cout << "Comparing Segment " << s1->getIndex() << " and Segment " << s2->getIndex();
+//			std::cout << "Comparing Segment " << s1->getIndex() << " and Segment " << s2->getIndex();
 			if (s1 != s2){
 				float s1x1 = (s1->getP1())->getX();
 				float s1y1 = (s1->getP1())->getY();
@@ -99,28 +99,38 @@ namespace geometry{
 				//if scan line's y coord is not the first point of the segment then compute the x coord for the scan y
 				float scanX1;
 				if(scanY != s1y1){
-					scanX1 =  s1x1 + ( (scanY - s1y1) * (1 / slope1) );
+					scanX1 =  s1x1 + ( (scanY - s1y1) / slope1 );
 				}else{//else the x of the scanY will be the x of the first point of the segment
 					scanX1 = s1x1;
 				}
 				//Do the same for segment 2, if scan line's y coord is not the first point of the segment then compute the x coord for the scan y
 				float scanX2;
 				if(scanY != s2y1){
-					scanX2 =  s2x1 + ( (scanY - s2y1) * (1 / slope2) );
+					scanX2 =  s2x1 + ( (scanY - s2y1) / slope2 );
 				}else{//else the x of the scanY will be the x of the first point of the segment
 					scanX2 = s2x1;
 				}
-				if(scanX1 < scanX2 || (scanX1 == scanX2 && slope1 < slope2)){
-					returnVal = true;
-				}else{/*if(scanX1 == scanX2)*/
-                    //if x are same,that means intersection, so we return slope to determine position of both segs
-					returnVal = false;
+				if (abs(scanX1-scanX2) > Geometry::DISTANCE_ABS_TOL){
+					if(scanX1 < scanX2){
+						returnVal = true;
+					}else /*if(scanX1 > scanX2)*/{
+						//if x are same,that means intersection, so we return slope to determine position of both segs
+						returnVal = false;
+					}
+				// If the scan line is at the intersection point (we are comparing again the two
+				// segments whose intersection defined the current event point and current scanY)
+                }else{
+                    if(slope1 <0)
+                        returnVal = (slope2 < 0) && (slope1 < slope2);
+                    else
+                        returnVal = (slope2 < 0) || (slope2 > slope1);
 				}
+				
 			}
 			else{
 				returnVal = false;
 			}
-			std::cout << ": " << (returnVal ? "true" : "false") << std::endl;
+//			std::cout << ": " << (returnVal ? "true" : "false") << std::endl;
 			return returnVal;
 		}
     };

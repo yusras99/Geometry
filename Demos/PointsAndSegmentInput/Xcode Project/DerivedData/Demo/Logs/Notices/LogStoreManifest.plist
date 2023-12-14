@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>logFormatVersion</key>
+	<integer>10</integer>
+	<key>logs</key>
+	<dict>
+		<key>0B22DE8E-B37A-4E05-A64F-4A8C5989CCFA</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>0B22DE8E-B37A-4E05-A64F-4A8C5989CCFA.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>710906587.49492395</real>
+			<key>timeStoppedRecording</key>
+			<real>710906594.95922005</real>
+			<key>title</key>
+			<string>Build Point Input - source</string>
+			<key>uniqueIdentifier</key>
+			<string>0B22DE8E-B37A-4E05-A64F-4A8C5989CCFA</string>
+		</dict>
+		<key>29819CB9-87E4-4401-ABBD-CEE2E07AF3CF</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>29819CB9-87E4-4401-ABBD-CEE2E07AF3CF.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>710906587.49492395</real>
+			<key>timeStoppedRecording</key>
+			<real>710906594.95922005</real>
+			<key>title</key>
+			<string>Build Point Input - source</string>
+			<key>uniqueIdentifier</key>
+			<string>29819CB9-87E4-4401-ABBD-CEE2E07AF3CF</string>
+		</dict>
+		<key>8088E3CC-EDBE-440A-8920-39B4E686E28A</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>8088E3CC-EDBE-440A-8920-39B4E686E28A.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludCI6e319LCJibHVlcHJpbnRfcHJvdmlkZXJGaWxlUGF0aFN0cmluZyI6IlwvVXNlcnNcL3l1c3Jhc3VoYWlsXC9Ecm9wYm94XC9jc2M0OTEtWXVzcmEtU3VoYWlsXC9HZW9tZXRyeVwvRGVtb3NcL1BvaW50c0FuZFNlZ21lbnRJbnB1dFwvWGNvZGUgUHJvamVjdFwvRGVtby54Y29kZXByb2oiLCJibHVlcHJpbnRfYmx1ZXByaW50SWRlbnRpZmllciI6IjkzRUIwMDdDMjZGMTBBNDEwMDIwQzM1MCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>710906587.49492395</real>
+			<key>timeStoppedRecording</key>
+			<real>710906594.95922005</real>
+			<key>title</key>
+			<string>Build Point Input - source</string>
+			<key>uniqueIdentifier</key>
+			<string>8088E3CC-EDBE-440A-8920-39B4E686E28A</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

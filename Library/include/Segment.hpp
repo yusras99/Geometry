@@ -58,7 +58,9 @@ namespace geometry {
 	};
 	
 	class Segment{
-
+		
+		friend class Edge;
+		
 		private:
 
             std::shared_ptr<Point> p1_;
@@ -74,7 +76,8 @@ namespace geometry {
 			 * @param endpt1Ptr first endpoint
 			 * @param endpt2Ptr second endpoint
 			 */
-			Segment(std::shared_ptr<Point> endpt1Ptr, std::shared_ptr<Point> endpt2Ptr);
+			Segment(std::shared_ptr<Point> endpt1Ptr, std::shared_ptr<Point> endpt2Ptr,
+						bool endpointsOrdered=false);
 
 			//	Disabled constructors and operators
 			Segment(void) = delete;
@@ -125,6 +128,7 @@ namespace geometry {
              */
             static void clearAllSegments(){
                 segSet_.clear();
+                segVect_.clear();
                 count_ = 0;
             }
             void render(SegmentType type = SegmentType::SEGMENT) const;

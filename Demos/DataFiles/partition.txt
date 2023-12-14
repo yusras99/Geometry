@@ -1,0 +1,152 @@
+{v1, v2, ... v15}
+{e1, e2, ... e15}
+
+       
+D = {(v6, v4), (v8, v2), (v14, v8), (v12, v10)}
+     e(v6, v4)
+     e(v4, v6)
+
+Poly 1
+{v4', v5', v6'}
+{e4', e5', D1}
+
+Poly 2
+{v4, v6, v7, v8, v2, v3}
+{-D1, e6, e7, D2, e2, e3}
+
+
+Connections (next, counterclockwise)
+
+arriving from
+ |
+ V
+e15: v2
+e1: (v8), v3
+e2: v4
+e3: (v6), v5
+e4: v6
+e5: v7, (v4)
+e6: v8
+(v14), (v2), v9
+v10
+(v12), v11
+v12
+v13, (v10)
+v14
+v15, (v8)
+v1
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+v1' --> v2'  -> v8' --> v14' --> v15' --> v1'
+
+v2'' --> v3' --> v4' --> v6' --> v7' --> v8' --> v2''
+
+v4' --> v5' --> v6' --> v4'
+
+v8' --> v9' --> v10' --> v12' --> v13' --> v14' --> v8'
+
+v10 --> v11 --> v12 --> v10
+
+----------------------
+New, improved version
+----------------------
+pick first in list unless it's already on the new poly list
+or first one.
+
+Connection List
+    arriving from
+    |
+    V
+Vector< < Vertex> >
+v1,e15: v2
+v2,e1: (v8), v3
+v3,e2: v4
+v4,e3: (v6), v5
+v5,e4: v6
+v6,e5: (v4), v7
+v7,e6: v8
+v8,e7: (v2), (v14), v9
+v9,e8: v10
+v10,e9: (v12), v11
+v11,e10: v12
+v12,e11: (v10), v13
+v13,e12: v14
+v14,e13: (v8), v15
+v15,e14: v1
+
+Vertex Queue
+Queue
+v5
+v3
+v4
+v6
+v7
+v1
+v9
+v2
+v8
+v14
+v15
+v10
+v12
+v11
+v13
+
+When removing the vertex from the queue, remove the vertex by value
+v1,e15: .
+v2,e1: .
+v3,e2: .
+v4,e3: .
+v5,e4: .
+v6,e5: .
+v7,e6: .
+v8,e7: .
+v9,e8: .
+v10,e9: .
+v11,e10: .
+v12,e11: .
+v13,e12: .
+v14,e13: .
+v15,e14: .
+
+Queue
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+
+v5 --> v6 --> v4 --> x
+
+v3 --> v4 --> v6 --> v7 --> v8 --> v2 --> x
+
+v1 --> v2 --> v8 --> v14 --> v15 --> x
+
+v9 --> v10 --> v12 --> v13 --> v14 --> v8 --> x
+
+v10 --> v11 --> v12 --> x
